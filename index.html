@@ -37,6 +37,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   font-family:'Georgia',serif;font-size:16px;color:#3498DB;
   font-weight:bold;letter-spacing:1px;
 }
+.mute-btn{
+  background:none;border:2px solid rgba(52,152,219,0.4);border-radius:16px;
+  padding:4px 12px;font-size:14px;cursor:pointer;color:#FFF8F0;
+  transition:all 0.15s;
+}
+.mute-btn:hover{border-color:#3498DB;}
+.mute-btn.muted{opacity:0.4;}
 .stat-box{
   display:flex;align-items:center;gap:6px;
   background:rgba(52,152,219,0.15);
@@ -191,7 +198,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   <div style="flex:1"></div>
   <div class="stat-box"><span class="icon">☢️</span><span class="val" id="energyDisplay">100</span></div>
   <div class="stat-box"><span class="icon">💀</span><span class="val" id="waveDisplay">Wave 1/5</span></div>
-  <button class="stat-box" style="cursor:pointer;border:none;background:none;color:#FFF8F0;font-size:18px" onclick="showPeriodicTable()" title="图鉴">🧪</button>
+  <button class="mute-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+  <button class="stat-box" style="cursor:pointer;border:none;background:none;color:#FFF8F0;font-size:18px" onclick="showPeriodicTable();Sound.click()" title="图鉴">🧪</button>
   <button class="stat-box" style="cursor:pointer;border:none;background:none;color:#FFF8F0;font-size:18px" onclick="pauseGame()" title="暂停">⏸</button>
 </div>
 
@@ -217,10 +225,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   <div class="panel" style="min-width:320px">
     <div class="menu-title">⚗️ 元素大战反应</div>
     <p style="text-align:center;opacity:0.7;margin-bottom:20px;font-size:13px">周期表塔防 · 化学教育游戏</p>
-    <button class="menu-btn" onclick="startGame()">🎮 开始游戏</button>
-    <button class="menu-btn" onclick="showLevelSelect()">🗺️ 选择关卡</button>
-    <button class="menu-btn" onclick="showPeriodicTable()">🧪 元素图鉴</button>
-    <button class="menu-btn" onclick="showHelp()">❓ 游戏帮助</button>
+    <button class="menu-btn" onclick="startGame();Sound.click()">🎮 开始游戏</button>
+    <button class="menu-btn" onclick="showLevelSelect();Sound.click()">🗺️ 选择关卡</button>
+    <button class="menu-btn" onclick="showPeriodicTable();Sound.click()">🧪 元素图鉴</button>
+    <button class="menu-btn" onclick="showHelp();Sound.click()">❓ 游戏帮助</button>
   </div>
 </div>
 
@@ -251,6 +259,19 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
     <div id="ptGrid" class="pt-grid"></div>
     <div id="ptDetail" style="margin-top:16px;padding:16px;background:#0a1a2a;border-radius:8px;min-height:80px"></div>
     <button class="menu-btn" style="margin-top:16px" onclick="closeOverlay('periodicTable')">返回</button>
+  </div>
+</div>
+
+<!-- Tutorial Overlay -->
+<div id="tutorialOverlay" class="overlay hidden" style="background:rgba(0,0,0,0.4);z-index:400;">
+  <div style="background:#1a2a3a;border:2px solid #f39c12;border-radius:16px;padding:24px;max-width:380px;text-align:center;box-shadow:0 8px 40px rgba(243,156,18,0.3)">
+    <div style="font-size:48px;margin-bottom:12px">🎓</div>
+    <div id="tutCounter" style="color:#f39c12;font-size:12px;margin-bottom:8px">1/4</div>
+    <div id="tutText" style="font-size:15px;line-height:1.6;color:#FFF8F0;margin-bottom:20px"></div>
+    <div style="display:flex;gap:10px">
+      <button onclick="skipTut()" style="flex:1;padding:10px;background:#2c3e50;border:2px solid #2c3e50;border-radius:8px;color:#aaa;font-size:13px;cursor:pointer">跳过教程</button>
+      <button onclick="nextTut()" style="flex:1;padding:10px;background:#f39c12;border:2px solid #f39c12;border-radius:8px;color:#000;font-size:13px;font-weight:bold;cursor:pointer">知道了 →</button>
+    </div>
   </div>
 </div>
 
@@ -285,8 +306,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   <div class="panel" style="text-align:center">
     <h2 id="gameEndTitle">游戏结束</h2>
     <p id="gameEndMsg" style="margin:16px 0;font-size:14px;opacity:0.8"></p>
-    <button class="menu-btn" onclick="restartLevel()">🔄 重试</button>
-    <button class="menu-btn" onclick="showMenu()">🏠 主菜单</button>
+    <button class="menu-btn" onclick="restartLevel();Sound.click()">🔄 重试</button>
+    <button class="menu-btn" onclick="showMenu();Sound.click()">🏠 主菜单</button>
   </div>
 </div>
 
@@ -343,10 +364,112 @@ const GS = {
 };
 
 // ═══════════════════════════════════════════════════════════
-//  CANVAS SETUP
+//  SOUND SYSTEM — Web Audio API (zero downloads)
+// ═══════════════════════════════════════════════════════════
+let _audioCtx = null;
+let _muted = false;
+function getAC(){
+  if(!_audioCtx) _audioCtx = new (window.AudioContext||window.webkitContext)();
+  return _audioCtx;
+}
+function _tone(freq, type, start, dur, vol=0.25){
+  if(_muted) return;
+  try{
+    const ac=getAC(), o=ac.createOscillator(), g=ac.createGain();
+    o.connect(g); g.connect(ac.destination);
+    o.type=type; o.frequency.value=freq;
+    g.gain.setValueAtTime(vol, ac.currentTime+start);
+    g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime+start+dur);
+    o.start(ac.currentTime+start); o.stop(ac.currentTime+start+dur+0.05);
+  }catch(e){}
+}
+function toggleMute(){
+  _muted = !_muted;
+  document.getElementById('muteBtn').textContent = _muted ? '🔇' : '🔊';
+  document.getElementById('muteBtn').classList.toggle('muted', _muted);
+  if(!_muted) Sound.click();
+}
+const Sound = {
+  place(){ _tone(523,'sine',0,0.12,0.2); _tone(659,'sine',0.05,0.1,0.15); },
+  attack(){ _tone(440,'triangle',0,0.08,0.15); },
+  hit(){ _tone(330,'square',0,0.06,0.1); _tone(262,'triangle',0.04,0.06,0.12); },
+  kill(){
+    _tone(523,'sine',0,0.08,0.2);
+    _tone(659,'sine',0.06,0.1,0.18);
+    _tone(784,'sine',0.12,0.15,0.2);
+    _tone(1047,'sine',0.18,0.2,0.15);
+  },
+  wave(){ _tone(196,'sine',0,0.3,0.25); _tone(262,'sine',0.15,0.25,0.2); _tone(330,'sine',0.3,0.3,0.2); },
+  victory(){
+    [523,659,784,1047].forEach((f,i)=>_tone(f,'sine',i*0.15,0.4,0.25));
+    _tone(1318,'sine',0.6,0.5,0.2);
+  },
+  defeat(){ _tone(196,'sawtooth',0,0.4,0.2); _tone(165,'sawtooth',0.2,0.4,0.2); },
+  select(){ _tone(880,'sine',0,0.06,0.1); },
+  click(){ _tone(660,'sine',0,0.04,0.08); },
+  error(){ _tone(220,'sawtooth',0,0.15,0.15); },
+  energy(){
+    _tone(784,'sine',0,0.05,0.15);
+    _tone(1047,'sine',0.04,0.08,0.12);
+  },
+  unlock(){
+    [523,659,784,1047,1318].forEach((f,i)=>_tone(f,'sine',i*0.1,0.25,0.2));
+  }
+};
+
+// ═══════════════════════════════════════════════════════════
+//  TUTORIAL SYSTEM
+// ═══════════════════════════════════════════════════════════
+const TUTORIAL_STEPS = [
+  { target:'elemBar', text:'👇 点击底部的元素卡牌，选择要放置的元素', side:'top' },
+  { target:'canvas', text:'🖱️ 在绿色格子上点击，放置你选择的元素', side:'bottom' },
+  { target:'topBar', text:'⚡ 击杀怪物获得能量，消耗能量放置元素', side:'bottom' },
+  { target:'gameCanvas', text:'💀 阻止怪物到达左侧边界！怪物到达=游戏失败', side:'top' },
+];
+let tutStep = 0;
+let tutDone = false;
+
+function showTutorialStep(){
+  if(tutDone || GS.phase!=='playing') return;
+  if(tutStep >= TUTORIAL_STEPS.length){ tutDone=true; closeOverlay('tutorialOverlay'); return; }
+  const step = TUTORIAL_STEPS[tutStep];
+  document.getElementById('tutText').textContent = step.text;
+  document.getElementById('tutCounter').textContent = `${tutStep+1}/${TUTORIAL_STEPS.length}`;
+  document.getElementById('tutorialOverlay').classList.remove('hidden');
+}
+function nextTut(){
+  tutStep++;
+  if(tutStep >= TUTORIAL_STEPS.length){ tutDone=true; closeOverlay('tutorialOverlay'); return; }
+  showTutorialStep();
+}
+function skipTut(){
+  tutDone=true; tutStep=TUTORIAL_STEPS.length;
+  closeOverlay('tutorialOverlay');
+}
+// ═══════════════════════════════════════════════════════════
+//  CANVAS HOVER HIGHLIGHT
+// ═══════════════════════════════════════════════════════════
+let _hoverCell = null;
+function setupHover(){
+  const cvs = document.getElementById('gameCanvas');
+  cvs.addEventListener('mousemove', e => {
+    const rect = cvs.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (cvs.width / rect.width);
+    const my = (e.clientY - rect.top) * (cvs.height / rect.height);
+    if(GS.FIELD_X <= 0 || cvs.width <= 0){ _hoverCell=null; return; }
+    if(mx < GS.FIELD_X){ _hoverCell=null; return; }
+    const col = Math.floor((mx - GS.FIELD_X) / 60);
+    const lane = Math.floor(my / GS.LANE_H);
+    if(lane<0||lane>=GS.LANES||col<0||col>=GS.COLS){ _hoverCell=null; return; }
+    _hoverCell = {lane, col};
+  });
+  cvs.addEventListener('mouseleave', ()=>{ _hoverCell=null; });
+}
+
 // ═══════════════════════════════════════════════════════════
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+setupHover();
 
 function resizeCanvas(){
   const maxW = window.innerWidth;
@@ -455,12 +578,14 @@ function onElemCardClick(atomicNum){
   if(!elem) return;
   if(!GS.unlocked.has(atomicNum)){
     openQuiz(elem);
+    Sound.select();
     return;
   }
   if(GS.selectedElem === atomicNum){
     GS.selectedElem = null;
   } else {
     GS.selectedElem = atomicNum;
+    Sound.select();
   }
   updateElemBarSelection();
 }
@@ -489,8 +614,10 @@ function showQuizStep(){
       saveProgress();
       buildElemBar();
       showKnowledge(`✅ ${elem.symbol} ${elem.name_cn} 解锁成功！`, 2000);
+      Sound.unlock();
     } else {
       showKnowledge('❌ 答对太少，解锁失败，可重复尝试', 2000);
+      Sound.error();
     }
     return;
   }
@@ -508,8 +635,10 @@ function showQuizStep(){
       if(opt === q.answer){
         btn.classList.add('correct');
         GS.quiz.correct++;
+        Sound.hit();
       } else {
         btn.classList.add('wrong');
+        Sound.error();
       }
       setTimeout(() => {
         GS.quiz.idx++;
@@ -672,12 +801,12 @@ function startLevel(){
   if(!lvl) return;
 
   GS.phase = 'playing';
-  GS.energy = 100;
+  GS.energy = 200; // 初始能量提高到 200
   GS.score = 0;
   GS.currentWave = 0;
   GS.waveTotal = lvl.wave_count;
   GS.waveCount = 0;
-  GS.spawnInterval = Math.max(1500, 4000 - GS.levelIdx * 300);
+  GS.spawnInterval = Math.max(2500, 5000 - GS.levelIdx * 300);
   GS.lastSpawn = 0;
   GS.env = world.env_modifier;
   GS.field = [];
@@ -692,6 +821,11 @@ function startLevel(){
 
   showWaveBanner(`${world.name} 第${GS.levelIdx}关`);
   setTimeout(() => gameLoop(0), 500);
+  // 触发新手教程
+  if(GS.levelIdx===1 && world.id==='world0_grassland'){
+    tutStep=0; tutDone=false;
+    setTimeout(()=>showTutorialStep(), 1500);
+  }
 }
 
 function restartLevel(){
@@ -714,6 +848,7 @@ function resumeGame(){
 
 function endGame(victory){
   GS.phase = victory ? 'victory' : 'gameover';
+  if(victory){ Sound.victory(); } else { Sound.defeat(); }
   const world = WORLDS_DATA.find(w=>w.id === GS.worldId);
   if(victory && world){
     const lvl = world.levels[GS.levelIdx - 1];
@@ -807,6 +942,7 @@ function update(dt, ts){
         f.lastAttack = 0;
         const dmg = f.elem.attack * GS.env.element_attack_mod;
         spawnProjectile(f.col * 60 + GS.FIELD_X + 50, f.lane * GS.LANE_H + GS.LANE_H/2, dmg, f.elem, f.lane);
+        Sound.attack();
       }
     }
     // Salt corrosion env damage
@@ -843,6 +979,7 @@ function update(dt, ts){
         if(p.elem.atomic_number >= 6 && p.elem.atomic_number <= 8) dmg *= 1.2; // carbon group
         z.hp -= dmg;
         p.hit = true;
+        Sound.hit();
         spawnParticles(p.x, p.y, '#f39c12', 3);
         // Knowledge popup on hit
         if(Math.random() < 0.05) showKnowledge(p.elem.knowledge_text);
@@ -852,12 +989,14 @@ function update(dt, ts){
   GS.projs = GS.projs.filter(p => !p.hit && p.x < canvas.width + 50);
 
   // ── Dead zombies ─────────────────────────────────────────
-  const before = GS.zombies.length;
   GS.zombies = GS.zombies.filter(z => {
     if(z.hp <= 0){
-      GS.energy += 10 + Math.floor(z.maxHp / 100);
+      GS.energy += z.reward;
       GS.score += Math.floor(z.maxHp / 10);
-      spawnParticles(z.x, z.lane * GS.LANE_H + GS.LANE_H/2, z.color, 8);
+      Sound.kill();
+      Sound.energy();
+      spawnParticles(z.x, z.lane * GS.LANE_H + GS.LANE_H/2, z.color, 10);
+      updateEnergy();
       return false;
     }
     return true;
@@ -888,6 +1027,7 @@ function spawnWave(){
   GS.waveCount++;
   document.getElementById('waveDisplay').textContent = `Wave ${GS.currentWave}/${GS.waveTotal}`;
   showWaveBanner(`第 ${GS.currentWave} 波来袭！`);
+  Sound.wave();
 
   const world = WORLDS_DATA.find(w=>w.id === GS.worldId);
   const lvl = world.levels[GS.levelIdx-1];
@@ -901,23 +1041,35 @@ function spawnWave(){
     halogen:'#9b59b6',
     inert:'rgba(200,200,255,0.5)'
   };
+  const typeEmoji = {
+    oxidizer:'🟫', hydrated:'💧', heated:'🔥', acid:'🟢', halogen:'🟣', inert:'👻'
+  };
+  const typeNames = {
+    oxidizer:'氧化怪', hydrated:'水合怪', heated:'高温怪', acid:'强酸怪', halogen:'卤素怪', inert:'惰性怪'
+  };
 
-  const zombiesThisWave = 2 + GS.currentWave;
+  // 降低难度：每波怪物数量减少 30%，血量降低 40%
+  const zombiesThisWave = Math.max(2, Math.ceil((1 + GS.currentWave) * 0.7));
   for(let i=0; i<zombiesThisWave; i++){
     const lane = Math.floor(Math.random() * GS.LANES);
     const type = types[Math.floor(Math.random() * types.length)];
-    const baseHp = 80 + GS.currentWave * 20 + GS.levelIdx * 10;
+    // 难度降低：基础血量从 80→40，每波增长从 20→10
+    const baseHp = 40 + GS.currentWave * 10 + GS.levelIdx * 5;
     const hp = baseHp * GS.env.element_global_hp_mod;
-    const speed = 0.8 + Math.random() * 0.4;
+    const speed = 0.5 + Math.random() * 0.3; // 速度也降低 30%
     const color = typeColors[type];
 
     GS.zombies.push({
-      type, lane, x: canvas.width + i * 80,
-      hp, maxHp: hp, speed, damage: 10 + GS.currentWave * 2, color,
-      reward: 10
+      type, lane, x: canvas.width + i * 100,
+      hp, maxHp: hp, speed, damage: 5 + GS.currentWave, color,
+      emoji: typeEmoji[type], typeName: typeNames[type],
+      reward: 15
     });
   }
   GS.lastSpawn = performance.now();
+  // 每波开始时奖励能量
+  GS.energy += 25;
+  updateEnergy();
 }
 
 function spawnProjectile(x, y, dmg, elem, targetLane){
@@ -962,8 +1114,15 @@ function render(){
     for(let col=0; col<GS.COLS; col++){
       const x = GS.FIELD_X + col * 60;
       const y = lane * GS.LANE_H;
-      ctx.strokeStyle = 'rgba(52,152,219,0.08)';
-      ctx.strokeRect(x, y, 60, GS.LANE_H);
+      const isHover = _hoverCell && _hoverCell.lane===lane && _hoverCell.col===col;
+      const isOccupied = GS.field.some(f=>f.lane===lane && f.col===col);
+      if(isHover && GS.selectedElem){
+        ctx.fillStyle = isOccupied ? 'rgba(231,76,60,0.2)' : 'rgba(52,152,219,0.3)';
+        ctx.fillRect(x+1, y+1, 58, GS.LANE_H-2);
+      } else {
+        ctx.strokeStyle = 'rgba(52,152,219,0.08)';
+        ctx.strokeRect(x, y, 60, GS.LANE_H);
+      }
     }
   }
 
@@ -1016,44 +1175,63 @@ function render(){
     ctx.shadowBlur = 0;
   });
 
-  // Zombies
+  // Zombies — upgraded visual with emoji + name tag
   GS.zombies.forEach(z => {
     const y = z.lane * GS.LANE_H + GS.LANE_H/2;
-    const size = 16;
+    const size = 18;
 
     // Shadow
-    ctx.fillStyle = 'rgba(0,0,0,0.3)';
+    ctx.fillStyle = 'rgba(0,0,0,0.35)';
     ctx.beginPath();
-    ctx.ellipse(z.x, y+14, size*0.8, size*0.3, 0, 0, Math.PI*2);
+    ctx.ellipse(z.x, y+16, size*0.9, size*0.35, 0, 0, Math.PI*2);
     ctx.fill();
 
+    // Body glow
+    ctx.shadowColor = z.color;
+    ctx.shadowBlur = 8;
     // Body
     ctx.beginPath();
     ctx.arc(z.x, y, size, 0, Math.PI*2);
     ctx.fillStyle = z.color;
     ctx.fill();
-    ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Eyes
+    // Eyes (angry expression)
     ctx.fillStyle = '#fff';
     ctx.beginPath();
-    ctx.arc(z.x-5, y-3, 4, 0, Math.PI*2);
-    ctx.arc(z.x+5, y-3, 4, 0, Math.PI*2);
+    ctx.arc(z.x-5, y-4, 4.5, 0, Math.PI*2);
+    ctx.arc(z.x+5, y-4, 4.5, 0, Math.PI*2);
     ctx.fill();
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = '#111';
     ctx.beginPath();
-    ctx.arc(z.x-5, y-2, 2, 0, Math.PI*2);
-    ctx.arc(z.x+5, y-2, 2, 0, Math.PI*2);
+    ctx.arc(z.x-4, y-3, 2.2, 0, Math.PI*2);
+    ctx.arc(z.x+6, y-3, 2.2, 0, Math.PI*2);
     ctx.fill();
+
+    // Mouth (angry grimace)
+    ctx.strokeStyle = '#111';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(z.x, y+6, 5, 0.2, Math.PI-0.2);
+    ctx.stroke();
 
     // HP bar
     const hpR = z.hp / z.maxHp;
     ctx.fillStyle = '#1a2a3a';
-    ctx.fillRect(z.x-16, y-size-6, 32, 5);
+    ctx.fillRect(z.x-18, y-size-8, 36, 5);
     ctx.fillStyle = hpR > 0.5 ? '#27ae60' : hpR > 0.25 ? '#f39c12' : '#e74c3c';
-    ctx.fillRect(z.x-16, y-size-6, 32*hpR, 5);
+    ctx.fillRect(z.x-18, y-size-8, 36*hpR, 5);
+
+    // Emoji icon above
+    if(z.emoji){
+      ctx.font = '16px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(z.emoji, z.x, y - size - 12);
+      ctx.textAlign = 'left';
+    }
   });
 
   // Particles
@@ -1089,7 +1267,11 @@ function render(){
 // ═══════════════════════════════════════════════════════════
 canvas.addEventListener('click', e => {
   if(GS.phase !== 'playing') return;
-  if(!GS.selectedElem) return;
+  if(!GS.selectedElem){
+    showKnowledge('请先在底部选择一个元素！👇', 1500);
+    Sound.error();
+    return;
+  }
 
   const rect = canvas.getBoundingClientRect();
   const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
@@ -1123,7 +1305,8 @@ canvas.addEventListener('click', e => {
   });
   updateEnergy();
   showKnowledge(elem.knowledge_text);
-  spawnParticles(GS.FIELD_X + col*60+30, lane*GS.LANE_H+GS.LANE_H/2, elem.sprite_color, 6);
+  spawnParticles(GS.FIELD_X + col*60+30, lane*GS.LANE_H+GS.LANE_H/2, elem.sprite_color, 8);
+  Sound.place();
 });
 
 // ═══════════════════════════════════════════════════════════
