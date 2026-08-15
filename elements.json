@@ -1,0 +1,5810 @@
+[
+  {
+    "atomic_number": 1,
+    "symbol": "H",
+    "name_cn": "氢",
+    "family": "第一族(IA)",
+    "hp": 120,
+    "attack": 40,
+    "attack_speed": 1.4,
+    "cost_energy": 75,
+    "skill_desc": "可燃弹：对氧化怪物造成双倍伤害",
+    "weakness": [
+      "high_temp"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氢是宇宙中最丰富的元素，可燃烧生成水，化学性质活泼。",
+    "sprite_color": "#E8E8E8",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "氢的原子序数是？",
+        "options": [
+          "1",
+          "2",
+          "3"
+        ],
+        "answer": "1"
+      },
+      {
+        "q": "氢的元素符号是？",
+        "options": [
+          "H",
+          "He",
+          "Li"
+        ],
+        "answer": "H"
+      },
+      {
+        "q": "氢气可以燃烧生成什么？",
+        "options": [
+          "水",
+          "氧气",
+          "氮气"
+        ],
+        "answer": "水"
+      }
+    ]
+  },
+  {
+    "atomic_number": 2,
+    "symbol": "He",
+    "name_cn": "氦",
+    "family": "第零族(0族)",
+    "hp": 200,
+    "attack": 15,
+    "attack_speed": 0.6,
+    "cost_energy": 100,
+    "skill_desc": "稀有气体护盾：免疫卤素侵蚀伤害",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氦气是惰性气体，化学性质极不活泼，常用于气球和制冷。",
+    "sprite_color": "#DDA0DD",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "氦的元素符号是？",
+        "options": [
+          "H",
+          "He",
+          "Li"
+        ],
+        "answer": "He"
+      },
+      {
+        "q": "氦属于哪一族？",
+        "options": [
+          "第一族",
+          "零族",
+          "卤素族"
+        ],
+        "answer": "零族"
+      },
+      {
+        "q": "氦气的主要用途是？",
+        "options": [
+          "燃烧",
+          "制冷",
+          "炼钢"
+        ],
+        "answer": "制冷"
+      }
+    ]
+  },
+  {
+    "atomic_number": 3,
+    "symbol": "Li",
+    "name_cn": "锂",
+    "family": "第一族(IA)",
+    "hp": 95,
+    "attack": 55,
+    "attack_speed": 1.6,
+    "cost_energy": 100,
+    "skill_desc": "轻金属投射：对水合怪造成双倍伤害",
+    "weakness": [
+      "water"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锂是最轻的金属，可用于锂电池，化学性质活泼。",
+    "sprite_color": "#FF6B6B",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "锂的元素符号是？",
+        "options": [
+          "Li",
+          "Na",
+          "K"
+        ],
+        "answer": "Li"
+      },
+      {
+        "q": "锂属于第几族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第一族"
+      },
+      {
+        "q": "锂常用于什么电池？",
+        "options": [
+          "锂电池",
+          "铅酸电池",
+          "燃料电池"
+        ],
+        "answer": "锂电池"
+      }
+    ]
+  },
+  {
+    "atomic_number": 4,
+    "symbol": "Be",
+    "name_cn": "铍",
+    "family": "第二族(IIA)",
+    "hp": 180,
+    "attack": 35,
+    "attack_speed": 1.0,
+    "cost_energy": 120,
+    "skill_desc": "轻质护甲：高血量，酸环境伤害减半",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铍是稀有轻金属，用于航空航天，X射线透明。",
+    "sprite_color": "#FFA94D",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "铍的元素符号是？",
+        "options": [
+          "Be",
+          "Mg",
+          "Ca"
+        ],
+        "answer": "Be"
+      },
+      {
+        "q": "铍属于哪一族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第二族"
+      },
+      {
+        "q": "铍常用于什么工业？",
+        "options": [
+          "航空航天",
+          "食品加工",
+          "纺织"
+        ],
+        "answer": "航空航天"
+      }
+    ]
+  },
+  {
+    "atomic_number": 5,
+    "symbol": "B",
+    "name_cn": "硼",
+    "family": "第十三族(IIIA)",
+    "hp": 160,
+    "attack": 30,
+    "attack_speed": 0.8,
+    "cost_energy": 90,
+    "skill_desc": "半导体屏障：受到高温伤害减半",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "硼是半导体材料，用于玻璃和陶瓷工业。",
+    "sprite_color": "#A8D8A8",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "硼的元素符号是？",
+        "options": [
+          "B",
+          "C",
+          "N"
+        ],
+        "answer": "B"
+      },
+      {
+        "q": "硼属于哪一族？",
+        "options": [
+          "第三族",
+          "第四族",
+          "第五族"
+        ],
+        "answer": "第十三族"
+      },
+      {
+        "q": "硼主要用于什么工业？",
+        "options": [
+          "食品",
+          "航空航天",
+          "玻璃陶瓷"
+        ],
+        "answer": "玻璃陶瓷"
+      }
+    ]
+  },
+  {
+    "atomic_number": 6,
+    "symbol": "C",
+    "name_cn": "碳",
+    "family": "第十四族(IVA)",
+    "hp": 200,
+    "attack": 45,
+    "attack_speed": 1.2,
+    "cost_energy": 110,
+    "skill_desc": "高耐温屏障：免疫高温灼烧伤害",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "碳是生命的基础，可以形成钻石、石墨、富勒烯等多种同素异形体。",
+    "sprite_color": "#505050",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "碳的元素符号是？",
+        "options": [
+          "C",
+          "Si",
+          "Ge"
+        ],
+        "answer": "C"
+      },
+      {
+        "q": "碳可形成多少种单质？",
+        "options": [
+          "1种",
+          "2种",
+          "多种同素异形体"
+        ],
+        "answer": "多种同素异形体"
+      },
+      {
+        "q": "碳是生命的基础元素吗？",
+        "options": [
+          "是",
+          "不是",
+          "不确定"
+        ],
+        "answer": "是"
+      }
+    ]
+  },
+  {
+    "atomic_number": 7,
+    "symbol": "N",
+    "name_cn": "氮",
+    "family": "第十五族(VA)",
+    "hp": 140,
+    "attack": 50,
+    "attack_speed": 1.3,
+    "cost_energy": 100,
+    "skill_desc": "惰性防护：酸环境抗性提升",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氮气占空气78%，制造氨、硝酸，是生命必需元素。",
+    "sprite_color": "#87CEEB",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "氮的元素符号是？",
+        "options": [
+          "N",
+          "O",
+          "C"
+        ],
+        "answer": "N"
+      },
+      {
+        "q": "空气中氮气占多少？",
+        "options": [
+          "21%",
+          "78%",
+          "1%"
+        ],
+        "answer": "78%"
+      },
+      {
+        "q": "氮主要用于制造什么？",
+        "options": [
+          "塑料",
+          "氨和硝酸",
+          "合金"
+        ],
+        "answer": "氨和硝酸"
+      }
+    ]
+  },
+  {
+    "atomic_number": 8,
+    "symbol": "O",
+    "name_cn": "氧",
+    "family": "第十六族(VIA)",
+    "hp": 110,
+    "attack": 65,
+    "attack_speed": 1.5,
+    "cost_energy": 85,
+    "skill_desc": "氧化攻击：对所有金属造成额外50%伤害",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氧支持燃烧和呼吸，占空气21%，是地壳中含量最多的元素。",
+    "sprite_color": "#FF4500",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "氧的元素符号是？",
+        "options": [
+          "O",
+          "N",
+          "S"
+        ],
+        "answer": "O"
+      },
+      {
+        "q": "空气中氧气占多少？",
+        "options": [
+          "78%",
+          "21%",
+          "1%"
+        ],
+        "answer": "21%"
+      },
+      {
+        "q": "氧气支持什么过程？",
+        "options": [
+          "燃烧和呼吸",
+          "光合作用",
+          "蒸腾"
+        ],
+        "answer": "燃烧和呼吸"
+      }
+    ]
+  },
+  {
+    "atomic_number": 9,
+    "symbol": "F",
+    "name_cn": "氟",
+    "family": "第十七族(VIIA)",
+    "hp": 80,
+    "attack": 80,
+    "attack_speed": 1.8,
+    "cost_energy": 120,
+    "skill_desc": "最强氧化剂：对所有怪物造成高额伤害，被克制减少",
+    "weakness": [],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氟是最强的非金属单质氧化剂，用于牙膏和特氟龙涂层。",
+    "sprite_color": "#ADFF2F",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "氟的元素符号是？",
+        "options": [
+          "F",
+          "Cl",
+          "Br"
+        ],
+        "answer": "F"
+      },
+      {
+        "q": "氟是第几族？",
+        "options": [
+          "卤素族",
+          "氧族",
+          "氮族"
+        ],
+        "answer": "卤素族"
+      },
+      {
+        "q": "氟用于什么日常用品？",
+        "options": [
+          "玻璃",
+          "特氟龙不粘锅",
+          "金属管"
+        ],
+        "answer": "特氟龙不粘锅"
+      }
+    ]
+  },
+  {
+    "atomic_number": 10,
+    "symbol": "Ne",
+    "name_cn": "氖",
+    "family": "第零族(0族)",
+    "hp": 220,
+    "attack": 20,
+    "attack_speed": 0.5,
+    "cost_energy": 130,
+    "skill_desc": "惰性光环：免疫卤素和酸侵蚀，减速附近怪物",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氖气通电发红光，用于霓虹灯和激光器。",
+    "sprite_color": "#FF69B4",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "氖的元素符号是？",
+        "options": [
+          "Ne",
+          "Na",
+          "Ni"
+        ],
+        "answer": "Ne"
+      },
+      {
+        "q": "氖气通电发什么光？",
+        "options": [
+          "白光",
+          "红光",
+          "蓝光"
+        ],
+        "answer": "红光"
+      },
+      {
+        "q": "氖属于哪一族？",
+        "options": [
+          "卤素族",
+          "零族",
+          "第一族"
+        ],
+        "answer": "零族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 11,
+    "symbol": "Na",
+    "name_cn": "钠",
+    "family": "第一族(IA)",
+    "hp": 90,
+    "attack": 60,
+    "attack_speed": 1.7,
+    "cost_energy": 110,
+    "skill_desc": "碱金属投射：遇水爆炸，对水合怪特攻",
+    "weakness": [
+      "water"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钠是活泼金属，与水剧烈反应，用于食盐和肥皂工业。",
+    "sprite_color": "#FF4444",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "钠的元素符号是？",
+        "options": [
+          "Na",
+          "K",
+          "Li"
+        ],
+        "answer": "Na"
+      },
+      {
+        "q": "钠与水反应的现象是？",
+        "options": [
+          "无变化",
+          "爆炸",
+          "变绿"
+        ],
+        "answer": "爆炸"
+      },
+      {
+        "q": "钠主要用于什么？",
+        "options": [
+          "食盐",
+          "塑料",
+          "建筑"
+        ],
+        "answer": "食盐"
+      }
+    ]
+  },
+  {
+    "atomic_number": 12,
+    "symbol": "Mg",
+    "name_cn": "镁",
+    "family": "第二族(IIA)",
+    "hp": 170,
+    "attack": 45,
+    "attack_speed": 1.1,
+    "cost_energy": 125,
+    "skill_desc": "轻质高熔点：免疫高温灼烧",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镁是轻质金属，燃烧发出耀眼白光，用于合金和烟火。",
+    "sprite_color": "#98FB98",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "镁的元素符号是？",
+        "options": [
+          "Mg",
+          "Ca",
+          "Sr"
+        ],
+        "answer": "Mg"
+      },
+      {
+        "q": "镁燃烧发出什么光？",
+        "options": [
+          "红光",
+          "绿光",
+          "白光"
+        ],
+        "answer": "白光"
+      },
+      {
+        "q": "镁主要用于什么合金？",
+        "options": [
+          "铝合金",
+          "铜合金",
+          "铅合金"
+        ],
+        "answer": "铝合金"
+      }
+    ]
+  },
+  {
+    "atomic_number": 13,
+    "symbol": "Al",
+    "name_cn": "铝",
+    "family": "第十三族(IIIA)",
+    "hp": 200,
+    "attack": 35,
+    "attack_speed": 0.9,
+    "cost_energy": 115,
+    "skill_desc": "氧化铝保护膜：酸环境抗性高",
+    "weakness": [
+      "acid",
+      "halogen"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铝是地壳中含量最多的金属，用于航空航天和包装。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world0_grassland",
+    "unlock_questions": [
+      {
+        "q": "铝的元素符号是？",
+        "options": [
+          "Al",
+          "Ag",
+          "Au"
+        ],
+        "answer": "Al"
+      },
+      {
+        "q": "地壳中含量最多的金属是？",
+        "options": [
+          "铁",
+          "铝",
+          "钙"
+        ],
+        "answer": "铝"
+      },
+      {
+        "q": "铝的氧化物是？",
+        "options": [
+          "氧化铝",
+          "氧化铁",
+          "氧化钙"
+        ],
+        "answer": "氧化铝"
+      }
+    ]
+  },
+  {
+    "atomic_number": 14,
+    "symbol": "Si",
+    "name_cn": "硅",
+    "family": "第十四族(IVA)",
+    "hp": 210,
+    "attack": 30,
+    "attack_speed": 0.8,
+    "cost_energy": 105,
+    "skill_desc": "半导体屏障：高温抗性，酸环境抗性",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "硅是半导体工业的基础，用于芯片和太阳能电池。",
+    "sprite_color": "#D2691E",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "硅的元素符号是？",
+        "options": [
+          "Si",
+          "Ge",
+          "Sn"
+        ],
+        "answer": "Si"
+      },
+      {
+        "q": "硅主要用于什么工业？",
+        "options": [
+          "纺织",
+          "半导体芯片",
+          "食品"
+        ],
+        "answer": "半导体芯片"
+      },
+      {
+        "q": "硅属于哪一族？",
+        "options": [
+          "碳族",
+          "氮族",
+          "氧族"
+        ],
+        "answer": "碳族（第十四族）"
+      }
+    ]
+  },
+  {
+    "atomic_number": 15,
+    "symbol": "P",
+    "name_cn": "磷",
+    "family": "第十五族(VA)",
+    "hp": 130,
+    "attack": 55,
+    "attack_speed": 1.4,
+    "cost_energy": 95,
+    "skill_desc": "燃烧弹：对有机物怪物造成额外伤害",
+    "weakness": [
+      "oxidize"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "磷有白磷和红磷，白磷剧毒，用于火柴和化肥。",
+    "sprite_color": "#FF8C00",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "磷的元素符号是？",
+        "options": [
+          "P",
+          "N",
+          "As"
+        ],
+        "answer": "P"
+      },
+      {
+        "q": "白磷有什么特性？",
+        "options": [
+          "无毒",
+          "剧毒",
+          "中性"
+        ],
+        "answer": "剧毒"
+      },
+      {
+        "q": "磷用于什么？",
+        "options": [
+          "火柴",
+          "玻璃",
+          "建筑"
+        ],
+        "answer": "火柴"
+      }
+    ]
+  },
+  {
+    "atomic_number": 16,
+    "symbol": "S",
+    "name_cn": "硫",
+    "family": "第十六族(VIA)",
+    "hp": 140,
+    "attack": 50,
+    "attack_speed": 1.3,
+    "cost_energy": 90,
+    "skill_desc": "硫化物攻击：酸环境输出提升",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "硫用于硫酸制造、橡胶硫化，燃烧产生刺激性气体。",
+    "sprite_color": "#FFD700",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "硫的元素符号是？",
+        "options": [
+          "S",
+          "Se",
+          "Te"
+        ],
+        "answer": "S"
+      },
+      {
+        "q": "硫燃烧产生什么气体？",
+        "options": [
+          "氧气",
+          "二氧化碳",
+          "二氧化硫"
+        ],
+        "answer": "二氧化硫"
+      },
+      {
+        "q": "硫主要用于制造什么？",
+        "options": [
+          "玻璃",
+          "硫酸",
+          "塑料"
+        ],
+        "answer": "硫酸"
+      }
+    ]
+  },
+  {
+    "atomic_number": 17,
+    "symbol": "Cl",
+    "name_cn": "氯",
+    "family": "第十七族(VIIA)",
+    "hp": 85,
+    "attack": 75,
+    "attack_speed": 1.7,
+    "cost_energy": 115,
+    "skill_desc": "氯化侵蚀：对碱金属造成双倍伤害",
+    "weakness": [],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氯气用于自来水消毒、漂白剂和PVC塑料制造。",
+    "sprite_color": "#00FF00",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "氯的元素符号是？",
+        "options": [
+          "Cl",
+          "Br",
+          "F"
+        ],
+        "answer": "Cl"
+      },
+      {
+        "q": "氯气常用于什么？",
+        "options": [
+          "消毒自来水",
+          "制造玻璃",
+          "建筑材料"
+        ],
+        "answer": "消毒自来水"
+      },
+      {
+        "q": "氯气是什么颜色？",
+        "options": [
+          "红色",
+          "黄绿色",
+          "蓝色"
+        ],
+        "answer": "黄绿色"
+      }
+    ]
+  },
+  {
+    "atomic_number": 18,
+    "symbol": "Ar",
+    "name_cn": "氩",
+    "family": "第零族(0族)",
+    "hp": 230,
+    "attack": 18,
+    "attack_speed": 0.5,
+    "cost_energy": 135,
+    "skill_desc": "惰性保护：免疫酸碱伤害，减速敌人",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氩气用于焊接保护气和灯泡充填。",
+    "sprite_color": "#9370DB",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "氩的元素符号是？",
+        "options": [
+          "Ar",
+          "Kr",
+          "Xe"
+        ],
+        "answer": "Ar"
+      },
+      {
+        "q": "氩气主要用于什么？",
+        "options": [
+          "呼吸",
+          "焊接保护气",
+          "制冷"
+        ],
+        "answer": "焊接保护气"
+      },
+      {
+        "q": "氩属于哪一族？",
+        "options": [
+          "卤素族",
+          "零族",
+          "第一族"
+        ],
+        "answer": "零族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 19,
+    "symbol": "K",
+    "name_cn": "钾",
+    "family": "第一族(IA)",
+    "hp": 85,
+    "attack": 65,
+    "attack_speed": 1.8,
+    "cost_energy": 120,
+    "skill_desc": "钾碱冲击：强碱攻击，对酸怪高伤害",
+    "weakness": [
+      "water",
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钾是植物必需的营养元素，用于化肥和肥皂工业。",
+    "sprite_color": "#FF6347",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "钾的元素符号是？",
+        "options": [
+          "K",
+          "Na",
+          "Li"
+        ],
+        "answer": "K"
+      },
+      {
+        "q": "钾与水反应会？",
+        "options": [
+          "无变化",
+          "爆炸",
+          "变绿"
+        ],
+        "answer": "爆炸"
+      },
+      {
+        "q": "钾主要用作什么？",
+        "options": [
+          "化肥",
+          "建筑",
+          "纺织"
+        ],
+        "answer": "化肥"
+      }
+    ]
+  },
+  {
+    "atomic_number": 20,
+    "symbol": "Ca",
+    "name_cn": "钙",
+    "family": "第二族(IIA)",
+    "hp": 250,
+    "attack": 30,
+    "attack_speed": 0.9,
+    "cost_energy": 130,
+    "skill_desc": "骨骼护甲：高HP，酸环境伤害减半",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钙是骨骼和牙齿的主要成分，用于建筑和牛奶补剂。",
+    "sprite_color": "#F5F5DC",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "钙的元素符号是？",
+        "options": [
+          "Ca",
+          "Mg",
+          "Sr"
+        ],
+        "answer": "Ca"
+      },
+      {
+        "q": "骨骼的主要成分是？",
+        "options": [
+          "钙",
+          "铁",
+          "锌"
+        ],
+        "answer": "钙"
+      },
+      {
+        "q": "钙属于哪一族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第二族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 21,
+    "symbol": "Sc",
+    "name_cn": "钪",
+    "family": "过渡金属",
+    "hp": 140,
+    "attack": 45,
+    "attack_speed": 1.2,
+    "cost_energy": 125,
+    "skill_desc": "稀土先锋：中等输出，开启过渡金属篇章",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钪是稀土元素，用于航空合金和照明。",
+    "sprite_color": "#B0C4DE",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "钪的元素符号是？",
+        "options": [
+          "Sc",
+          "Y",
+          "La"
+        ],
+        "answer": "Sc"
+      },
+      {
+        "q": "钪属于哪类元素？",
+        "options": [
+          "稀土",
+          "卤素",
+          "稀有气体"
+        ],
+        "answer": "稀土"
+      },
+      {
+        "q": "钪用于什么合金？",
+        "options": [
+          "航空合金",
+          "铜合金",
+          "铝合金"
+        ],
+        "answer": "航空合金"
+      }
+    ]
+  },
+  {
+    "atomic_number": 22,
+    "symbol": "Ti",
+    "name_cn": "钛",
+    "family": "过渡金属",
+    "hp": 220,
+    "attack": 40,
+    "attack_speed": 1.0,
+    "cost_energy": 140,
+    "skill_desc": "航空钛甲：高强度，酸碱双抗",
+    "weakness": [
+      "acid",
+      "halogen"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钛用于航空航天、人工关节和手机外壳，重量轻强度高。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "钛的元素符号是？",
+        "options": [
+          "Ti",
+          "Th",
+          "Tc"
+        ],
+        "answer": "Ti"
+      },
+      {
+        "q": "钛主要用于什么？",
+        "options": [
+          "航空航天",
+          "食品加工",
+          "纺织"
+        ],
+        "answer": "航空航天"
+      },
+      {
+        "q": "钛的特点是？",
+        "options": [
+          "重而脆",
+          "轻而强",
+          "软而轻"
+        ],
+        "answer": "轻而强"
+      }
+    ]
+  },
+  {
+    "atomic_number": 23,
+    "symbol": "V",
+    "name_cn": "钒",
+    "family": "过渡金属",
+    "hp": 160,
+    "attack": 55,
+    "attack_speed": 1.3,
+    "cost_energy": 130,
+    "skill_desc": "钒钢强化：高攻击，卤素抗性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钒用于高强度钢合金，钒电池用于储能。",
+    "sprite_color": "#E6E6FA",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "钒的元素符号是？",
+        "options": [
+          "V",
+          "Nb",
+          "Ta"
+        ],
+        "answer": "V"
+      },
+      {
+        "q": "钒主要用于什么？",
+        "options": [
+          "食品",
+          "高强度钢合金",
+          "纺织"
+        ],
+        "answer": "高强度钢合金"
+      },
+      {
+        "q": "钒电池用于什么？",
+        "options": [
+          "手机",
+          "储能",
+          "汽车照明"
+        ],
+        "answer": "储能"
+      }
+    ]
+  },
+  {
+    "atomic_number": 24,
+    "symbol": "Cr",
+    "name_cn": "铬",
+    "family": "过渡金属",
+    "hp": 180,
+    "attack": 50,
+    "attack_speed": 1.1,
+    "cost_energy": 135,
+    "skill_desc": "钝化保护：酸碱环境自动生成保护膜",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铬用于镀铬防腐、不锈钢和颜料。",
+    "sprite_color": "#708090",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "铬的元素符号是？",
+        "options": [
+          "Cr",
+          "Mo",
+          "W"
+        ],
+        "answer": "Cr"
+      },
+      {
+        "q": "不锈钢中含有哪种元素？",
+        "options": [
+          "铬",
+          "铜",
+          "锡"
+        ],
+        "answer": "铬"
+      },
+      {
+        "q": "铬用于什么表面处理？",
+        "options": [
+          "防锈镀铬",
+          "染色",
+          "涂层"
+        ],
+        "answer": "防锈镀铬"
+      }
+    ]
+  },
+  {
+    "atomic_number": 25,
+    "symbol": "Mn",
+    "name_cn": "锰",
+    "family": "过渡金属",
+    "hp": 170,
+    "attack": 48,
+    "attack_speed": 1.2,
+    "cost_energy": 130,
+    "skill_desc": "钢铁之血：护甲加成，氧化环境稳定",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锰用于钢铁冶炼、干电池和玻璃工业。",
+    "sprite_color": "#778899",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "锰的元素符号是？",
+        "options": [
+          "Mn",
+          "Fe",
+          "Co"
+        ],
+        "answer": "Mn"
+      },
+      {
+        "q": "锰主要用于什么？",
+        "options": [
+          "纺织",
+          "钢铁冶炼",
+          "建筑"
+        ],
+        "answer": "钢铁冶炼"
+      },
+      {
+        "q": "锰用于什么电池？",
+        "options": [
+          "锂电池",
+          "干电池",
+          "太阳能电池"
+        ],
+        "answer": "干电池"
+      }
+    ]
+  },
+  {
+    "atomic_number": 26,
+    "symbol": "Fe",
+    "name_cn": "铁",
+    "family": "过渡金属",
+    "hp": 200,
+    "attack": 42,
+    "attack_speed": 1.0,
+    "cost_energy": 120,
+    "skill_desc": "铁锈侵蚀：攻击附带氧化，持续掉血",
+    "weakness": [
+      "acid",
+      "halogen"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铁是使用最广泛的金属，铁锈是氧化铁。",
+    "sprite_color": "#8B0000",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "铁的元素符号是？",
+        "options": [
+          "Fe",
+          "Cu",
+          "Zn"
+        ],
+        "answer": "Fe"
+      },
+      {
+        "q": "铁锈的成分是？",
+        "options": [
+          "氧化铁",
+          "氧化铝",
+          "碳酸钙"
+        ],
+        "answer": "氧化铁"
+      },
+      {
+        "q": "铁在什么环境下容易生锈？",
+        "options": [
+          "干燥",
+          "潮湿",
+          "真空"
+        ],
+        "answer": "潮湿"
+      }
+    ]
+  },
+  {
+    "atomic_number": 27,
+    "symbol": "Co",
+    "name_cn": "钴",
+    "family": "过渡金属",
+    "hp": 150,
+    "attack": 58,
+    "attack_speed": 1.4,
+    "cost_energy": 135,
+    "skill_desc": "钴蓝攻击：高温环境稳定，输出稳定",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钴用于蓝色颜料、硬质合金和锂电池。",
+    "sprite_color": "#4169E1",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "钴的元素符号是？",
+        "options": [
+          "Co",
+          "Ni",
+          "Cu"
+        ],
+        "answer": "Co"
+      },
+      {
+        "q": "钴主要用于什么颜料？",
+        "options": [
+          "红色",
+          "蓝色",
+          "绿色"
+        ],
+        "answer": "蓝色"
+      },
+      {
+        "q": "钴属于哪类元素？",
+        "options": [
+          "稀土",
+          "过渡金属",
+          "贵金属"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 28,
+    "symbol": "Ni",
+    "name_cn": "镍",
+    "family": "过渡金属",
+    "hp": 190,
+    "attack": 38,
+    "attack_speed": 0.9,
+    "cost_energy": 140,
+    "skill_desc": "镍币之盾：盐蚀抗性，高血量",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镍用于硬币、不锈钢和电池。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "镍的元素符号是？",
+        "options": [
+          "Ni",
+          "Co",
+          "Fe"
+        ],
+        "answer": "Ni"
+      },
+      {
+        "q": "哪种硬币含有镍？",
+        "options": [
+          "人民币1元",
+          "人民币5角",
+          "人民币1角"
+        ],
+        "answer": "人民币1元"
+      },
+      {
+        "q": "镍在什么环境抗性好？",
+        "options": [
+          "盐蚀",
+          "酸蚀",
+          "高温"
+        ],
+        "answer": "盐蚀"
+      }
+    ]
+  },
+  {
+    "atomic_number": 29,
+    "symbol": "Cu",
+    "name_cn": "铜",
+    "family": "过渡金属",
+    "hp": 165,
+    "attack": 45,
+    "attack_speed": 1.1,
+    "cost_energy": 130,
+    "skill_desc": "导电之矛：攻击附带电流，高攻击速度",
+    "weakness": [
+      "acid",
+      "halogen",
+      "oxidize"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铜是优良的导电材料，用于电线和管道。",
+    "sprite_color": "#B87333",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "铜的元素符号是？",
+        "options": [
+          "Cu",
+          "Ag",
+          "Au"
+        ],
+        "answer": "Cu"
+      },
+      {
+        "q": "铜主要用于什么？",
+        "options": [
+          "导电",
+          "防腐",
+          "炼钢"
+        ],
+        "answer": "导电"
+      },
+      {
+        "q": "铜绿是什么？",
+        "options": [
+          "氧化铜",
+          "碳酸铜",
+          "硫酸铜"
+        ],
+        "answer": "碳酸铜"
+      }
+    ]
+  },
+  {
+    "atomic_number": 30,
+    "symbol": "Zn",
+    "name_cn": "锌",
+    "family": "过渡金属",
+    "hp": 175,
+    "attack": 40,
+    "attack_speed": 1.0,
+    "cost_energy": 125,
+    "skill_desc": "牺牲阳极：被攻击时反制伤害，镀锌防锈",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锌用于镀锌防腐、黄铜和干电池。",
+    "sprite_color": "#7F7F7F",
+    "unlock_world_id": "world1_egypt",
+    "unlock_questions": [
+      {
+        "q": "锌的元素符号是？",
+        "options": [
+          "Zn",
+          "Mg",
+          "Ca"
+        ],
+        "answer": "Zn"
+      },
+      {
+        "q": "铁镀锌的作用是？",
+        "options": [
+          "防腐",
+          "导电",
+          "装饰"
+        ],
+        "answer": "防腐"
+      },
+      {
+        "q": "锌用于什么电池？",
+        "options": [
+          "锂电池",
+          "干电池",
+          "太阳能电池"
+        ],
+        "answer": "干电池"
+      }
+    ]
+  },
+  {
+    "atomic_number": 31,
+    "symbol": "Ga",
+    "name_cn": "镓",
+    "family": "第十三族(IIIA)",
+    "hp": 130,
+    "attack": 52,
+    "attack_speed": 1.5,
+    "cost_energy": 120,
+    "skill_desc": "低熔点金属：手温即可融化，奇特攻击方式",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镓的熔点只有30°C，常温下为固体，握在手心会融化。",
+    "sprite_color": "#DDA0DD",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "镓的元素符号是？",
+        "options": [
+          "Ga",
+          "In",
+          "Tl"
+        ],
+        "answer": "Ga"
+      },
+      {
+        "q": "镓的熔点大约是多少？",
+        "options": [
+          "30°C",
+          "100°C",
+          "300°C"
+        ],
+        "answer": "30°C"
+      },
+      {
+        "q": "镓属于哪一族？",
+        "options": [
+          "第一族",
+          "第十三族",
+          "第十四族"
+        ],
+        "answer": "第十三族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 32,
+    "symbol": "Ge",
+    "name_cn": "锗",
+    "family": "第十四族(IVA)",
+    "hp": 155,
+    "attack": 48,
+    "attack_speed": 1.2,
+    "cost_energy": 125,
+    "skill_desc": "半导体战士：高/低温双抗，早期晶体管材料",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锗是重要的半导体材料，用于晶体管和光纤。",
+    "sprite_color": "#D2691E",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "锗的元素符号是？",
+        "options": [
+          "Ge",
+          "Si",
+          "Sn"
+        ],
+        "answer": "Ge"
+      },
+      {
+        "q": "锗主要用于什么？",
+        "options": [
+          "半导体",
+          "玻璃",
+          "钢铁"
+        ],
+        "answer": "半导体"
+      },
+      {
+        "q": "锗属于哪一族？",
+        "options": [
+          "碳族",
+          "硅族",
+          "锗族"
+        ],
+        "answer": "碳族（第十四族）"
+      }
+    ]
+  },
+  {
+    "atomic_number": 33,
+    "symbol": "As",
+    "name_cn": "砷",
+    "family": "第十五族(VA)",
+    "hp": 120,
+    "attack": 70,
+    "attack_speed": 1.6,
+    "cost_energy": 130,
+    "skill_desc": "砒霜之击：高攻击，剧毒，对碱金属特攻",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "砷俗称砒霜，有剧毒，用于半导体和农药。",
+    "sprite_color": "#9ACD32",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "砷的元素符号是？",
+        "options": [
+          "As",
+          "Sb",
+          "Bi"
+        ],
+        "answer": "As"
+      },
+      {
+        "q": "砷的俗称是？",
+        "options": [
+          "盐",
+          "砒霜",
+          "石灰"
+        ],
+        "answer": "砒霜"
+      },
+      {
+        "q": "砷主要用于什么？",
+        "options": [
+          "食品",
+          "半导体",
+          "纺织"
+        ],
+        "answer": "半导体"
+      }
+    ]
+  },
+  {
+    "atomic_number": 34,
+    "symbol": "Se",
+    "name_cn": "硒",
+    "family": "第十六族(VIA)",
+    "hp": 115,
+    "attack": 62,
+    "attack_speed": 1.5,
+    "cost_energy": 115,
+    "skill_desc": "光敏攻击：卤素环境伤害提升",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "硒用于光电池、玻璃脱色和营养补剂。",
+    "sprite_color": "#FFA500",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "硒的元素符号是？",
+        "options": [
+          "Se",
+          "Te",
+          "Po"
+        ],
+        "answer": "Se"
+      },
+      {
+        "q": "硒用于什么电池？",
+        "options": [
+          "锂电池",
+          "光电池",
+          "燃料电池"
+        ],
+        "answer": "光电池"
+      },
+      {
+        "q": "硒属于哪一族？",
+        "options": [
+          "氧族",
+          "氮族",
+          "卤素族"
+        ],
+        "answer": "氧族（第十六族）"
+      }
+    ]
+  },
+  {
+    "atomic_number": 35,
+    "symbol": "Br",
+    "name_cn": "溴",
+    "family": "第十七族(VIIA)",
+    "hp": 75,
+    "attack": 82,
+    "attack_speed": 1.9,
+    "cost_energy": 125,
+    "skill_desc": "卤素侵蚀：对碱金属和碱土金属双倍伤害",
+    "weakness": [],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "溴是唯一在常温下为液体的非金属，用于阻燃剂和药物。",
+    "sprite_color": "#8B4513",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "溴的元素符号是？",
+        "options": [
+          "Br",
+          "I",
+          "Cl"
+        ],
+        "answer": "Br"
+      },
+      {
+        "q": "溴在常温下是什么状态？",
+        "options": [
+          "固体",
+          "液体",
+          "气体"
+        ],
+        "answer": "液体"
+      },
+      {
+        "q": "溴属于哪一族？",
+        "options": [
+          "卤素族",
+          "氧族",
+          "氮族"
+        ],
+        "answer": "卤素族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 36,
+    "symbol": "Kr",
+    "name_cn": "氪",
+    "family": "第零族(0族)",
+    "hp": 210,
+    "attack": 25,
+    "attack_speed": 0.6,
+    "cost_energy": 140,
+    "skill_desc": "惰性氪光：激光材料，卤素抗性",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氪气用于激光、闪光灯和激光手术。",
+    "sprite_color": "#00CED1",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "氪的元素符号是？",
+        "options": [
+          "Kr",
+          "Xe",
+          "Ar"
+        ],
+        "answer": "Kr"
+      },
+      {
+        "q": "氪气用于什么？",
+        "options": [
+          "呼吸",
+          "激光",
+          "制冷"
+        ],
+        "answer": "激光"
+      },
+      {
+        "q": "氪属于哪一族？",
+        "options": [
+          "卤素族",
+          "零族",
+          "第一族"
+        ],
+        "answer": "零族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 37,
+    "symbol": "Rb",
+    "name_cn": "铷",
+    "family": "第一族(IA)",
+    "hp": 80,
+    "attack": 70,
+    "attack_speed": 1.9,
+    "cost_energy": 130,
+    "skill_desc": "光敏碱金属：极活泼，光电效应强",
+    "weakness": [
+      "water",
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铷是极活泼的碱金属，用于原子钟和光电管。",
+    "sprite_color": "#FF1493",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "铷的元素符号是？",
+        "options": [
+          "Rb",
+          "Cs",
+          "Fr"
+        ],
+        "answer": "Rb"
+      },
+      {
+        "q": "铷属于哪一族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第一族"
+      },
+      {
+        "q": "铷用于什么精密仪器？",
+        "options": [
+          "天平",
+          "原子钟",
+          "温度计"
+        ],
+        "answer": "原子钟"
+      }
+    ]
+  },
+  {
+    "atomic_number": 38,
+    "symbol": "Sr",
+    "name_cn": "锶",
+    "family": "第二族(IIA)",
+    "hp": 200,
+    "attack": 38,
+    "attack_speed": 0.9,
+    "cost_energy": 140,
+    "skill_desc": "烟火红光：燃烧发出红色火焰",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锶燃烧发出红色火焰，用于烟火和信号弹。",
+    "sprite_color": "#FF7F50",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "锶的元素符号是？",
+        "options": [
+          "Sr",
+          "Ca",
+          "Mg"
+        ],
+        "answer": "Sr"
+      },
+      {
+        "q": "锶燃烧发出什么光？",
+        "options": [
+          "白光",
+          "红光",
+          "绿光"
+        ],
+        "answer": "红光"
+      },
+      {
+        "q": "锶属于哪一族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第二族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 39,
+    "symbol": "Y",
+    "name_cn": "钇",
+    "family": "过渡金属",
+    "hp": 145,
+    "attack": 50,
+    "attack_speed": 1.2,
+    "cost_energy": 135,
+    "skill_desc": "稀土战士：高温稳定性好，合金强化",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钇是稀土元素，用于LED荧光粉和高温超导体。",
+    "sprite_color": "#FFD700",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "钇的元素符号是？",
+        "options": [
+          "Y",
+          "La",
+          "Ce"
+        ],
+        "answer": "Y"
+      },
+      {
+        "q": "钇属于哪类元素？",
+        "options": [
+          "稀土",
+          "贵金属",
+          "过渡金属"
+        ],
+        "answer": "稀土"
+      },
+      {
+        "q": "钇用于什么？",
+        "options": [
+          "LED荧光粉",
+          "食品",
+          "纺织"
+        ],
+        "answer": "LED荧光粉"
+      }
+    ]
+  },
+  {
+    "atomic_number": 40,
+    "symbol": "Zr",
+    "name_cn": "锆",
+    "family": "过渡金属",
+    "hp": 230,
+    "attack": 35,
+    "attack_speed": 0.9,
+    "cost_energy": 145,
+    "skill_desc": "核级耐腐蚀：酸碱双抗，核反应堆材料",
+    "weakness": [
+      "acid",
+      "halogen"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锆用于核反应堆包壳和陶瓷。",
+    "sprite_color": "#F5F5DC",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "锆的元素符号是？",
+        "options": [
+          "Zr",
+          "Nb",
+          "Mo"
+        ],
+        "answer": "Zr"
+      },
+      {
+        "q": "锆主要用于什么？",
+        "options": [
+          "核反应堆",
+          "食品",
+          "建筑"
+        ],
+        "answer": "核反应堆"
+      },
+      {
+        "q": "锆的特点是？",
+        "options": [
+          "不耐腐蚀",
+          "耐腐蚀",
+          "易燃"
+        ],
+        "answer": "耐腐蚀"
+      }
+    ]
+  },
+  {
+    "atomic_number": 41,
+    "symbol": "Nb",
+    "name_cn": "铌",
+    "family": "过渡金属",
+    "hp": 170,
+    "attack": 55,
+    "attack_speed": 1.3,
+    "cost_energy": 140,
+    "skill_desc": "超导材料：低温超导，高强度合金",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铌用于超导磁铁、火箭合金和钢铁强化。",
+    "sprite_color": "#B0E0E6",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "铌的元素符号是？",
+        "options": [
+          "Nb",
+          "Ta",
+          "V"
+        ],
+        "answer": "Nb"
+      },
+      {
+        "q": "铌用于什么高科技？",
+        "options": [
+          "超导磁铁",
+          "玻璃",
+          "纺织"
+        ],
+        "answer": "超导磁铁"
+      },
+      {
+        "q": "铌属于哪类元素？",
+        "options": [
+          "稀土",
+          "过渡金属",
+          "卤素"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 42,
+    "symbol": "Mo",
+    "name_cn": "钼",
+    "family": "过渡金属",
+    "hp": 185,
+    "attack": 48,
+    "attack_speed": 1.1,
+    "cost_energy": 138,
+    "skill_desc": "高熔点合金：高攻击，卤素抗性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钼用于高强度钢合金和催化剂。",
+    "sprite_color": "#708090",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "钼的元素符号是？",
+        "options": [
+          "Mo",
+          "W",
+          "Cr"
+        ],
+        "answer": "Mo"
+      },
+      {
+        "q": "钼主要用于什么？",
+        "options": [
+          "高强度钢",
+          "玻璃",
+          "纺织"
+        ],
+        "answer": "高强度钢"
+      },
+      {
+        "q": "钼的熔点如何？",
+        "options": [
+          "低",
+          "高",
+          "中等"
+        ],
+        "answer": "高"
+      }
+    ]
+  },
+  {
+    "atomic_number": 43,
+    "symbol": "Tc",
+    "name_cn": "锝",
+    "family": "过渡金属",
+    "hp": 140,
+    "attack": 72,
+    "attack_speed": 1.7,
+    "cost_energy": 145,
+    "skill_desc": "放射性先锋：首个人工合成元素，医学成像",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 1200,
+    "knowledge_text": "锝是首个人工合成元素，用于医学放射性成像。",
+    "sprite_color": "#40E0D0",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "锝的元素符号是？",
+        "options": [
+          "Tc",
+          "Re",
+          "Ru"
+        ],
+        "answer": "Tc"
+      },
+      {
+        "q": "锝有什么特性？",
+        "options": [
+          "普通金属",
+          "放射性",
+          "惰性"
+        ],
+        "answer": "放射性"
+      },
+      {
+        "q": "锝主要用于什么？",
+        "options": [
+          "建筑",
+          "医学成像",
+          "食品"
+        ],
+        "answer": "医学成像"
+      }
+    ]
+  },
+  {
+    "atomic_number": 44,
+    "symbol": "Ru",
+    "name_cn": "钌",
+    "family": "过渡金属",
+    "hp": 155,
+    "attack": 58,
+    "attack_speed": 1.4,
+    "cost_energy": 140,
+    "skill_desc": "铂族耐磨：高攻击，盐蚀抗性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钌用于电子器件催化剂和珠宝镀层。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "钌的元素符号是？",
+        "options": [
+          "Ru",
+          "Rh",
+          "Pd"
+        ],
+        "answer": "Ru"
+      },
+      {
+        "q": "钌属于哪族？",
+        "options": [
+          "铂族",
+          "镍族",
+          "铜族"
+        ],
+        "answer": "铂族"
+      },
+      {
+        "q": "钌用于什么？",
+        "options": [
+          "催化剂",
+          "食品",
+          "建筑"
+        ],
+        "answer": "催化剂"
+      }
+    ]
+  },
+  {
+    "atomic_number": 45,
+    "symbol": "Rh",
+    "name_cn": "铑",
+    "family": "过渡金属",
+    "hp": 145,
+    "attack": 62,
+    "attack_speed": 1.5,
+    "cost_energy": 148,
+    "skill_desc": "高反射镀层：高攻击，卤素完全抗性",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铑用于汽车尾气催化和珠宝高反射镀层。",
+    "sprite_color": "#E6E6E6",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "铑的元素符号是？",
+        "options": [
+          "Rh",
+          "Ir",
+          "Pd"
+        ],
+        "answer": "Rh"
+      },
+      {
+        "q": "铑用于什么表面处理？",
+        "options": [
+          "高反射镀层",
+          "防锈",
+          "染色"
+        ],
+        "answer": "高反射镀层"
+      },
+      {
+        "q": "铑属于哪族？",
+        "options": [
+          "铂族",
+          "镍族",
+          "铜族"
+        ],
+        "answer": "铂族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 46,
+    "symbol": "Pd",
+    "name_cn": "钯",
+    "family": "过渡金属",
+    "hp": 160,
+    "attack": 55,
+    "attack_speed": 1.3,
+    "cost_energy": 142,
+    "skill_desc": "氢气吸附：盐蚀环境稳定，催化加氢",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钯用于汽车催化转化器和氢气储存。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "钯的元素符号是？",
+        "options": [
+          "Pd",
+          "Pt",
+          "Ni"
+        ],
+        "answer": "Pd"
+      },
+      {
+        "q": "钯用于什么？",
+        "options": [
+          "催化转化器",
+          "玻璃",
+          "纺织"
+        ],
+        "answer": "催化转化器"
+      },
+      {
+        "q": "钯能吸附什么气体？",
+        "options": [
+          "氧气",
+          "氢气",
+          "氮气"
+        ],
+        "answer": "氢气"
+      }
+    ]
+  },
+  {
+    "atomic_number": 47,
+    "symbol": "Ag",
+    "name_cn": "银",
+    "family": "过渡金属",
+    "hp": 130,
+    "attack": 65,
+    "attack_speed": 1.6,
+    "cost_energy": 135,
+    "skill_desc": "导电之银：最高攻击速度，卤素环境危险",
+    "weakness": [
+      "halogen"
+    ],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "银是最好的导电金属，用于电子和珠宝。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "银的元素符号是？",
+        "options": [
+          "Ag",
+          "Au",
+          "Cu"
+        ],
+        "answer": "Ag"
+      },
+      {
+        "q": "银的导电性如何？",
+        "options": [
+          "最差",
+          "最好",
+          "中等"
+        ],
+        "answer": "最好"
+      },
+      {
+        "q": "银在什么环境有危险？",
+        "options": [
+          "普通",
+          "卤素",
+          "水"
+        ],
+        "answer": "卤素"
+      }
+    ]
+  },
+  {
+    "atomic_number": 48,
+    "symbol": "Cd",
+    "name_cn": "镉",
+    "family": "过渡金属",
+    "hp": 170,
+    "attack": 42,
+    "attack_speed": 1.0,
+    "cost_energy": 130,
+    "skill_desc": "颜料橙红：高血量，镍铬电池材料",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镉用于镍镉电池和颜料，但有毒性。",
+    "sprite_color": "#FFA500",
+    "unlock_world_id": "world2_greatwall",
+    "unlock_questions": [
+      {
+        "q": "镉的元素符号是？",
+        "options": [
+          "Cd",
+          "Hg",
+          "Zn"
+        ],
+        "answer": "Cd"
+      },
+      {
+        "q": "镉用于什么电池？",
+        "options": [
+          "镍镉电池",
+          "锂电池",
+          "干电池"
+        ],
+        "answer": "镍镉电池"
+      },
+      {
+        "q": "镉有什么特性？",
+        "options": [
+          "无毒",
+          "有毒性",
+          "中性"
+        ],
+        "answer": "有毒性"
+      }
+    ]
+  },
+  {
+    "atomic_number": 49,
+    "symbol": "In",
+    "name_cn": "铟",
+    "family": "第十三族(IIIA)",
+    "hp": 125,
+    "attack": 52,
+    "attack_speed": 1.4,
+    "cost_energy": 128,
+    "skill_desc": "低熔点合金：软金属，触摸屏导电层",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铟用于触摸屏导电层（ITO）和低熔点合金。",
+    "sprite_color": "#DDA0DD",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铟的元素符号是？",
+        "options": [
+          "In",
+          "Sn",
+          "Tl"
+        ],
+        "answer": "In"
+      },
+      {
+        "q": "铟用于什么屏幕？",
+        "options": [
+          "触摸屏",
+          "老式CRT",
+          "电视"
+        ],
+        "answer": "触摸屏"
+      },
+      {
+        "q": "铟属于哪一族？",
+        "options": [
+          "第一族",
+          "第十三族",
+          "第十四族"
+        ],
+        "answer": "第十三族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 50,
+    "symbol": "Sn",
+    "name_cn": "锡",
+    "family": "第十四族(IVA)",
+    "hp": 180,
+    "attack": 38,
+    "attack_speed": 0.9,
+    "cost_energy": 125,
+    "skill_desc": "焊接之锡：盐蚀抗性好，护甲加成",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锡用于焊接、食品罐镀层和青铜合金。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "锡的元素符号是？",
+        "options": [
+          "Sn",
+          "Pb",
+          "Bi"
+        ],
+        "answer": "Sn"
+      },
+      {
+        "q": "锡用于什么？",
+        "options": [
+          "焊接",
+          "纺织",
+          "玻璃"
+        ],
+        "answer": "焊接"
+      },
+      {
+        "q": "锡在空气中会怎样？",
+        "options": [
+          "生锈",
+          "氧化变暗",
+          "无变化"
+        ],
+        "answer": "氧化变暗"
+      }
+    ]
+  },
+  {
+    "atomic_number": 51,
+    "symbol": "Sb",
+    "name_cn": "锑",
+    "family": "第十五族(VA)",
+    "hp": 140,
+    "attack": 60,
+    "attack_speed": 1.4,
+    "cost_energy": 135,
+    "skill_desc": "阻燃材料：高攻击，卤素协同",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锑用于阻燃剂、合金和半导体。",
+    "sprite_color": "#708090",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "锑的元素符号是？",
+        "options": [
+          "Sb",
+          "As",
+          "Bi"
+        ],
+        "answer": "Sb"
+      },
+      {
+        "q": "锑主要用于什么？",
+        "options": [
+          "阻燃剂",
+          "食品",
+          "纺织"
+        ],
+        "answer": "阻燃剂"
+      },
+      {
+        "q": "锑属于哪一族？",
+        "options": [
+          "氮族",
+          "碳族",
+          "氧族"
+        ],
+        "answer": "氮族（第十五族）"
+      }
+    ]
+  },
+  {
+    "atomic_number": 52,
+    "symbol": "Te",
+    "name_cn": "碲",
+    "family": "第十六族(VIA)",
+    "hp": 130,
+    "attack": 55,
+    "attack_speed": 1.3,
+    "cost_energy": 130,
+    "skill_desc": "半导体材料：低毒，高温稳定性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "碲用于太阳能电池和热电材料。",
+    "sprite_color": "#D2691E",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "碲的元素符号是？",
+        "options": [
+          "Te",
+          "Se",
+          "Po"
+        ],
+        "answer": "Te"
+      },
+      {
+        "q": "碲用于什么电池？",
+        "options": [
+          "锂电池",
+          "太阳能电池",
+          "干电池"
+        ],
+        "answer": "太阳能电池"
+      },
+      {
+        "q": "碲属于哪一族？",
+        "options": [
+          "氧族",
+          "卤素族",
+          "氮族"
+        ],
+        "answer": "氧族（第十六族）"
+      }
+    ]
+  },
+  {
+    "atomic_number": 53,
+    "symbol": "I",
+    "name_cn": "碘",
+    "family": "第十七族(VIIA)",
+    "hp": 70,
+    "attack": 88,
+    "attack_speed": 2.0,
+    "cost_energy": 130,
+    "skill_desc": "碘酒消毒：对有机物高伤害，卤素侵蚀",
+    "weakness": [],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "碘用于消毒（碘酒）、甲状腺药物和摄影。",
+    "sprite_color": "#9400D3",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "碘的元素符号是？",
+        "options": [
+          "I",
+          "Br",
+          "Cl"
+        ],
+        "answer": "I"
+      },
+      {
+        "q": "碘酒用于什么？",
+        "options": [
+          "消毒",
+          "调味",
+          "染色"
+        ],
+        "answer": "消毒"
+      },
+      {
+        "q": "碘属于哪一族？",
+        "options": [
+          "卤素族",
+          "氧族",
+          "氮族"
+        ],
+        "answer": "卤素族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 54,
+    "symbol": "Xe",
+    "name_cn": "氙",
+    "family": "第零族(0族)",
+    "hp": 200,
+    "attack": 28,
+    "attack_speed": 0.7,
+    "cost_energy": 145,
+    "skill_desc": "惰性重气：高压放电发光，卤素抗性",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "氙气用于氙灯、汽车大灯和激光。",
+    "sprite_color": "#00BFFF",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "氙的元素符号是？",
+        "options": [
+          "Xe",
+          "Kr",
+          "Rn"
+        ],
+        "answer": "Xe"
+      },
+      {
+        "q": "氙灯用于什么？",
+        "options": [
+          "汽车大灯",
+          "普通照明",
+          "信号灯"
+        ],
+        "answer": "汽车大灯"
+      },
+      {
+        "q": "氙属于哪一族？",
+        "options": [
+          "卤素族",
+          "零族",
+          "第一族"
+        ],
+        "answer": "零族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 55,
+    "symbol": "Cs",
+    "name_cn": "铯",
+    "family": "第一族(IA)",
+    "hp": 75,
+    "attack": 78,
+    "attack_speed": 2.0,
+    "cost_energy": 140,
+    "skill_desc": "原子钟基准：最活泼碱金属之一，遇水爆炸",
+    "weakness": [
+      "water",
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铯用于原子钟基准，是最活泼的碱金属之一。",
+    "sprite_color": "#FFDAB9",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铯的元素符号是？",
+        "options": [
+          "Cs",
+          "Ba",
+          "La"
+        ],
+        "answer": "Cs"
+      },
+      {
+        "q": "铯用于什么精密仪器？",
+        "options": [
+          "原子钟",
+          "温度计",
+          "压力计"
+        ],
+        "answer": "原子钟"
+      },
+      {
+        "q": "铯与水反应会？",
+        "options": [
+          "无变化",
+          "爆炸",
+          "变色"
+        ],
+        "answer": "爆炸"
+      }
+    ]
+  },
+  {
+    "atomic_number": 56,
+    "symbol": "Ba",
+    "name_cn": "钡",
+    "family": "第二族(IIA)",
+    "hp": 210,
+    "attack": 35,
+    "attack_speed": 0.8,
+    "cost_energy": 145,
+    "skill_desc": "烟火绿光：燃烧发出绿色火焰",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钡燃烧发出绿色火焰，用于烟火和医学造影。",
+    "sprite_color": "#ADFF2F",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "钡的元素符号是？",
+        "options": [
+          "Ba",
+          "Ra",
+          "Mg"
+        ],
+        "answer": "Ba"
+      },
+      {
+        "q": "钡燃烧发出什么光？",
+        "options": [
+          "红光",
+          "绿光",
+          "白光"
+        ],
+        "answer": "绿光"
+      },
+      {
+        "q": "钡属于哪一族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第二族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 57,
+    "symbol": "La",
+    "name_cn": "镧",
+    "family": "镧系",
+    "hp": 150,
+    "attack": 50,
+    "attack_speed": 1.2,
+    "cost_energy": 140,
+    "skill_desc": "稀土之始：中等输出，高温稳定性好",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镧是镧系元素之首，用于混合动力电池和相机镜头。",
+    "sprite_color": "#F0E68C",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "镧的元素符号是？",
+        "options": [
+          "La",
+          "Ce",
+          "Pr"
+        ],
+        "answer": "La"
+      },
+      {
+        "q": "镧属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      },
+      {
+        "q": "镧用于什么电池？",
+        "options": [
+          "锂电池",
+          "混合动力电池",
+          "干电池"
+        ],
+        "answer": "混合动力电池"
+      }
+    ]
+  },
+  {
+    "atomic_number": 58,
+    "symbol": "Ce",
+    "name_cn": "铈",
+    "family": "镧系",
+    "hp": 145,
+    "attack": 52,
+    "attack_speed": 1.3,
+    "cost_energy": 138,
+    "skill_desc": "稀土催化剂：高输出，氧化环境稳定",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铈是地壳中最丰富的稀土元素，用于催化转化器和玻璃抛光。",
+    "sprite_color": "#F5DEB3",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铈的元素符号是？",
+        "options": [
+          "Ce",
+          "La",
+          "Nd"
+        ],
+        "answer": "Ce"
+      },
+      {
+        "q": "地壳中最丰富的稀土元素是？",
+        "options": [
+          "铈",
+          "镧",
+          "钕"
+        ],
+        "answer": "铈"
+      },
+      {
+        "q": "铈用于什么？",
+        "options": [
+          "催化转化器",
+          "食品",
+          "纺织"
+        ],
+        "answer": "催化转化器"
+      }
+    ]
+  },
+  {
+    "atomic_number": 59,
+    "symbol": "Pr",
+    "name_cn": "镨",
+    "family": "镧系",
+    "hp": 140,
+    "attack": 55,
+    "attack_speed": 1.4,
+    "cost_energy": 138,
+    "skill_desc": "稀土永磁：高强度，卤素抗性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镨用于永磁材料和航空合金。",
+    "sprite_color": "#98FB98",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "镨的元素符号是？",
+        "options": [
+          "Pr",
+          "Nd",
+          "Sm"
+        ],
+        "answer": "Pr"
+      },
+      {
+        "q": "镨属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      },
+      {
+        "q": "镨用于什么材料？",
+        "options": [
+          "永磁材料",
+          "玻璃",
+          "塑料"
+        ],
+        "answer": "永磁材料"
+      }
+    ]
+  },
+  {
+    "atomic_number": 60,
+    "symbol": "Nd",
+    "name_cn": "钕",
+    "family": "镧系",
+    "hp": 138,
+    "attack": 65,
+    "attack_speed": 1.6,
+    "cost_energy": 145,
+    "skill_desc": "钕铁硼磁铁：极高攻击，永久强磁",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钕铁硼是最强的永磁材料，用于电机和耳机。",
+    "sprite_color": "#DDA0DD",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "钕的元素符号是？",
+        "options": [
+          "Nd",
+          "Pr",
+          "Sm"
+        ],
+        "answer": "Nd"
+      },
+      {
+        "q": "钕铁硼是什么？",
+        "options": [
+          "最强永磁材料",
+          "最重金属",
+          "最硬材料"
+        ],
+        "answer": "最强永磁材料"
+      },
+      {
+        "q": "钕铁硼用于什么？",
+        "options": [
+          "电机",
+          "建筑",
+          "纺织"
+        ],
+        "answer": "电机"
+      }
+    ]
+  },
+  {
+    "atomic_number": 61,
+    "symbol": "Pm",
+    "name_cn": "钷",
+    "family": "镧系",
+    "hp": 120,
+    "attack": 70,
+    "attack_speed": 1.7,
+    "cost_energy": 145,
+    "skill_desc": "人工放射性稀土：医学同位素，短寿命",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 800,
+    "knowledge_text": "钷是人造放射性元素，用于医学成像和荧光粉。",
+    "sprite_color": "#E0E0E0",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "钷的元素符号是？",
+        "options": [
+          "Pm",
+          "Sm",
+          "Eu"
+        ],
+        "answer": "Pm"
+      },
+      {
+        "q": "钷有什么特性？",
+        "options": [
+          "普通金属",
+          "人工放射性",
+          "惰性"
+        ],
+        "answer": "人工放射性"
+      },
+      {
+        "q": "钷主要用于什么？",
+        "options": [
+          "医学成像",
+          "食品",
+          "纺织"
+        ],
+        "answer": "医学成像"
+      }
+    ]
+  },
+  {
+    "atomic_number": 62,
+    "symbol": "Sm",
+    "name_cn": "钐",
+    "family": "镧系",
+    "hp": 135,
+    "attack": 58,
+    "attack_speed": 1.4,
+    "cost_energy": 140,
+    "skill_desc": "钐钴磁铁：耐高温永磁，高攻击",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钐钴磁铁用于高温电机和航空航天。",
+    "sprite_color": "#FFB6C1",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "钐的元素符号是？",
+        "options": [
+          "Sm",
+          "Eu",
+          "Gd"
+        ],
+        "answer": "Sm"
+      },
+      {
+        "q": "钐钴磁铁有什么特点？",
+        "options": [
+          "耐高温",
+          "不耐高温",
+          "普通磁铁"
+        ],
+        "answer": "耐高温"
+      },
+      {
+        "q": "钐属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 63,
+    "symbol": "Eu",
+    "name_cn": "铕",
+    "family": "镧系",
+    "hp": 110,
+    "attack": 75,
+    "attack_speed": 1.8,
+    "cost_energy": 140,
+    "skill_desc": "荧光粉红：高攻击，显示器发光材料",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铕用于彩电荧光粉和欧元防伪标记。",
+    "sprite_color": "#FF69B4",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铕的元素符号是？",
+        "options": [
+          "Eu",
+          "Sm",
+          "Gd"
+        ],
+        "answer": "Eu"
+      },
+      {
+        "q": "铕用于什么？",
+        "options": [
+          "彩电荧光粉",
+          "食品",
+          "纺织"
+        ],
+        "answer": "彩电荧光粉"
+      },
+      {
+        "q": "铕属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 64,
+    "symbol": "Gd",
+    "name_cn": "钆",
+    "family": "镧系",
+    "hp": 155,
+    "attack": 48,
+    "attack_speed": 1.1,
+    "cost_energy": 142,
+    "skill_desc": "MRI造影剂：高血量，医学成像材料",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钆用于MRI造影剂和中子吸收剂。",
+    "sprite_color": "#B0E0E6",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "钆的元素符号是？",
+        "options": [
+          "Gd",
+          "Tb",
+          "Dy"
+        ],
+        "answer": "Gd"
+      },
+      {
+        "q": "钆用于什么医学技术？",
+        "options": [
+          "X光",
+          "MRI",
+          "CT"
+        ],
+        "answer": "MRI"
+      },
+      {
+        "q": "钆属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 65,
+    "symbol": "Tb",
+    "name_cn": "铽",
+    "family": "镧系",
+    "hp": 130,
+    "attack": 62,
+    "attack_speed": 1.5,
+    "cost_energy": 142,
+    "skill_desc": "绿色荧光粉：高攻击，光电材料",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铽用于绿色荧光粉和光磁存储。",
+    "sprite_color": "#98FB98",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铽的元素符号是？",
+        "options": [
+          "Tb",
+          "Gd",
+          "Dy"
+        ],
+        "answer": "Tb"
+      },
+      {
+        "q": "铽用于什么颜色荧光粉？",
+        "options": [
+          "红色",
+          "绿色",
+          "蓝色"
+        ],
+        "answer": "绿色"
+      },
+      {
+        "q": "铽属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 66,
+    "symbol": "Dy",
+    "name_cn": "镝",
+    "family": "镧系",
+    "hp": 128,
+    "attack": 68,
+    "attack_speed": 1.6,
+    "cost_energy": 145,
+    "skill_desc": "钕铁硼添加剂：高攻击，永久磁铁增强",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镝用于钕铁硼添加剂和高性能电机。",
+    "sprite_color": "#FFDAB9",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "镝的元素符号是？",
+        "options": [
+          "Dy",
+          "Ho",
+          "Er"
+        ],
+        "answer": "Dy"
+      },
+      {
+        "q": "镝用于什么添加剂？",
+        "options": [
+          "钕铁硼",
+          "铜合金",
+          "铝合金"
+        ],
+        "answer": "钕铁硼"
+      },
+      {
+        "q": "镝属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 67,
+    "symbol": "Ho",
+    "name_cn": "钬",
+    "family": "镧系",
+    "hp": 125,
+    "attack": 72,
+    "attack_speed": 1.7,
+    "cost_energy": 145,
+    "skill_desc": "激光材料：高攻击，医学激光器",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钬用于医疗激光器和光通讯。",
+    "sprite_color": "#FFB6C1",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "钬的元素符号是？",
+        "options": [
+          "Ho",
+          "Er",
+          "Tm"
+        ],
+        "answer": "Ho"
+      },
+      {
+        "q": "钬用于什么医疗设备？",
+        "options": [
+          "激光器",
+          "X光机",
+          "CT"
+        ],
+        "answer": "激光器"
+      },
+      {
+        "q": "钬属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 68,
+    "symbol": "Er",
+    "name_cn": "铒",
+    "family": "镧系",
+    "hp": 122,
+    "attack": 75,
+    "attack_speed": 1.8,
+    "cost_energy": 148,
+    "skill_desc": "光通讯纤维：高攻击，光纤放大器",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铒用于光纤通讯放大器和激光器。",
+    "sprite_color": "#FF69B4",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铒的元素符号是？",
+        "options": [
+          "Er",
+          "Tm",
+          "Yb"
+        ],
+        "answer": "Er"
+      },
+      {
+        "q": "铒用于什么通讯技术？",
+        "options": [
+          "光纤通讯",
+          "卫星通讯",
+          "无线电"
+        ],
+        "answer": "光纤通讯"
+      },
+      {
+        "q": "铒属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 69,
+    "symbol": "Tm",
+    "name_cn": "铥",
+    "family": "镧系",
+    "hp": 118,
+    "attack": 78,
+    "attack_speed": 1.9,
+    "cost_energy": 148,
+    "skill_desc": "最稀有稀土：高攻击，X射线源",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 0,
+    "knowledge_text": "铥是镧系中最稀有的元素，用于便携式X射线源。",
+    "sprite_color": "#DDA0DD",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铥的元素符号是？",
+        "options": [
+          "Tm",
+          "Yb",
+          "Lu"
+        ],
+        "answer": "Tm"
+      },
+      {
+        "q": "镧系中最稀有的元素是？",
+        "options": [
+          "铥",
+          "钷",
+          "镥"
+        ],
+        "answer": "铥"
+      },
+      {
+        "q": "铥用于什么？",
+        "options": [
+          "X射线源",
+          "食品",
+          "纺织"
+        ],
+        "answer": "X射线源"
+      }
+    ]
+  },
+  {
+    "atomic_number": 70,
+    "symbol": "Yb",
+    "name_cn": "镱",
+    "family": "镧系",
+    "hp": 120,
+    "attack": 72,
+    "attack_speed": 1.7,
+    "cost_energy": 145,
+    "skill_desc": "原子钟改进：高攻击，激光冷却",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镱用于原子钟和激光冷却实验。",
+    "sprite_color": "#F5DEB3",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "镱的元素符号是？",
+        "options": [
+          "Yb",
+          "Lu",
+          "La"
+        ],
+        "answer": "Yb"
+      },
+      {
+        "q": "镱用于什么精密仪器？",
+        "options": [
+          "原子钟",
+          "温度计",
+          "压力计"
+        ],
+        "answer": "原子钟"
+      },
+      {
+        "q": "镱属于哪一系列？",
+        "options": [
+          "镧系",
+          "锕系",
+          "过渡金属"
+        ],
+        "answer": "镧系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 71,
+    "symbol": "Lu",
+    "name_cn": "镥",
+    "family": "镧系",
+    "hp": 130,
+    "attack": 65,
+    "attack_speed": 1.5,
+    "cost_energy": 148,
+    "skill_desc": "最重稀土：高血量，PET扫描探测器",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "镥是镧系中最重的元素，用于PET探测器。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "镥的元素符号是？",
+        "options": [
+          "Lu",
+          "Yb",
+          "Tm"
+        ],
+        "answer": "Lu"
+      },
+      {
+        "q": "镧系中最重的元素是？",
+        "options": [
+          "镥",
+          "镱",
+          "铥"
+        ],
+        "answer": "镥"
+      },
+      {
+        "q": "镥用于什么医疗技术？",
+        "options": [
+          "PET探测器",
+          "X光",
+          "MRI"
+        ],
+        "answer": "PET探测器"
+      }
+    ]
+  },
+  {
+    "atomic_number": 72,
+    "symbol": "Hf",
+    "name_cn": "铪",
+    "family": "过渡金属",
+    "hp": 190,
+    "attack": 42,
+    "attack_speed": 0.9,
+    "cost_energy": 148,
+    "skill_desc": "核反应堆控制：高HP，硼中子吸收剂",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铪用于核反应堆控制棒和高温合金。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world3_notredame",
+    "unlock_questions": [
+      {
+        "q": "铪的元素符号是？",
+        "options": [
+          "Hf",
+          "Zr",
+          "Nb"
+        ],
+        "answer": "Hf"
+      },
+      {
+        "q": "铪用于什么核设备？",
+        "options": [
+          "控制棒",
+          "燃料棒",
+          "冷却剂"
+        ],
+        "answer": "控制棒"
+      },
+      {
+        "q": "铪的特点是？",
+        "options": [
+          "不耐高温",
+          "耐高温",
+          "易燃"
+        ],
+        "answer": "耐高温"
+      }
+    ]
+  },
+  {
+    "atomic_number": 73,
+    "symbol": "Ta",
+    "name_cn": "钽",
+    "family": "过渡金属",
+    "hp": 200,
+    "attack": 45,
+    "attack_speed": 0.9,
+    "cost_energy": 150,
+    "skill_desc": "钽电容：高HP，酸碱双抗，极耐腐蚀",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钽用于钽电容和外科植入物，极耐腐蚀。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "钽的元素符号是？",
+        "options": [
+          "Ta",
+          "Nb",
+          "W"
+        ],
+        "answer": "Ta"
+      },
+      {
+        "q": "钽用于什么电子元件？",
+        "options": [
+          "钽电容",
+          "电阻",
+          "电感"
+        ],
+        "answer": "钽电容"
+      },
+      {
+        "q": "钽的特点是？",
+        "options": [
+          "不耐腐蚀",
+          "极耐腐蚀",
+          "普通"
+        ],
+        "answer": "极耐腐蚀"
+      }
+    ]
+  },
+  {
+    "atomic_number": 74,
+    "symbol": "W",
+    "name_cn": "钨",
+    "family": "过渡金属",
+    "hp": 250,
+    "attack": 50,
+    "attack_speed": 0.8,
+    "cost_energy": 155,
+    "skill_desc": "最高熔点：高HP，低攻击速度，极高耐温",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "钨是熔点最高的金属，用于灯泡灯丝和穿甲弹。",
+    "sprite_color": "#708090",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "钨的元素符号是？",
+        "options": [
+          "W",
+          "Mo",
+          "Cr"
+        ],
+        "answer": "W"
+      },
+      {
+        "q": "什么金属熔点最高？",
+        "options": [
+          "钨",
+          "铁",
+          "铜"
+        ],
+        "answer": "钨"
+      },
+      {
+        "q": "钨用于什么？",
+        "options": [
+          "灯泡灯丝",
+          "食品",
+          "纺织"
+        ],
+        "answer": "灯泡灯丝"
+      }
+    ]
+  },
+  {
+    "atomic_number": 75,
+    "symbol": "Re",
+    "name_cn": "铼",
+    "family": "过渡金属",
+    "hp": 170,
+    "attack": 68,
+    "attack_speed": 1.4,
+    "cost_energy": 150,
+    "skill_desc": "超耐高温：高攻击，高温合金，卤素抗性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铼用于喷气发动机合金和催化剂。",
+    "sprite_color": "#E8E8E8",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "铼的元素符号是？",
+        "options": [
+          "Re",
+          "Os",
+          "Ir"
+        ],
+        "answer": "Re"
+      },
+      {
+        "q": "铼用于什么发动机？",
+        "options": [
+          "喷气发动机",
+          "汽车发动机",
+          "摩托艇"
+        ],
+        "answer": "喷气发动机"
+      },
+      {
+        "q": "铼属于哪族？",
+        "options": [
+          "铂族",
+          "镍族",
+          "铜族"
+        ],
+        "answer": "铂族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 76,
+    "symbol": "Os",
+    "name_cn": "锇",
+    "family": "过渡金属",
+    "hp": 180,
+    "attack": 72,
+    "attack_speed": 1.5,
+    "cost_energy": 152,
+    "skill_desc": "最重金属：高攻击，高密度，盐蚀抗性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "锇是密度最大的稳定元素，用于钢笔尖和仪器。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "锇的元素符号是？",
+        "options": [
+          "Os",
+          "Ir",
+          "Pt"
+        ],
+        "answer": "Os"
+      },
+      {
+        "q": "哪种金属密度最大？",
+        "options": [
+          "锇",
+          "钨",
+          "金"
+        ],
+        "answer": "锇"
+      },
+      {
+        "q": "锇用于什么？",
+        "options": [
+          "钢笔尖",
+          "食品",
+          "纺织"
+        ],
+        "answer": "钢笔尖"
+      }
+    ]
+  },
+  {
+    "atomic_number": 77,
+    "symbol": "Ir",
+    "name_cn": "铱",
+    "family": "过渡金属",
+    "hp": 175,
+    "attack": 70,
+    "attack_speed": 1.4,
+    "cost_energy": 155,
+    "skill_desc": "最耐腐蚀：高攻击，抗强酸王水",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铱是已知最耐腐蚀的金属，用于火花塞和坩埚。",
+    "sprite_color": "#E6E6FA",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "铱的元素符号是？",
+        "options": [
+          "Ir",
+          "Os",
+          "Pt"
+        ],
+        "answer": "Ir"
+      },
+      {
+        "q": "哪种金属最耐腐蚀？",
+        "options": [
+          "铱",
+          "金",
+          "铂"
+        ],
+        "answer": "铱"
+      },
+      {
+        "q": "铱用于什么？",
+        "options": [
+          "火花塞",
+          "食品",
+          "纺织"
+        ],
+        "answer": "火花塞"
+      }
+    ]
+  },
+  {
+    "atomic_number": 78,
+    "symbol": "Pt",
+    "name_cn": "铂",
+    "family": "过渡金属",
+    "hp": 190,
+    "attack": 38,
+    "attack_speed": 0.7,
+    "cost_energy": 155,
+    "skill_desc": "贵金属之王：极高HP，低攻击，全伤害抗性",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铂是贵金属，用于珠宝、汽车催化转化器和抗癌症药物。",
+    "sprite_color": "#E6E6E6",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "铂的元素符号是？",
+        "options": [
+          "Pt",
+          "Pd",
+          "Au"
+        ],
+        "answer": "Pt"
+      },
+      {
+        "q": "铂属于什么金属？",
+        "options": [
+          "贵金属",
+          "稀土",
+          "过渡金属"
+        ],
+        "answer": "贵金属"
+      },
+      {
+        "q": "铂用于什么？",
+        "options": [
+          "珠宝和催化转化器",
+          "食品",
+          "建筑"
+        ],
+        "answer": "珠宝和催化转化器"
+      }
+    ]
+  },
+  {
+    "atomic_number": 79,
+    "symbol": "Au",
+    "name_cn": "金",
+    "family": "过渡金属",
+    "hp": 210,
+    "attack": 30,
+    "attack_speed": 0.6,
+    "cost_energy": 160,
+    "skill_desc": "惰性之王：极高HP，最低攻击，几乎全伤害免疫",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "金是最惰性的金属之一，用于珠宝、货币储备和电子器件。",
+    "sprite_color": "#FFD700",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "金的元素符号是？",
+        "options": [
+          "Au",
+          "Ag",
+          "Cu"
+        ],
+        "answer": "Au"
+      },
+      {
+        "q": "金的化学性质如何？",
+        "options": [
+          "非常活泼",
+          "非常惰性",
+          "一般"
+        ],
+        "answer": "非常惰性"
+      },
+      {
+        "q": "金主要用于什么？",
+        "options": [
+          "珠宝和货币",
+          "食品",
+          "建筑"
+        ],
+        "answer": "珠宝和货币"
+      }
+    ]
+  },
+  {
+    "atomic_number": 80,
+    "symbol": "Hg",
+    "name_cn": "汞",
+    "family": "过渡金属",
+    "hp": 150,
+    "attack": 55,
+    "attack_speed": 1.3,
+    "cost_energy": 140,
+    "skill_desc": "液态金属：唯一常温液态，蒸气有毒",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "汞是唯一在常温下呈液态的金属，用于温度计和荧光灯。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "汞的元素符号是？",
+        "options": [
+          "Hg",
+          "Pb",
+          "Sn"
+        ],
+        "answer": "Hg"
+      },
+      {
+        "q": "汞在常温下是什么状态？",
+        "options": [
+          "固体",
+          "液体",
+          "气体"
+        ],
+        "answer": "液体"
+      },
+      {
+        "q": "汞有什么毒性？",
+        "options": [
+          "无毒",
+          "有毒",
+          "微毒"
+        ],
+        "answer": "有毒"
+      }
+    ]
+  },
+  {
+    "atomic_number": 81,
+    "symbol": "Tl",
+    "name_cn": "铊",
+    "family": "第十三族(IIIA)",
+    "hp": 100,
+    "attack": 60,
+    "attack_speed": 1.4,
+    "cost_energy": 135,
+    "skill_desc": "低温超导：高攻击，盐蚀环境危险",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铊是铅的同族元素，有剧毒，曾用于杀虫剂。",
+    "sprite_color": "#9B59B6",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "铊的元素符号是？",
+        "options": [
+          "Tl",
+          "In",
+          "Ga"
+        ],
+        "answer": "Tl"
+      },
+      {
+        "q": "铊的毒性如何？",
+        "options": [
+          "无毒",
+          "剧毒",
+          "微毒"
+        ],
+        "answer": "剧毒"
+      },
+      {
+        "q": "铊属于哪一族？",
+        "options": [
+          "第一族",
+          "第十三族",
+          "第十四族"
+        ],
+        "answer": "第十三族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 82,
+    "symbol": "Pb",
+    "name_cn": "铅",
+    "family": "第十四族(IVA)",
+    "hp": 230,
+    "attack": 25,
+    "attack_speed": 0.5,
+    "cost_energy": 140,
+    "skill_desc": "辐射屏蔽：高HP，X射线屏蔽，但有毒性",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铅用于辐射屏蔽、电池和子弹，但有累积毒性。",
+    "sprite_color": "#708090",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "铅的元素符号是？",
+        "options": [
+          "Pb",
+          "Sn",
+          "Bi"
+        ],
+        "answer": "Pb"
+      },
+      {
+        "q": "铅用于什么防护？",
+        "options": [
+          "辐射屏蔽",
+          "防火",
+          "防腐"
+        ],
+        "answer": "辐射屏蔽"
+      },
+      {
+        "q": "铅有什么特性？",
+        "options": [
+          "无毒",
+          "有累积毒性",
+          "中性"
+        ],
+        "answer": "有累积毒性"
+      }
+    ]
+  },
+  {
+    "atomic_number": 83,
+    "symbol": "Bi",
+    "name_cn": "铋",
+    "family": "第十五族(VA)",
+    "hp": 170,
+    "attack": 42,
+    "attack_speed": 0.9,
+    "cost_energy": 135,
+    "skill_desc": "低毒性重元素：高HP，医药应用",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": false,
+    "decay_lifetime": 0,
+    "knowledge_text": "铋是低毒性重元素，用于药物（胃药）和化妆品。",
+    "sprite_color": "#E6E6FA",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "铋的元素符号是？",
+        "options": [
+          "Bi",
+          "Sb",
+          "As"
+        ],
+        "answer": "Bi"
+      },
+      {
+        "q": "铋的毒性如何？",
+        "options": [
+          "剧毒",
+          "低毒",
+          "无毒"
+        ],
+        "answer": "低毒"
+      },
+      {
+        "q": "铋用于什么？",
+        "options": [
+          "胃药",
+          "食品",
+          "纺织"
+        ],
+        "answer": "胃药"
+      }
+    ]
+  },
+  {
+    "atomic_number": 84,
+    "symbol": "Po",
+    "name_cn": "钋",
+    "family": "第十六族(VIA)",
+    "hp": 90,
+    "attack": 80,
+    "attack_speed": 1.6,
+    "cost_energy": 145,
+    "skill_desc": "极强放射性：高攻击，衰变产生热量",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 600,
+    "knowledge_text": "钋是极强放射性的元素，200毫克能加热4克水至沸腾。",
+    "sprite_color": "#D2691E",
+    "unlock_world_id": "world4_tokyo",
+    "unlock_questions": [
+      {
+        "q": "钋的元素符号是？",
+        "options": [
+          "Po",
+          "Te",
+          "Se"
+        ],
+        "answer": "Po"
+      },
+      {
+        "q": "钋有什么特性？",
+        "options": [
+          "普通金属",
+          "极强放射性",
+          "惰性"
+        ],
+        "answer": "极强放射性"
+      },
+      {
+        "q": "钋的衰变会产生什么？",
+        "options": [
+          "冷",
+          "热量",
+          "气体"
+        ],
+        "answer": "热量"
+      }
+    ]
+  },
+  {
+    "atomic_number": 85,
+    "symbol": "At",
+    "name_cn": "砹",
+    "family": "第十七族(VIIA)",
+    "hp": 60,
+    "attack": 95,
+    "attack_speed": 2.2,
+    "cost_energy": 150,
+    "skill_desc": "最稀有卤素：高攻击，半衰期仅7小时",
+    "weakness": [],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 400,
+    "knowledge_text": "砹是最稀有的天然元素，半衰期仅7.2小时，用于放射治疗研究。",
+    "sprite_color": "#8B008B",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "砹的元素符号是？",
+        "options": [
+          "At",
+          "I",
+          "Ts"
+        ],
+        "answer": "At"
+      },
+      {
+        "q": "砹的半衰期大约是？",
+        "options": [
+          "几秒",
+          "7小时",
+          "几天"
+        ],
+        "answer": "7小时"
+      },
+      {
+        "q": "砹属于哪一族？",
+        "options": [
+          "卤素族",
+          "氧族",
+          "氮族"
+        ],
+        "answer": "卤素族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 86,
+    "symbol": "Rn",
+    "name_cn": "氡",
+    "family": "第零族(0族)",
+    "hp": 160,
+    "attack": 30,
+    "attack_speed": 0.6,
+    "cost_energy": 145,
+    "skill_desc": "放射性惰性气体：护盾同时对全场造成微量辐射",
+    "weakness": [],
+    "resist": [
+      "halogen"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 900,
+    "knowledge_text": "氡是天然放射性惰性气体，可积累在地下室导致肺癌风险。",
+    "sprite_color": "#9370DB",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "氡的元素符号是？",
+        "options": [
+          "Rn",
+          "Xe",
+          "Kr"
+        ],
+        "answer": "Rn"
+      },
+      {
+        "q": "氡气有什么危害？",
+        "options": [
+          "无危害",
+          "致肺癌",
+          "促生长"
+        ],
+        "answer": "致肺癌"
+      },
+      {
+        "q": "氡属于哪一族？",
+        "options": [
+          "卤素族",
+          "零族",
+          "第一族"
+        ],
+        "answer": "零族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 87,
+    "symbol": "Fr",
+    "name_cn": "钫",
+    "family": "第一族(IA)",
+    "hp": 50,
+    "attack": 90,
+    "attack_speed": 2.3,
+    "cost_energy": 150,
+    "skill_desc": "最不稳定碱金属：高攻击，极强放射性，极短寿命",
+    "weakness": [
+      "water",
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 150,
+    "knowledge_text": "钫是最不稳定的天然元素，极少量存在于铀矿中，半衰期仅22分钟。",
+    "sprite_color": "#FF4500",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "钫的元素符号是？",
+        "options": [
+          "Fr",
+          "Cs",
+          "Ra"
+        ],
+        "answer": "Fr"
+      },
+      {
+        "q": "钫的半衰期大约是？",
+        "options": [
+          "几年",
+          "22分钟",
+          "几天"
+        ],
+        "answer": "22分钟"
+      },
+      {
+        "q": "钫属于哪一族？",
+        "options": [
+          "第一族",
+          "第二族",
+          "第三族"
+        ],
+        "answer": "第一族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 88,
+    "symbol": "Ra",
+    "name_cn": "镭",
+    "family": "第二族(IIA)",
+    "hp": 140,
+    "attack": 60,
+    "attack_speed": 1.3,
+    "cost_energy": 148,
+    "skill_desc": "强放射性碱土：高攻击，自发光，医学放射治疗",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 1800,
+    "knowledge_text": "镭有强放射性，居里夫人发现，用于早期癌症放射治疗。",
+    "sprite_color": "#E6E6FA",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "镭的元素符号是？",
+        "options": [
+          "Ra",
+          "Ba",
+          "Sr"
+        ],
+        "answer": "Ra"
+      },
+      {
+        "q": "谁发现了镭？",
+        "options": [
+          "居里夫人",
+          "爱因斯坦",
+          "诺贝尔"
+        ],
+        "answer": "居里夫人"
+      },
+      {
+        "q": "镭有什么特性？",
+        "options": [
+          "普通金属",
+          "强放射性",
+          "惰性"
+        ],
+        "answer": "强放射性"
+      }
+    ]
+  },
+  {
+    "atomic_number": 89,
+    "symbol": "Ac",
+    "name_cn": "锕",
+    "family": "锕系",
+    "hp": 130,
+    "attack": 72,
+    "attack_speed": 1.6,
+    "cost_energy": 150,
+    "skill_desc": "锕系之始：高攻击，强放射性，衰变热",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 2200,
+    "knowledge_text": "锕是锕系首个元素，强放射性，用于中子源。",
+    "sprite_color": "#D3D3D3",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "锕的元素符号是？",
+        "options": [
+          "Ac",
+          "Th",
+          "Pa"
+        ],
+        "answer": "Ac"
+      },
+      {
+        "q": "锕属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      },
+      {
+        "q": "锕有什么特性？",
+        "options": [
+          "普通金属",
+          "强放射性",
+          "惰性"
+        ],
+        "answer": "强放射性"
+      }
+    ]
+  },
+  {
+    "atomic_number": 90,
+    "symbol": "Th",
+    "name_cn": "钍",
+    "family": "锕系",
+    "hp": 170,
+    "attack": 55,
+    "attack_speed": 1.2,
+    "cost_energy": 152,
+    "skill_desc": "核燃料候选：高HP，核反应堆燃料",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 3500,
+    "knowledge_text": "钍是潜在的核燃料，用于钍基核反应堆研究。",
+    "sprite_color": "#A9A9A9",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "钍的元素符号是？",
+        "options": [
+          "Th",
+          "U",
+          "Np"
+        ],
+        "answer": "Th"
+      },
+      {
+        "q": "钍可用于什么？",
+        "options": [
+          "核燃料",
+          "食品",
+          "建筑"
+        ],
+        "answer": "核燃料"
+      },
+      {
+        "q": "钍属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 91,
+    "symbol": "Pa",
+    "name_cn": "镤",
+    "family": "锕系",
+    "hp": 145,
+    "attack": 65,
+    "attack_speed": 1.4,
+    "cost_energy": 150,
+    "skill_desc": "铀前体：高攻击，核裂变副产品",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 2800,
+    "knowledge_text": "镤是铀衰变链中间产物，用于核研究。",
+    "sprite_color": "#808080",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "镤的元素符号是？",
+        "options": [
+          "Pa",
+          "U",
+          "Th"
+        ],
+        "answer": "Pa"
+      },
+      {
+        "q": "镤是铀衰变的什么？",
+        "options": [
+          "前体",
+          "后代",
+          "无关"
+        ],
+        "answer": "前体"
+      },
+      {
+        "q": "镤属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 92,
+    "symbol": "U",
+    "name_cn": "铀",
+    "family": "锕系",
+    "hp": 160,
+    "attack": 75,
+    "attack_speed": 1.5,
+    "cost_energy": 155,
+    "skill_desc": "核裂变核心：高攻击，核武器和核燃料",
+    "weakness": [
+      "acid"
+    ],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 4500,
+    "knowledge_text": "铀是核裂变燃料，用于核武器和核电站。",
+    "sprite_color": "#2F4F4F",
+    "unlock_world_id": "world5_jiuzhaigou",
+    "unlock_questions": [
+      {
+        "q": "铀的元素符号是？",
+        "options": [
+          "U",
+          "Th",
+          "Pu"
+        ],
+        "answer": "U"
+      },
+      {
+        "q": "铀用于什么？",
+        "options": [
+          "核燃料和核武器",
+          "食品",
+          "建筑"
+        ],
+        "answer": "核燃料和核武器"
+      },
+      {
+        "q": "铀属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 93,
+    "symbol": "Np",
+    "name_cn": "镎",
+    "family": "锕系",
+    "hp": 140,
+    "attack": 80,
+    "attack_speed": 1.7,
+    "cost_energy": 152,
+    "skill_desc": "人工超铀：高攻击，核反应堆副产品",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 2000,
+    "knowledge_text": "镎是首个超铀元素，核反应堆副产品。",
+    "sprite_color": "#696969",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "镎的元素符号是？",
+        "options": [
+          "Np",
+          "Pu",
+          "Am"
+        ],
+        "answer": "Np"
+      },
+      {
+        "q": "镎属于哪类元素？",
+        "options": [
+          "人工超铀元素",
+          "天然元素",
+          "稀土"
+        ],
+        "answer": "人工超铀元素"
+      },
+      {
+        "q": "镎主要用于什么？",
+        "options": [
+          "核武器",
+          "核反应堆研究",
+          "食品"
+        ],
+        "answer": "核反应堆研究"
+      }
+    ]
+  },
+  {
+    "atomic_number": 94,
+    "symbol": "Pu",
+    "name_cn": "钚",
+    "family": "锕系",
+    "hp": 155,
+    "attack": 85,
+    "attack_speed": 1.8,
+    "cost_energy": 155,
+    "skill_desc": "核武器材料：高攻击，极度危险，核弹核心",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 2500,
+    "knowledge_text": "钚用于核武器和核电站，毒性极强。",
+    "sprite_color": "#4A4A4A",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "钚的元素符号是？",
+        "options": [
+          "Pu",
+          "Am",
+          "Cm"
+        ],
+        "answer": "Pu"
+      },
+      {
+        "q": "钚用于什么？",
+        "options": [
+          "核武器",
+          "食品",
+          "建筑"
+        ],
+        "answer": "核武器"
+      },
+      {
+        "q": "钚的毒性如何？",
+        "options": [
+          "无毒",
+          "极强毒性",
+          "普通"
+        ],
+        "answer": "极强毒性"
+      }
+    ]
+  },
+  {
+    "atomic_number": 95,
+    "symbol": "Am",
+    "name_cn": "镅",
+    "family": "锕系",
+    "hp": 125,
+    "attack": 88,
+    "attack_speed": 1.9,
+    "cost_energy": 152,
+    "skill_desc": "人工放射性：高攻击，烟雾探测器源",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 1500,
+    "knowledge_text": "镅用于烟雾探测器的放射源和核电池。",
+    "sprite_color": "#808080",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "镅的元素符号是？",
+        "options": [
+          "Am",
+          "Cm",
+          "Bk"
+        ],
+        "answer": "Am"
+      },
+      {
+        "q": "镅用于什么日常设备？",
+        "options": [
+          "烟雾探测器",
+          "电视",
+          "冰箱"
+        ],
+        "answer": "烟雾探测器"
+      },
+      {
+        "q": "镅属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 96,
+    "symbol": "Cm",
+    "name_cn": "锔",
+    "family": "锕系",
+    "hp": 145,
+    "attack": 82,
+    "attack_speed": 1.7,
+    "cost_energy": 155,
+    "skill_desc": "热源材料：高攻击，自发热衰变",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 1800,
+    "knowledge_text": "锔有强放射性，用于深空探测器核电池。",
+    "sprite_color": "#A9A9A9",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "锔的元素符号是？",
+        "options": [
+          "Cm",
+          "Bk",
+          "Cf"
+        ],
+        "answer": "Cm"
+      },
+      {
+        "q": "锔用于什么航天器？",
+        "options": [
+          "深空探测器",
+          "卫星",
+          "航天飞机"
+        ],
+        "answer": "深空探测器"
+      },
+      {
+        "q": "锔属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 97,
+    "symbol": "Bk",
+    "name_cn": "锫",
+    "family": "锕系",
+    "hp": 120,
+    "attack": 85,
+    "attack_speed": 1.8,
+    "cost_energy": 150,
+    "skill_desc": "人工合成：高攻击，热原子研究",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 1300,
+    "knowledge_text": "锫是人造元素，用于热原子化学研究。",
+    "sprite_color": "#B0C4DE",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "锫的元素符号是？",
+        "options": [
+          "Bk",
+          "Cf",
+          "Es"
+        ],
+        "answer": "Bk"
+      },
+      {
+        "q": "锫是天然还是人造？",
+        "options": [
+          "人造",
+          "天然",
+          "半天然"
+        ],
+        "answer": "人造"
+      },
+      {
+        "q": "锫属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 98,
+    "symbol": "Cf",
+    "name_cn": "锎",
+    "family": "锕系",
+    "hp": 115,
+    "attack": 92,
+    "attack_speed": 2.0,
+    "cost_energy": 155,
+    "skill_desc": "强中子源：高攻击，最强中子源之一",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 1000,
+    "knowledge_text": "锎是最强的中子源之一，用于探测金属和医疗。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "锎的元素符号是？",
+        "options": [
+          "Cf",
+          "Es",
+          "Fm"
+        ],
+        "answer": "Cf"
+      },
+      {
+        "q": "锎是已知最强的什么源？",
+        "options": [
+          "中子源",
+          "质子源",
+          "光子源"
+        ],
+        "answer": "中子源"
+      },
+      {
+        "q": "锎属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 99,
+    "symbol": "Es",
+    "name_cn": "锿",
+    "family": "锕系",
+    "hp": 100,
+    "attack": 90,
+    "attack_speed": 2.0,
+    "cost_energy": 152,
+    "skill_desc": "爱因斯坦ium：高攻击，极短寿命人工元素",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 600,
+    "knowledge_text": "锿以爱因斯坦命名，首次氢弹爆炸中产生，半衰期276天。",
+    "sprite_color": "#D3D3D3",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "锿的元素符号是？",
+        "options": [
+          "Es",
+          "Fm",
+          "Md"
+        ],
+        "answer": "Es"
+      },
+      {
+        "q": "锿以谁命名？",
+        "options": [
+          "爱因斯坦",
+          "居里夫人",
+          "诺贝尔"
+        ],
+        "answer": "爱因斯坦"
+      },
+      {
+        "q": "锿属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 100,
+    "symbol": "Fm",
+    "name_cn": "镄",
+    "family": "锕系",
+    "hp": 95,
+    "attack": 92,
+    "attack_speed": 2.1,
+    "cost_energy": 150,
+    "skill_desc": "费米ium：高攻击，极短寿命研究",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 450,
+    "knowledge_text": "镄以费米命名，半衰期100天，用于科学研究。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world6_moscow",
+    "unlock_questions": [
+      {
+        "q": "镄的元素符号是？",
+        "options": [
+          "Fm",
+          "Md",
+          "No"
+        ],
+        "answer": "Fm"
+      },
+      {
+        "q": "镄以谁命名？",
+        "options": [
+          "费米",
+          "爱因斯坦",
+          "居里"
+        ],
+        "answer": "费米"
+      },
+      {
+        "q": "镄属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 101,
+    "symbol": "Md",
+    "name_cn": "钔",
+    "family": "锕系",
+    "hp": 88,
+    "attack": 90,
+    "attack_speed": 2.0,
+    "cost_energy": 148,
+    "skill_desc": "门捷列夫ium：高攻击，辐射自损严重",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 350,
+    "knowledge_text": "钔以门捷列夫命名，辐射自损严重，半衰期51天。",
+    "sprite_color": "#D3D3D3",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "钔的元素符号是？",
+        "options": [
+          "Md",
+          "No",
+          "Lr"
+        ],
+        "answer": "Md"
+      },
+      {
+        "q": "钔以谁命名？",
+        "options": [
+          "门捷列夫",
+          "拉瓦锡",
+          "道尔顿"
+        ],
+        "answer": "门捷列夫"
+      },
+      {
+        "q": "钔属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 102,
+    "symbol": "No",
+    "name_cn": "锘",
+    "family": "锕系",
+    "hp": 82,
+    "attack": 88,
+    "attack_speed": 2.0,
+    "cost_energy": 145,
+    "skill_desc": "诺贝尔ium：高攻击，自毁严重",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 280,
+    "knowledge_text": "锘以诺贝尔命名，半衰期58分钟，极易自毁。",
+    "sprite_color": "#B0B0B0",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "锘的元素符号是？",
+        "options": [
+          "No",
+          "Lr",
+          "Rf"
+        ],
+        "answer": "No"
+      },
+      {
+        "q": "锘以谁命名？",
+        "options": [
+          "诺贝尔",
+          "门捷列夫",
+          "居里"
+        ],
+        "answer": "诺贝尔"
+      },
+      {
+        "q": "锘属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 103,
+    "symbol": "Lr",
+    "name_cn": "铹",
+    "family": "锕系",
+    "hp": 78,
+    "attack": 82,
+    "attack_speed": 1.9,
+    "cost_energy": 142,
+    "skill_desc": "最后一个锕系：高攻击，最后的锕系元素",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 220,
+    "knowledge_text": "铹是最后一个锕系元素，半衰期3小时。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "铹的元素符号是？",
+        "options": [
+          "Lr",
+          "Rf",
+          "Db"
+        ],
+        "answer": "Lr"
+      },
+      {
+        "q": "哪个是最后一个锕系元素？",
+        "options": [
+          "铹",
+          "锘",
+          "镏"
+        ],
+        "answer": "铹"
+      },
+      {
+        "q": "铹属于哪一系列？",
+        "options": [
+          "锕系",
+          "镧系",
+          "过渡金属"
+        ],
+        "answer": "锕系"
+      }
+    ]
+  },
+  {
+    "atomic_number": 104,
+    "symbol": "Rf",
+    "name_cn": "𬬻",
+    "family": "过渡金属",
+    "hp": 85,
+    "attack": 78,
+    "attack_speed": 1.8,
+    "cost_energy": 148,
+    "skill_desc": "超重先锋：高攻击，核研究，短寿命",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 120,
+    "knowledge_text": "𬬻是首个超重元素，存在仅几分钟，用于核物理研究。",
+    "sprite_color": "#C0C0C0",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𬬻的元素符号是？",
+        "options": [
+          "Rf",
+          "Db",
+          "Sg"
+        ],
+        "answer": "Rf"
+      },
+      {
+        "q": "𬬻是第几个超重元素？",
+        "options": [
+          "第一个",
+          "第三个",
+          "第五个"
+        ],
+        "answer": "第一个"
+      },
+      {
+        "q": "𬬻属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 105,
+    "symbol": "Db",
+    "name_cn": "𬭊",
+    "family": "过渡金属",
+    "hp": 82,
+    "attack": 82,
+    "attack_speed": 1.9,
+    "cost_energy": 150,
+    "skill_desc": "超重战士：高攻击，核物理研究",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 100,
+    "knowledge_text": "𬭊是第105号元素，极短寿命，用于超重元素研究。",
+    "sprite_color": "#B0B0B0",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𬭊的元素符号是？",
+        "options": [
+          "Db",
+          "Sg",
+          "Bh"
+        ],
+        "answer": "Db"
+      },
+      {
+        "q": "𬭊的寿命如何？",
+        "options": [
+          "很长",
+          "极短",
+          "中等"
+        ],
+        "answer": "极短"
+      },
+      {
+        "q": "𬭊属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 106,
+    "symbol": "Sg",
+    "name_cn": "𬭳",
+    "family": "过渡金属",
+    "hp": 80,
+    "attack": 85,
+    "attack_speed": 1.9,
+    "cost_energy": 152,
+    "skill_desc": "超重攻击：高输出，爆发力强",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 85,
+    "knowledge_text": "𬭳是第106号元素，存在时间极短但攻击力极高。",
+    "sprite_color": "#A0A0A0",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𬭳的元素符号是？",
+        "options": [
+          "Sg",
+          "Bh",
+          "Hs"
+        ],
+        "answer": "Sg"
+      },
+      {
+        "q": "𬭳的特点是？",
+        "options": [
+          "高攻击短寿命",
+          "低攻击长寿命",
+          "普通"
+        ],
+        "answer": "高攻击短寿命"
+      },
+      {
+        "q": "𬭳属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 107,
+    "symbol": "Bh",
+    "name_cn": "𬭛",
+    "family": "过渡金属",
+    "hp": 78,
+    "attack": 88,
+    "attack_speed": 2.0,
+    "cost_energy": 150,
+    "skill_desc": "超重高攻：高攻击，核物理突破",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 70,
+    "knowledge_text": "𬭛是第107号元素，以玻尔命名，存在仅1分钟。",
+    "sprite_color": "#909090",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𬭛的元素符号是？",
+        "options": [
+          "Bh",
+          "Hs",
+          "Mt"
+        ],
+        "answer": "Bh"
+      },
+      {
+        "q": "𬭛以谁命名？",
+        "options": [
+          "玻尔",
+          "爱因斯坦",
+          "费米"
+        ],
+        "answer": "玻尔"
+      },
+      {
+        "q": "𬭛属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 108,
+    "symbol": "Hs",
+    "name_cn": "𬭶",
+    "family": "过渡金属",
+    "hp": 76,
+    "attack": 90,
+    "attack_speed": 2.0,
+    "cost_energy": 152,
+    "skill_desc": "超重巅峰：高攻击，极短爆发",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 55,
+    "knowledge_text": "𬭶是第108号元素，以哈斯命名，存在仅几秒。",
+    "sprite_color": "#808080",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𬭶的元素符号是？",
+        "options": [
+          "Hs",
+          "Mt",
+          "Ds"
+        ],
+        "answer": "Hs"
+      },
+      {
+        "q": "𬭶以谁命名？",
+        "options": [
+          "哈斯",
+          "玻尔",
+          "费米"
+        ],
+        "answer": "哈斯"
+      },
+      {
+        "q": "𬭶属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 109,
+    "symbol": "Mt",
+    "name_cn": "鿏",
+    "family": "过渡金属",
+    "hp": 74,
+    "attack": 92,
+    "attack_speed": 2.1,
+    "cost_energy": 150,
+    "skill_desc": "中子魔：高攻击，短暂而致命",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 45,
+    "knowledge_text": "鿏是第109号元素，以梅耶命名，存在仅几秒。",
+    "sprite_color": "#707070",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "鿏的元素符号是？",
+        "options": [
+          "Mt",
+          "Ds",
+          "Rg"
+        ],
+        "answer": "Mt"
+      },
+      {
+        "q": "鿏以谁命名？",
+        "options": [
+          "梅耶",
+          "玻尔",
+          "哈斯"
+        ],
+        "answer": "梅耶"
+      },
+      {
+        "q": "鿏属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 110,
+    "symbol": "Ds",
+    "name_cn": "𫟼",
+    "family": "过渡金属",
+    "hp": 72,
+    "attack": 95,
+    "attack_speed": 2.1,
+    "cost_energy": 152,
+    "skill_desc": "短命杀手：高攻击，极短存在后爆炸",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 38,
+    "knowledge_text": "𫟼是第110号元素，以达斯命名，存在约几秒后衰变。",
+    "sprite_color": "#606060",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𫟼的元素符号是？",
+        "options": [
+          "Ds",
+          "Rg",
+          "Cn"
+        ],
+        "answer": "Ds"
+      },
+      {
+        "q": "𫟼以谁命名？",
+        "options": [
+          "达斯",
+          "诺贝尔",
+          "居里"
+        ],
+        "answer": "达斯"
+      },
+      {
+        "q": "𫟼属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 111,
+    "symbol": "Rg",
+    "name_cn": "𬬭",
+    "family": "过渡金属",
+    "hp": 70,
+    "attack": 96,
+    "attack_speed": 2.1,
+    "cost_energy": 150,
+    "skill_desc": "黄金杀手：高攻击，可穿透金属",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 30,
+    "knowledge_text": "𬬭是第111号元素，以罗糸斯命名，穿透性极强。",
+    "sprite_color": "#505050",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𬬭的元素符号是？",
+        "options": [
+          "Rg",
+          "Cn",
+          "Nh"
+        ],
+        "answer": "Rg"
+      },
+      {
+        "q": "𬬭可穿透什么？",
+        "options": [
+          "金属",
+          "空气",
+          "水"
+        ],
+        "answer": "金属"
+      },
+      {
+        "q": "𬬭属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 112,
+    "symbol": "Cn",
+    "name_cn": "鿔",
+    "family": "过渡金属",
+    "hp": 85,
+    "attack": 35,
+    "attack_speed": 0.7,
+    "cost_energy": 155,
+    "skill_desc": "最重稳定外壳：高HP，极短寿命后自毁",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 25,
+    "knowledge_text": "鿔是第112号元素，以哥本哈根命名，是最重的稳定元素之一。",
+    "sprite_color": "#404040",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "鿔的元素符号是？",
+        "options": [
+          "Cn",
+          "Nh",
+          "Fl"
+        ],
+        "answer": "Cn"
+      },
+      {
+        "q": "鿔以哪里命名？",
+        "options": [
+          "哥本哈根",
+          "斯德哥尔摩",
+          "柏林"
+        ],
+        "answer": "哥本哈根"
+      },
+      {
+        "q": "鿔属于哪一系列？",
+        "options": [
+          "过渡金属",
+          "锕系",
+          "镧系"
+        ],
+        "answer": "过渡金属"
+      }
+    ]
+  },
+  {
+    "atomic_number": 113,
+    "symbol": "Nh",
+    "name_cn": "鿭",
+    "family": "第十三族(IIIA)",
+    "hp": 65,
+    "attack": 88,
+    "attack_speed": 2.0,
+    "cost_energy": 148,
+    "skill_desc": "日本元素：高攻击，极短寿命",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 20,
+    "knowledge_text": "鿭是首个由亚洲（日本）发现的元素，以日本命名。",
+    "sprite_color": "#DDA0DD",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "鿭的元素符号是？",
+        "options": [
+          "Nh",
+          "Mc",
+          "Fl"
+        ],
+        "answer": "Nh"
+      },
+      {
+        "q": "鿭以什么命名？",
+        "options": [
+          "日本",
+          "中国",
+          "印度"
+        ],
+        "answer": "日本"
+      },
+      {
+        "q": "鿭属于哪一族？",
+        "options": [
+          "第十三族",
+          "第一族",
+          "第二族"
+        ],
+        "answer": "第十三族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 114,
+    "symbol": "Fl",
+    "name_cn": "𫓧",
+    "family": "第十四族(IVA)",
+    "hp": 75,
+    "attack": 40,
+    "attack_speed": 0.8,
+    "cost_energy": 152,
+    "skill_desc": "铱最强：高HP，超重元素稳定岛边缘",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 18,
+    "knowledge_text": "𫓧是第114号元素，位于核稳定岛边缘，半衰期约2.7秒。",
+    "sprite_color": "#505050",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𫓧的元素符号是？",
+        "options": [
+          "Fl",
+          "Mc",
+          "Lv"
+        ],
+        "answer": "Fl"
+      },
+      {
+        "q": "𫓧位于核稳定岛的什么位置？",
+        "options": [
+          "边缘",
+          "中心",
+          "外侧"
+        ],
+        "answer": "边缘"
+      },
+      {
+        "q": "𫓧属于哪一族？",
+        "options": [
+          "第十四族",
+          "第十三族",
+          "第十五族"
+        ],
+        "answer": "第十四族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 115,
+    "symbol": "Mc",
+    "name_cn": "镆",
+    "family": "第十三族(IIIA)",
+    "hp": 68,
+    "attack": 85,
+    "attack_speed": 1.9,
+    "cost_energy": 148,
+    "skill_desc": "莫斯科元素：高攻击，极短寿命",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 15,
+    "knowledge_text": "镆是第115号元素，以莫斯科命名，存在仅约0.65毫秒。",
+    "sprite_color": "#9B59B6",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "镆的元素符号是？",
+        "options": [
+          "Mc",
+          "Nh",
+          "Ts"
+        ],
+        "answer": "Mc"
+      },
+      {
+        "q": "镆以什么命名？",
+        "options": [
+          "莫斯科",
+          "东京",
+          "北京"
+        ],
+        "answer": "莫斯科"
+      },
+      {
+        "q": "镆属于哪一族？",
+        "options": [
+          "第十三族",
+          "第一族",
+          "第二族"
+        ],
+        "answer": "第十三族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 116,
+    "symbol": "Lv",
+    "name_cn": "𫟷",
+    "family": "第十六族(VIA)",
+    "hp": 70,
+    "attack": 82,
+    "attack_speed": 1.8,
+    "cost_energy": 145,
+    "skill_desc": "利佛莫尔元素：高攻击，存在仅约0.1毫秒",
+    "weakness": [],
+    "resist": [
+      "acid"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 12,
+    "knowledge_text": "𫟷是第116号元素，以劳伦斯利佛莫尔实验室命名。",
+    "sprite_color": "#8B4513",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "𫟷的元素符号是？",
+        "options": [
+          "Lv",
+          "Ts",
+          "Og"
+        ],
+        "answer": "Lv"
+      },
+      {
+        "q": "𫟷以什么命名？",
+        "options": [
+          "利佛莫尔实验室",
+          "莫斯科",
+          "东京"
+        ],
+        "answer": "利佛莫尔实验室"
+      },
+      {
+        "q": "𫟷属于哪一族？",
+        "options": [
+          "第十六族",
+          "卤素族",
+          "氧族"
+        ],
+        "answer": "第十六族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 117,
+    "symbol": "Ts",
+    "name_cn": "鿬",
+    "family": "第十七族(VIIA)",
+    "hp": 55,
+    "attack": 95,
+    "attack_speed": 2.3,
+    "cost_energy": 150,
+    "skill_desc": "卤素末裔：高攻击，最重卤素，极短寿命",
+    "weakness": [],
+    "resist": [
+      "oxidize"
+    ],
+    "is_radioactive": true,
+    "decay_lifetime": 8,
+    "knowledge_text": "鿬是最重的卤素元素，以田纳西命名，存在仅约0.05秒。",
+    "sprite_color": "#2F4F2F",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "鿬的元素符号是？",
+        "options": [
+          "Ts",
+          "Og",
+          "Lv"
+        ],
+        "answer": "Ts"
+      },
+      {
+        "q": "鿬以什么命名？",
+        "options": [
+          "田纳西",
+          "日本",
+          "莫斯科"
+        ],
+        "answer": "田纳西"
+      },
+      {
+        "q": "鿬属于哪一族？",
+        "options": [
+          "卤素族",
+          "氧族",
+          "氮族"
+        ],
+        "answer": "卤素族"
+      }
+    ]
+  },
+  {
+    "atomic_number": 118,
+    "symbol": "Og",
+    "name_cn": "鿫",
+    "family": "第零族(0族)",
+    "hp": 80,
+    "attack": 35,
+    "attack_speed": 0.6,
+    "cost_energy": 155,
+    "skill_desc": "元素之王：高HP，超重惰性，极短寿命后爆发",
+    "weakness": [],
+    "resist": [],
+    "is_radioactive": true,
+    "decay_lifetime": 5,
+    "knowledge_text": "鿫是最重的元素，也是首个惰性气体超重元素，存在仅约0.0009秒。",
+    "sprite_color": "#1a1a2e",
+    "unlock_world_id": "world7_baikal",
+    "unlock_questions": [
+      {
+        "q": "鿫的元素符号是？",
+        "options": [
+          "Og",
+          "Ts",
+          "Mc"
+        ],
+        "answer": "Og"
+      },
+      {
+        "q": "鿫是最重元素吗？",
+        "options": [
+          "是",
+          "不是",
+          "不确定"
+        ],
+        "answer": "是"
+      },
+      {
+        "q": "鿫属于哪一族？",
+        "options": [
+          "零族（惰性气体）",
+          "卤素族",
+          "第一族"
+        ],
+        "answer": "零族（惰性气体）"
+      }
+    ]
+  }
+]

@@ -1,0 +1,511 @@
+[
+  {
+    "id": "world0_grassland",
+    "name": "教学草原",
+    "background": "#2d5016",
+    "env_modifier": {
+      "high_temp_damage_rate": 1.0,
+      "water_zombie_spawn_rate": 1.0,
+      "acid_damage_rate": 1.0,
+      "salt_corrosion_dps": 0,
+      "element_global_hp_mod": 1.0,
+      "element_attack_mod": 1.0
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          1,
+          10
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          1,
+          14
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          1,
+          18
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          1,
+          20
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          1,
+          20
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 7,
+        "boss_name": "氧化先锋",
+        "boss_hp": 3000
+      }
+    ]
+  },
+  {
+    "id": "world1_egypt",
+    "name": "埃及·撒哈拉荒漠",
+    "background": "#c4a35a",
+    "env_modifier": {
+      "high_temp_damage_rate": 1.5,
+      "water_zombie_spawn_rate": 0.3,
+      "acid_damage_rate": 1.2,
+      "salt_corrosion_dps": 2,
+      "element_global_hp_mod": 0.9,
+      "element_attack_mod": 1.1
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          21,
+          26
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          21,
+          30
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          21,
+          32
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          21,
+          34
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          21,
+          36
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 7,
+        "boss_name": "沙漠守护者",
+        "boss_hp": 5000
+      }
+    ]
+  },
+  {
+    "id": "world2_greatwall",
+    "name": "中国·万里长城",
+    "background": "#8b7355",
+    "env_modifier": {
+      "high_temp_damage_rate": 1.2,
+      "water_zombie_spawn_rate": 1.5,
+      "acid_damage_rate": 1.8,
+      "salt_corrosion_dps": 1,
+      "element_global_hp_mod": 1.0,
+      "element_attack_mod": 1.0
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          37,
+          46
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          37,
+          50
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          37,
+          52
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          37,
+          54
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          37,
+          54
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 8,
+        "boss_name": "长城守卫",
+        "boss_hp": 7000
+      }
+    ]
+  },
+  {
+    "id": "world3_notredame",
+    "name": "法国·巴黎圣母院",
+    "background": "#5a5a6e",
+    "env_modifier": {
+      "high_temp_damage_rate": 1.0,
+      "water_zombie_spawn_rate": 0.8,
+      "acid_damage_rate": 2.0,
+      "salt_corrosion_dps": 0,
+      "element_global_hp_mod": 0.85,
+      "element_attack_mod": 1.1
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          55,
+          64
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          55,
+          70
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          55,
+          72
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          55,
+          72
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          55,
+          72
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 8,
+        "boss_name": "酸雨腐蚀者",
+        "boss_hp": 8000
+      }
+    ]
+  },
+  {
+    "id": "world4_tokyo",
+    "name": "日本·东京",
+    "background": "#1a1a3e",
+    "env_modifier": {
+      "high_temp_damage_rate": 1.0,
+      "water_zombie_spawn_rate": 1.2,
+      "acid_damage_rate": 1.5,
+      "salt_corrosion_dps": 3,
+      "element_global_hp_mod": 0.9,
+      "element_attack_mod": 1.15
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          73,
+          82
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          73,
+          84
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          73,
+          86
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          73,
+          86
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          73,
+          86
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 9,
+        "boss_name": "海盐妖",
+        "boss_hp": 10000
+      }
+    ]
+  },
+  {
+    "id": "world5_jiuzhaigou",
+    "name": "中国·九寨沟",
+    "background": "#1a4a5e",
+    "env_modifier": {
+      "high_temp_damage_rate": 0.5,
+      "water_zombie_spawn_rate": 2.0,
+      "acid_damage_rate": 0.8,
+      "salt_corrosion_dps": 0,
+      "element_global_hp_mod": 0.8,
+      "element_attack_mod": 1.1
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          87,
+          92
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          87,
+          94
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          87,
+          96
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          87,
+          98
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          87,
+          98
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 9,
+        "boss_name": "岩溶湖怪",
+        "boss_hp": 12000
+      }
+    ]
+  },
+  {
+    "id": "world6_moscow",
+    "name": "俄罗斯·莫斯科红场",
+    "background": "#4a3030",
+    "env_modifier": {
+      "high_temp_damage_rate": 0.3,
+      "water_zombie_spawn_rate": 0.5,
+      "acid_damage_rate": 0.8,
+      "salt_corrosion_dps": 1,
+      "element_global_hp_mod": 0.75,
+      "element_attack_mod": 1.2
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          99,
+          102
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          99,
+          104
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          99,
+          106
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          99,
+          110
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          99,
+          112
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 10,
+        "boss_name": "冻融巨怪",
+        "boss_hp": 15000
+      }
+    ]
+  },
+  {
+    "id": "world7_baikal",
+    "name": "俄罗斯·贝加尔湖极寒区",
+    "background": "#0a2a3a",
+    "env_modifier": {
+      "high_temp_damage_rate": 0.1,
+      "water_zombie_spawn_rate": 1.5,
+      "acid_damage_rate": 0.5,
+      "salt_corrosion_dps": 0,
+      "element_global_hp_mod": 0.7,
+      "element_attack_mod": 1.3
+    },
+    "levels": [
+      {
+        "level_idx": 1,
+        "wave_count": 3,
+        "allow_atomic_range": [
+          113,
+          114
+        ]
+      },
+      {
+        "level_idx": 2,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          113,
+          116
+        ]
+      },
+      {
+        "level_idx": 3,
+        "wave_count": 4,
+        "allow_atomic_range": [
+          113,
+          117
+        ]
+      },
+      {
+        "level_idx": 4,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          113,
+          118
+        ]
+      },
+      {
+        "level_idx": 5,
+        "wave_count": 5,
+        "allow_atomic_range": [
+          113,
+          118
+        ]
+      },
+      {
+        "boss": true,
+        "wave_count": 12,
+        "boss_name": "极寒领主",
+        "boss_hp": 20000
+      }
+    ]
+  },
+  {
+    "id": "world_final_reactor",
+    "name": "终局·反应堆实验室",
+    "background": "#1a0a0a",
+    "env_modifier": {
+      "high_temp_damage_rate": 2.0,
+      "water_zombie_spawn_rate": 2.0,
+      "acid_damage_rate": 2.0,
+      "salt_corrosion_dps": 5,
+      "element_global_hp_mod": 1.5,
+      "element_attack_mod": 1.5
+    },
+    "levels": [
+      {
+        "boss": true,
+        "wave_count": 15,
+        "boss_name": "链式反应BOSS",
+        "boss_hp": 50000
+      }
+    ]
+  }
+]
