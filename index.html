@@ -801,12 +801,12 @@ function startLevel(){
   if(!lvl) return;
 
   GS.phase = 'playing';
-  GS.energy = 200; // 初始能量提高到 200
+  GS.energy = 200; // 初始能量
   GS.score = 0;
   GS.currentWave = 0;
   GS.waveTotal = lvl.wave_count;
   GS.waveCount = 0;
-  GS.spawnInterval = Math.max(2500, 5000 - GS.levelIdx * 300);
+  GS.spawnInterval = Math.max(6000, 9000 - GS.levelIdx * 400); // 前期大幅延长刷新间隔
   GS.lastSpawn = 0;
   GS.env = world.env_modifier;
   GS.field = [];
@@ -1051,15 +1051,16 @@ function spawnWave(){
     oxidizer:'氧化怪', hydrated:'水合怪', heated:'高温怪', acid:'强酸怪', halogen:'卤素怪', inert:'惰性怪'
   };
 
-  // 降低难度：每波怪物数量减少 30%，血量降低 40%
-  const zombiesThisWave = Math.max(2, Math.ceil((1 + GS.currentWave) * 0.7));
+  // 极低难度：第1波仅1只，后续每波最多+1，基础血量极低，超慢速度
+  const zombiesThisWave = GS.currentWave === 1 ? 1 : Math.min(GS.currentWave, 3);
   for(let i=0; i<zombiesThisWave; i++){
     const lane = Math.floor(Math.random() * GS.LANES);
     const type = types[Math.floor(Math.random() * types.length)];
-    // 难度降低：基础血量从 80→40，每波增长从 20→10
-    const baseHp = 40 + GS.currentWave * 10 + GS.levelIdx * 5;
-    const hp = baseHp * GS.env.element_global_hp_mod;
-    const speed = 0.5 + Math.random() * 0.3; // 速度也降低 30%
+    // 极低血量：基础15，每波+8，关卡+3（不再受env modifier放大）
+    const baseHp = 15 + GS.currentWave * 8 + GS.levelIdx * 3;
+    const hp = baseHp;
+    // 超慢速度：0.2-0.35（几乎散步）
+    const speed = 0.2 + Math.random() * 0.15;
     const color = typeColors[type];
 
     GS.zombies.push({
