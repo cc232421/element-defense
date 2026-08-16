@@ -313,6 +313,86 @@ const { chromium } = require('playwright');
     }
   } catch(e) { fail('Grid alignment', e.message); }
 
+  // ── Test 21: LANE_H derived from cellSize/availH (consistent with laneY) ──
+  try {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('http://localhost:8878', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    const info = await page.evaluate(() => ({
+      LANE_H: GS.LANE_H,
+      LANES: GS.LANES,
+      cellSize: GS.cellSize,
+      canvasH: document.getElementById('gameCanvas').height,
+      laneY_0: laneY(0),
+      laneY_1: laneY(1)
+    }));
+    const expectedLaneH = Math.floor(info.canvasH / info.LANES);
+    const laneHDiff = Math.abs(info.LANE_H - expectedLaneH);
+    const laneYDiff = Math.abs(info.laneY_1 - info.laneY_0 - info.LANE_H);
+    if (laneHDiff < 2 && laneYDiff < 2) {
+      pass(`LANE_H=${info.LANE_H} canvasH=${info.canvasH} LANES=${info.LANES} laneY consistency diff=${laneYDiff}`);
+    } else {
+      fail('LANE_H consistency', `LANE_H=${info.LANE_H} expected=${expectedLaneH} diff=${laneHDiff}, laneY gap=${laneYDiff}`);
+    }
+  } catch(e) { fail('LANE_H test', e.message); }
+
+  // ── Test 22: deathEffects + energyPopups arrays exist ──
+  try {
+    const arrTest = await page.evaluate(() => {
+      // Simulate death effect creation
+      GS.deathEffects.push({ x:100, y:100, type:'oxidizer', startTime:performance.now(), particles:[], emojis:[] });
+      GS.energyPopups.push({ x:100, y:100, text:'+10 ⚡', life:40, vy:-1.5 });
+      return {
+        deathLen: GS.deathEffects.length,
+        popupLen: GS.energyPopups.length,
+        hasRender: typeof renderDeathEffects === 'function' && typeof renderEnergyPopups === 'function'
+      };
+    });
+    if (arrTest.deathLen > 0 && arrTest.popupLen > 0 && arrTest.hasRender) {
+      pass(`deathEffects=${arrTest.deathLen} energyPopups=${arrTest.popupLen} render functions exist`);
+    } else {
+      fail('Death/energy arrays', `deathEffects=${arrTest.deathLen} popups=${arrTest.popupLen} renders=${arrTest.hasRender}`);
+    }
+  } catch(e) { fail('deathEffects test', e.message); }
+
+  // ── Test 23: getDamageBonus returns correct values ──
+  try {
+    const bonusTest = await page.evaluate(() => {
+      const elemH = ELEM_MAP[1]; // H, weakness: high_temp
+      const elemF = ELEM_MAP[9]; // F, weakness: halogen
+      const tests = [
+        { elem: elemH, type: 'heated',   expected: 1.5 },  // high_temp→heated ×1.5
+        { elem: elemH, type: 'oxidizer', expected: 1.0 },  // no bonus → 1.0
+        { elem: elemF, type: 'halogen',  expected: 1.3 }   // F atomic9→17 halogens group +1.3, no weakness bonus
+      ];
+      return tests.map(t => {
+        const mult = getDamageBonus(t.elem, t.type);
+        return { mult, expected: t.expected, pass: Math.abs(mult - t.expected) < 0.01 };
+      });
+    });
+    const allPass = bonusTest.every(t => t.pass);
+    if (allPass) {
+      pass(`getDamageBonus: ${bonusTest.map(t=>t.mult.toFixed(2)).join(', ')}`);
+    } else {
+      fail('getDamageBonus', JSON.stringify(bonusTest));
+    }
+  } catch(e) { fail('getDamageBonus test', e.message); }
+
+  // ── Test 24: ZOMBIE_TYPES is single source of truth (6 types, 3 keys each) ──
+  try {
+    const zt = await page.evaluate(() => {
+      const keys = ZOMBIE_TYPE_KEYS;
+      const cfg = ZOMBIE_TYPES;
+      const hasAll = keys.length === 6 && keys.every(k => cfg[k] && 'emoji' in cfg[k] && 'color' in cfg[k] && 'name' in cfg[k]);
+      return { count: keys.length, keys, hasAll };
+    });
+    if (zt.hasAll) {
+      pass(`ZOMBIE_TYPES: ${zt.count} types — ${zt.keys.join(', ')}`);
+    } else {
+      fail('ZOMBIE_TYPES', `count=${zt.count} expected=6`);
+    }
+  } catch(e) { fail('ZOMBIE_TYPES test', e.message); }
+
   // ── Summary ────────────────────────────────────────
   console.log('\n========================================');
   console.log('  TEST SUMMARY');
