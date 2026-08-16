@@ -382,15 +382,61 @@ const GS = {
 //  ZOMBIE TYPES — Single Source of Truth (DRY / Open-Closed)
 // ═══════════════════════════════════════════════════════════
 const ZOMBIE_TYPES = {
-  oxidizer: { emoji:'🟫', color:'#4a4a4a', name:'氧化怪' },
-  hydrated: { emoji:'💧', color:'#87CEEB', name:'水合怪' },
-  heated:   { emoji:'🔥', color:'#e74c3c', name:'高温怪' },
-  acid:     { emoji:'🟢', color:'#2ecc71', name:'强酸怪' },
-  halogen:  { emoji:'🟣', color:'#9b59b6', name:'卤素怪' },
-  inert:    { emoji:'👻', color:'rgba(200,200,255,0.5)', name:'惰性怪' }
+  // spritePos: [sx, sy, sw, sh] in sprites/zombies.png (154×152 sheet, cells 36×48, gap=2)
+  oxidizer: { spritePos:[2,2,36,48], emoji:'🟫', color:'#4a4a4a', name:'氧化怪' },
+  hydrated: { spritePos:[40,2,36,48], emoji:'💧', color:'#87CEEB', name:'水合怪' },
+  heated:   { spritePos:[78,2,36,48], emoji:'🔥', color:'#e74c3c', name:'高温怪' },
+  acid:     { spritePos:[116,2,36,48], emoji:'🟢', color:'#2ecc71', name:'强酸怪' },
+  halogen:  { spritePos:[2,102,36,48], emoji:'🟣', color:'#9b59b6', name:'卤素怪' },
+  inert:    { spritePos:[40,102,36,48], emoji:'👻', color:'rgba(200,200,255,0.5)', name:'惰性怪' }
 };
 const ZOMBIE_TYPE_KEYS = Object.keys(ZOMBIE_TYPES);
 const EXPLOSION_EMOJIS = ['⭐','❤','💫','✨'];
+// ──────────────────────────────────────────────────────────────
+//  SPRITE SYSTEM — async load, offscreen cache, emoji fallback
+//  (DRY / Open-Closed / Fail Fast / Composition)
+// ──────────────────────────────────────────────────────────────
+let _spriteSheet = null;
+let _spriteState = 'idle'; // 'idle'|'loading'|'ready'|'error'
+
+function initSprites() {
+  if (_spriteState !== 'idle') return;
+  _spriteState = 'loading';
+  _spriteSheet = new Image();
+  _spriteSheet.onload = () => {
+    _spriteState = 'ready';
+    buildSpriteCache();
+    console.info('[Sprite] loaded OK');
+  };
+  _spriteSheet.onerror = () => {
+    _spriteState = 'error';
+    console.warn('[Sprite] fallback to emoji (load failed)');
+  };
+  _spriteSheet.src = '/sprites/zombies.png';
+  // 5s timeout fallback
+  setTimeout(() => { if(_spriteState==='loading'){ _spriteState='error'; console.warn('[Sprite] timeout'); } }, 5000);
+}
+
+function buildSpriteCache() {
+  if (!_spriteSheet || _spriteState !== 'ready') return;
+  GS.spriteCache = {};
+  for (const [type, cfg] of Object.entries(ZOMBIE_TYPES)) {
+    const [sx, sy, sw, sh] = cfg.spritePos;
+    const dw = Math.max(16, Math.round(GS.cellSize * 0.78));
+    const dh = Math.round(GS.LANE_H * 0.72);
+    const frames = [];
+    for (let f = 0; f < 2; f++) {
+      const srcY = sy + f * (sh + 2); // 2px row gap in sheet
+      const oc = document.createElement('canvas');
+      oc.width = dw; oc.height = dh;
+      const octx = oc.getContext('2d');
+      octx.imageSmoothingEnabled = false; // pixel art fidelity
+      octx.drawImage(_spriteSheet, sx, srcY, sw, sh, 0, 0, dw, dh);
+      frames.push(oc);
+    }
+    GS.spriteCache[type] = frames;
+  }
+}
 // ──────────────────────────────────────────────────────────────
 //  HELPERS — Single source of truth (DRY)
 // ──────────────────────────────────────────────────────────────
@@ -629,10 +675,13 @@ function resizeCanvas() {
   GS.LANES = lanes;
   GS.LANE_H = Math.floor(canvasH / lanes);
   GS.FIELD_X = dangerZone;
+  // Rebuild sprite cache on resize (new cellSize → new dw/dh)
+  if (_spriteState === 'ready') buildSpriteCache();
 }
 window.addEventListener('resize', resizeCanvas);
 window.addEventListener('orientationchange', () => setTimeout(resizeCanvas, 120));
 resizeCanvas();
+initSprites(); // async sprite loading — does not block game start
 
 // ═══════════════════════════════════════════════════════════
 //  QUIZ QUESTION BANK (auto-generated per element)
@@ -1209,6 +1258,14 @@ function update(dt, ts){
     spawnWave();
   }
 
+  // ── Sprite animation frames (200ms per frame) ─────────────
+  GS.zombies.forEach(z => {
+    if (!z._lastAnimUpdate || ts - z._lastAnimUpdate > 200) {
+      z.animFrame = ((z.animFrame || 0) + 1) % 2;
+      z._lastAnimUpdate = ts;
+    }
+  });
+
   // ── Move zombies ────────────────────────────────────────
   let gameEnded = false;
   GS.zombies.forEach(z => {
@@ -1576,10 +1633,24 @@ function render(){
     ctx.ellipse(z.x, y+22, 16, 5, 0, 0, Math.PI*2);
     ctx.fill();
 
-    // Emoji
-    const emoji = (ZOMBIE_TYPES[z.type] || {}).emoji || '🧟';
-    ctx.font = '36px serif';
-    ctx.fillText(emoji, z.x-18, y+12+bounce);
+    // Sprite (with emoji fallback + Fail Fast)
+    const dw = Math.max(16, Math.round(GS.cellSize * 0.78));
+    const dh = Math.round(GS.LANE_H * 0.72);
+    const dx = z.x - dw / 2;
+    const dy = y - dh + 2 + bounce;
+    const frameIdx = z.animFrame || 0;
+    try {
+      if (_spriteState === 'ready' && GS.spriteCache?.[z.type]?.[frameIdx]) {
+        ctx.drawImage(GS.spriteCache[z.type][frameIdx], dx, dy, dw, dh);
+      } else {
+        // Emoji fallback
+        ctx.font = `${Math.round(dh * 0.78)}px serif`;
+        ctx.fillText((ZOMBIE_TYPES[z.type]||{}).emoji||'🧟', dx, dy + dh * 0.82);
+      }
+    } catch(e) {
+      ctx.font = `${Math.round(dh * 0.78)}px serif`;
+      ctx.fillText((ZOMBIE_TYPES[z.type]||{}).emoji||'🧟', dx, dy + dh * 0.82);
+    }
 
     // HP bar
     const barW = 28, barH = 4;
