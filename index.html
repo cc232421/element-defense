@@ -1163,7 +1163,14 @@ function startLevel(){
   GS.waveCount = 0;
   GS.spawnInterval = Math.max(6000, 9000 - GS.levelIdx * 400); // 前期大幅延长刷新间隔
   GS.lastSpawn = 0;
-  GS.env = world.env_modifier;
+  GS.env = Object.assign({
+    element_global_hp_mod: 1,
+    element_attack_mod: 1,
+    salt_corrosion_dps: 0,
+    high_temp_damage_rate: 0,
+    water_zombie_spawn_rate: 0,
+    acid_damage_rate: 0
+  }, world.env_modifier);
   GS.field = [];
   GS.zombies = [];
   GS.projs = [];
@@ -1318,9 +1325,9 @@ function update(dt, ts){
       }
     }
     // Attack logic — FPS-style: attack_speed = attacks per second
-    f.lastAttack = (f.lastAttack||0) + dt;           // accumulate real seconds
-    const attacksPerSec = Math.max(0.5, f.elem.attack_speed); // 0.5~2.3 → 0.5~2.3 fps
-    const attackInterval = 1 / attacksPerSec;           // seconds between shots
+    f.lastAttack = (f.lastAttack||0) + dt;                  // accumulate real seconds
+    const attacksPerSec = 3 + f.elem.attack_speed * 5;   // 3fps(He)~14fps(Fr)
+    const attackInterval = 1 / attacksPerSec;              // seconds between shots
     if(f.lastAttack >= attackInterval){
       // Find closest zombie in same lane (leftmost = most dangerous)
       const laneZombies = GS.zombies.filter(z => z.lane === f.lane && z.x > GS.FIELD_X);
@@ -1329,25 +1336,21 @@ function update(dt, ts){
         : null;
       if(target){
         f.lastAttack = 0;
-        const dmg = f.elem.attack * GS.env.element_attack_mod; // direct: expensive = high damage
+        const dmg = (f.elem.attack / 8) * GS.env.element_attack_mod; // scaled: F=10, H=5, He=2
         spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, laneY(f.lane), dmg, f.elem, f.lane);
         Sound.attack();
       }
     }
-    // Salt corrosion env damage
-    if(GS.env.salt_corrosion_dps > 0){
+    // Salt corrosion env damage (world-specific, only if configured)
+    if(GS.env.salt_corrosion_dps > 0)
       f.hp -= GS.env.salt_corrosion_dps * dt;
-    }
-    // Env damage to elements
-    if(f.elem.weakness.includes('high_temp') && GS.env.high_temp_damage_rate > 1){
-      f.hp -= 0.3 * GS.env.high_temp_damage_rate * dt * 60;
-    }
-    if(f.elem.weakness.includes('water') && GS.env.water_zombie_spawn_rate > 1.5){
-      f.hp -= 0.2 * GS.env.water_zombie_spawn_rate * dt * 60;
-    }
-    if(f.elem.weakness.includes('acid') && GS.env.acid_damage_rate > 1){
-      f.hp -= 0.4 * GS.env.acid_damage_rate * dt * 60;
-    }
+    // Env damage to elements (only if world has the hazard AND element has the weakness)
+    if(f.elem.weakness.includes('high_temp') && GS.env.high_temp_damage_rate > 1)
+      f.hp -= 0.3 * GS.env.high_temp_damage_rate * dt;
+    if(f.elem.weakness.includes('water') && GS.env.water_zombie_spawn_rate > 1.5)
+      f.hp -= 0.2 * GS.env.water_zombie_spawn_rate * dt;
+    if(f.elem.weakness.includes('acid') && GS.env.acid_damage_rate > 1)
+      f.hp -= 0.4 * GS.env.acid_damage_rate * dt;
   });
   GS.field = GS.field.filter(f => f.hp > 0);
 
