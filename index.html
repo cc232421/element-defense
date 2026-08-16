@@ -1262,6 +1262,9 @@ function gameLoop(ts){
 }
 
 function update(dt, ts){
+  // B1 fix: init lastSpawn on first frame so wave spawns fire immediately
+  if (GS.lastSpawn === 0) GS.lastSpawn = ts;
+
   // ── Energy regeneration (every 10 seconds) ─────────────
   GS.energyRegenTimer = (GS.energyRegenTimer||0) + dt;
   if(GS.energyRegenTimer >= 10){
@@ -1314,9 +1317,10 @@ function update(dt, ts){
         return;
       }
     }
-    // Attack logic
-    f.lastAttack = (f.lastAttack||0) + dt * 60;
-    const attackInterval = 60 / f.elem.attack_speed;
+    // Attack logic — FPS-style: attack_speed = attacks per second
+    f.lastAttack = (f.lastAttack||0) + dt;           // accumulate real seconds
+    const attacksPerSec = Math.max(0.5, f.elem.attack_speed); // 0.5~2.3 → 0.5~2.3 fps
+    const attackInterval = 1 / attacksPerSec;           // seconds between shots
     if(f.lastAttack >= attackInterval){
       // Find closest zombie in same lane (leftmost = most dangerous)
       const laneZombies = GS.zombies.filter(z => z.lane === f.lane && z.x > GS.FIELD_X);
@@ -1325,8 +1329,7 @@ function update(dt, ts){
         : null;
       if(target){
         f.lastAttack = 0;
-        const base = Math.min(f.elem.attack, 32) * GS.env.element_attack_mod;
-        const dmg = base; // WM applied at hit time
+        const dmg = f.elem.attack * GS.env.element_attack_mod; // direct: expensive = high damage
         spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, laneY(f.lane), dmg, f.elem, f.lane);
         Sound.attack();
       }
@@ -1430,7 +1433,8 @@ function spawnWave(){
     const cfg = ZOMBIE_TYPES[type];
 
     GS.zombies.push({
-      type, lane, x: canvas.width + i * 100,
+      type, lane,
+      x: Math.max(canvas.width + 50, GS.FIELD_X + GS.COLS * GS.cellSize + i * 100),
       hp, maxHp: hp, speed, damage: 5 + GS.currentWave, color: cfg.color,
       emoji: cfg.emoji, typeName: cfg.name,
       reward: 10

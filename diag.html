@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head><title>Element Defense Diagnostic</title></head>
+<body>
+<pre id="out"></pre>
+<script src="index.html"></script>
+<script>
+const log = document.getElementById('out');
+function info(msg) { log.textContent += msg + '\n'; }
+
+(function() {
+  info('=== DIAGNOSTIC RUN ===\n');
+
+  // Check 1: attack_speed interpretation
+  const e = window.ELEMENTS_DATA;
+  info('Attack Speed range: ' + Math.min(...e.map(x=>x.attack_speed)) + ' ~ ' + Math.max(...e.map(x=>x.attack_speed)));
+
+  // Simulate: attack_interval at 60fps with 3 different interpretations
+  const speed = 1.0;
+  const rpm_interpretation = 60 / speed;        // how engineers read it
+  const fps_interpretation = 60 / (speed * 60); // how gamers read it
+  info(`\nattack_speed=1.0:`);
+  info(`  RPM interpretation (60/x): interval = ${rpm_interpretation} frames = ${rpm_interpretation/60*1000}ms`);
+  info(`  FPS interpretation (60/(x*60)): interval = ${fps_interpretation} frames = ${fps_interpretation/60*1000}ms`);
+
+  // Check 2: Verify damage values
+  const attackVals = e.map(x=>x.attack).sort((a,b)=>a-b);
+  info(`\nElement attack range: ${attackVals[0]} ~ ${attackVals[attackVals.length-1]}`);
+  info(`DMG_CAP=32, WM(W1)=1.0:`);
+  info(`  min(15,32)*1.0=${Math.min(15,32)*1.0} vs baseHp(W1)=15 → Francium kills in ${Math.ceil(15/(Math.min(15,32)*1.0))} hit(s)`);
+  info(`  min(80,32)*1.0=${Math.min(80,32)*1.0} vs baseHp(W1)=15 → Fluorine kills in ${Math.ceil(15/(Math.min(80,32)*1.0))} hit(s)`);
+
+  // Check 3: Verify spawn interval formula
+  info('\nSpawn interval formula (25s base):');
+  for(let w=1; w<=5; w++){
+    const si = Math.max(5000, 25000 - (w-1)*2000);
+    info(`  W${w}: ${si/1000}s`);
+  }
+
+  // Check 4: Verify speed formula
+  info('\nSpeed formula (0.06 base):');
+  for(let w=1; w<=5; w++){
+    const sp = Math.min(0.06 + (w-1)*0.03, 0.50);
+    info(`  W${w}: ${sp.toFixed(2)} px/frame = ${(sp*60).toFixed(1)} px/s`);
+  }
+
+  // Check 5: Zombie HP formula
+  info('\nZombie HP formula (base 15):');
+  for(let w=1; w<=5; w++){
+    const hp = 15 + (w-1)*4;
+    info(`  W${w}: ${hp} HP`);
+  }
+
+  info('\n=== DIAGNOSTIC COMPLETE ===');
+})();
+</script>
+</body>
+</html>
