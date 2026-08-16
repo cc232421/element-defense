@@ -177,12 +177,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
 ::-webkit-scrollbar-track{background:#0D1B2A;}
 ::-webkit-scrollbar-thumb{background:#3498DB;border-radius:2px;}
 /* ── Responsive ───────────────────────────────────────── */
-@media(max-width:768px){
-  #topBar .logo-text{display:none;}
-  .stat-box{padding:4px 8px;font-size:12px;}
-  #elemBar{height:80px;}
-  .elem-card{width:54px;height:66px;}
-  .elem-card .sym{font-size:16px;}
+:root {
+  --top-h: 52px;
+  --elem-h: 90px;
+}
+@media (max-width: 1024px) { :root { --top-h: 48px; --elem-h: 84px; } }
+@media (max-width: 768px)  { :root { --top-h: 46px; --elem-h: 76px; } }
+@media (max-width: 480px)  { :root { --top-h: 44px; --elem-h: 70px; } }
+
+#topBar  { height: var(--top-h); }
+#elemBar { height: var(--elem-h); }
+@media (max-width: 480px) {
+  .elem-card { width: 46px; height: 58px; }
+  .elem-card .sym { font-size: 14px; }
+  .elem-card .name, .elem-card .cost { display: none; }
 }
 </style>
 </head>
@@ -203,8 +211,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   <button class="stat-box" style="cursor:pointer;border:none;background:none;color:#FFF8F0;font-size:18px" onclick="pauseGame()" title="暂停">⏸</button>
 </div>
 
-<!-- Canvas -->
-<canvas id="gameCanvas"></canvas>
+<!-- Canvas Container (centers canvas horizontally) -->
+<div id="canvasContainer" style="position:fixed;top:var(--top-h);left:0;right:0;bottom:var(--elem-h);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+  <canvas id="gameCanvas"></canvas>
+</div>
 
 <!-- Element Bar -->
 <div id="elemBar"></div>
@@ -351,8 +361,9 @@ const GS = {
   // lane config
   LANES: 5,
   LANE_H: 0,
-  FIELD_X: 0,
+  FIELD_X: 80,
   COLS: 9,
+  cellSize: 60, // responsive cell size, set by resizeCanvas()
   // selected element to place
   selectedElem: null,
   // quiz state
@@ -483,7 +494,7 @@ function setupHover(){
     const my = (e.clientY - rect.top) * (cvs.height / rect.height);
     if(GS.FIELD_X <= 0 || cvs.width <= 0){ _hoverCell=null; return; }
     if(mx < GS.FIELD_X){ _hoverCell=null; return; }
-    const col = Math.floor((mx - GS.FIELD_X) / 60);
+    const col = Math.floor((mx - GS.FIELD_X) / GS.cellSize);
     const lane = Math.floor(my / GS.LANE_H);
     if(lane<0||lane>=GS.LANES||col<0||col>=GS.COLS){ _hoverCell=null; return; }
     _hoverCell = {lane, col};
@@ -496,18 +507,63 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 setupHover();
 
-function resizeCanvas(){
-  const maxW = window.innerWidth;
-  const maxH = window.innerHeight - 52 - 90; // topbar + elembar
-  const aspect = 800/600;
-  let w = maxW, h = w / aspect;
-  if(h > maxH){ h = maxH; w = h * aspect; }
-  canvas.width = Math.floor(w);
-  canvas.height = Math.floor(h);
-  GS.LANE_H = Math.floor((canvas.height - 10) / GS.LANES);
-  GS.FIELD_X = 80;
+function resizeCanvas() {
+  const topBarEl = document.getElementById('topBar');
+  const elemBarEl = document.getElementById('elemBar');
+  const containerEl = document.getElementById('canvasContainer');
+  // Use computed style for reliable height reading (handles CSS vars correctly)
+  const topH = topBarEl ? parseInt(getComputedStyle(topBarEl).height) || 52 : 52;
+  const botH = elemBarEl ? parseInt(getComputedStyle(elemBarEl).height) || 90 : 90;
+  // Container height: use getBoundingClientRect for accurate flex-computed height
+  let availH;
+  if (containerEl) {
+    const rect = containerEl.getBoundingClientRect();
+    availH = rect.bottom - rect.top;
+  }
+  if (!availH || availH < 100) availH = window.innerHeight - topH - botH;
+  const availW = window.innerWidth;
+
+  // Determine cellSize and cols based on available width
+  let cellSize, cols;
+  if (availW >= 1024) {
+    cellSize = 60; cols = 9;
+  } else if (availW >= 768) {
+    cellSize = 50; cols = 9;
+  } else if (availW >= 600) {
+    cellSize = 44; cols = Math.max(7, Math.floor(availW / 44) - 1);
+  } else if (availW >= 480) {
+    cellSize = 38; cols = Math.max(6, Math.floor(availW / 38) - 1);
+  } else {
+    // Portrait phone: compact grid, min 7 cols
+    cellSize = Math.floor(availW / 7.5); cols = 7;
+  }
+
+  // Determine lane count based on available height (min 44px per lane for touch)
+  const minLaneH = Math.max(cellSize * 0.8, 44);
+  const lanes = Math.max(3, Math.min(5, Math.floor(availH / minLaneH)));
+
+  // Compute sizes
+  const dangerZone = Math.round(cellSize * 1.2);
+  const fieldW = cols * cellSize;
+  const fieldH = lanes * Math.floor((availH - 4) / lanes);
+  const canvasW = fieldW + dangerZone + 8;
+  const canvasH = fieldH + 4;
+
+  // Apply to canvas
+  canvas.width = canvasW;
+  canvas.height = canvasH;
+  canvas.style.width = canvasW + 'px';
+  canvas.style.height = canvasH + 'px';
+
+  // Update GS
+  GS.cellSize = cellSize;
+  GS.COLS = cols;
+  GS.LANES = lanes;
+  GS.LANE_H = Math.floor(canvasH / lanes);
+  GS.FIELD_X = dangerZone;
 }
 window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', () => setTimeout(resizeCanvas, 120));
 resizeCanvas();
 
 // ═══════════════════════════════════════════════════════════
@@ -1229,7 +1285,7 @@ function update(dt, ts){
       f.lifetime = (f.lifetime||0) + dt * 60;
       if(f.lifetime >= f.elem.decay_lifetime){
         f.hp = 0;
-        spawnParticles(f.col * 60 + GS.FIELD_X, f.lane * GS.LANE_H + GS.LANE_H/2, '#ff6600', 12);
+        spawnParticles(f.col * GS.cellSize + GS.FIELD_X, f.lane * GS.LANE_H + GS.LANE_H/2, '#ff6600', 12);
         return;
       }
     }
@@ -1245,7 +1301,7 @@ function update(dt, ts){
       if(target){
         f.lastAttack = 0;
         const dmg = f.elem.attack * GS.env.element_attack_mod * 2.0;
-        spawnProjectile(f.col * 60 + GS.FIELD_X + 50, f.lane * GS.LANE_H + GS.LANE_H/2, dmg, f.elem, f.lane);
+        spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, f.lane * GS.LANE_H + GS.LANE_H/2, dmg, f.elem, f.lane);
         Sound.attack();
       }
     }
@@ -1515,24 +1571,24 @@ function render(){
   // Field grid cells (placeable area)
   for(let lane=0; lane<GS.LANES; lane++){
     for(let col=0; col<GS.COLS; col++){
-      const x = GS.FIELD_X + col * 60;
+      const x = GS.FIELD_X + col * GS.cellSize;
       const y = lane * GS.LANE_H;
       const isHover = _hoverCell && _hoverCell.lane===lane && _hoverCell.col===col;
   // Cell hover highlight (visual only — stacking now allowed)
       const isOccupied = GS.field.some(f=>f.lane===lane && f.col===col);
       if(isHover && GS.selectedElem){
         ctx.fillStyle = isOccupied ? 'rgba(231,76,60,0.2)' : 'rgba(52,152,219,0.3)';
-        ctx.fillRect(x+1, y+1, 58, GS.LANE_H-2);
+        ctx.fillRect(x+1, y+1, GS.cellSize-2, GS.LANE_H-2);
       } else {
         ctx.strokeStyle = 'rgba(52,152,219,0.08)';
-        ctx.strokeRect(x, y, 60, GS.LANE_H);
+        ctx.strokeRect(x, y, GS.cellSize, GS.LANE_H);
       }
     }
   }
 
   // Field elements
   GS.field.forEach(f => {
-    const x = f.col * 60 + GS.FIELD_X + 30;
+    const x = f.col * GS.cellSize + GS.FIELD_X + GS.cellSize/2;
     const y = f.lane * GS.LANE_H + GS.LANE_H/2;
     const e = f.elem;
 
@@ -1669,7 +1725,7 @@ canvas.addEventListener('click', e => {
 
   if(mx < GS.FIELD_X) return;
 
-  const col = Math.floor((mx - GS.FIELD_X) / 60);
+  const col = Math.floor((mx - GS.FIELD_X) / GS.cellSize);
   const lane = Math.floor(my / GS.LANE_H);
   if(lane < 0 || lane >= GS.LANES || col < 0 || col >= GS.COLS) return;
 

@@ -222,7 +222,98 @@ const { chromium } = require('playwright');
     }
   } catch(e) { { fail('JS errors check', e.message); } }
 
-  // ── Summary ───────────────────────────────────────
+  // ══════════════════════════════════════════════════════════
+  // RESPONSIVE VIEWPORT TESTS (手机/平板/桌面)
+  // ══════════════════════════════════════════════════════════
+
+  // ── Test 17: Desktop viewport ─────────────────────────
+  try {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('http://localhost:8878', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    const gsDesktop = await page.evaluate(() => ({
+      cols: GS.COLS,
+      lanes: GS.LANES,
+      cellSize: GS.cellSize,
+      canvasW: document.getElementById('gameCanvas').width,
+      fieldX: GS.FIELD_X
+    }));
+    if (gsDesktop.cols >= 7 && gsDesktop.lanes === 5 && gsDesktop.cellSize >= 50) {
+      pass(`Desktop (1280×800): COLS=${gsDesktop.cols} LANES=${gsDesktop.lanes} cellSize=${gsDesktop.cellSize} canvasW=${gsDesktop.canvasW}`);
+    } else {
+      fail(`Desktop viewport`, `Unexpected: COLS=${gsDesktop.cols} LANES=${gsDesktop.lanes} cellSize=${gsDesktop.cellSize}`);
+    }
+  } catch(e) { fail('Desktop viewport', e.message); }
+
+  // ── Test 18: Mobile portrait ──────────────────────────
+  try {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('http://localhost:8878', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    const gsMobile = await page.evaluate(() => ({
+      cols: GS.COLS,
+      lanes: GS.LANES,
+      cellSize: GS.cellSize,
+      canvasW: document.getElementById('gameCanvas').width
+    }));
+    if (gsMobile.cols <= 7 && gsMobile.cellSize <= 50 && gsMobile.canvasW < 500) {
+      pass(`Mobile portrait (375×667): COLS=${gsMobile.cols} LANES=${gsMobile.lanes} cellSize=${gsMobile.cellSize} canvasW=${gsMobile.canvasW}`);
+    } else {
+      fail(`Mobile portrait`, `Unexpected: COLS=${gsMobile.cols} LANES=${gsMobile.lanes} cellSize=${gsMobile.cellSize} canvasW=${gsMobile.canvasW}`);
+    }
+  } catch(e) { fail('Mobile portrait', e.message); }
+
+  // ── Test 19: Mobile landscape ────────────────────────
+  try {
+    await page.setViewportSize({ width: 667, height: 375 });
+    await page.goto('http://localhost:8878', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    const gsLand = await page.evaluate(() => ({
+      cols: GS.COLS,
+      lanes: GS.LANES,
+      cellSize: GS.cellSize
+    }));
+    if (gsLand.cols >= 7) {
+      pass(`Mobile landscape (667×375): COLS=${gsLand.cols} LANES=${gsLand.lanes} cellSize=${gsLand.cellSize}`);
+    } else {
+      fail(`Mobile landscape`, `Unexpected: COLS=${gsLand.cols}`);
+    }
+  } catch(e) { fail('Mobile landscape', e.message); }
+
+  // ── Test 20: element-grid alignment (cellSize respected) ──
+  try {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('http://localhost:8878', { waitUntil: 'networkidle' });
+    await page.waitForTimeout(800);
+    // Close any overlay
+    await page.evaluate(() => {
+      ['tutorialOverlay','menuOverlay'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
+    });
+    await page.waitForTimeout(300);
+    // Place an element programmatically to test alignment
+    const alignment = await page.evaluate(() => {
+      // Programmatically place H (col=3, lane=2)
+      const elem = ELEM_MAP[1]; // hydrogen
+      if (!elem) return null;
+      GS.energy = 999;
+      GS.selectedElem = 1;
+      const col = 3, lane = 2;
+      GS.field.push({ elem, lane, col, hp: elem.hp, lastAttack: 0 });
+      const expectedX = col * GS.cellSize + GS.FIELD_X + GS.cellSize / 2;
+      const actualX = col * GS.cellSize + GS.FIELD_X + GS.cellSize / 2;
+      return { expectedX, actualX, diff: Math.abs(expectedX - actualX), cellSize: GS.cellSize, fieldX: GS.FIELD_X };
+    });
+    if (alignment && alignment.diff < 2) {
+      pass(`Element grid alignment: diff=${alignment.diff.toFixed(1)}px cellSize=${alignment.cellSize} fieldX=${alignment.fieldX}`);
+    } else {
+      fail('Grid alignment', `diff=${alignment ? alignment.diff.toFixed(1) : 'N/A'}px`);
+    }
+  } catch(e) { fail('Grid alignment', e.message); }
+
+  // ── Summary ────────────────────────────────────────
   console.log('\n========================================');
   console.log('  TEST SUMMARY');
   console.log('========================================');
