@@ -1356,10 +1356,10 @@ function update(dt, ts){
 
   // ── Projectiles ─────────────────────────────────────────
   GS.projs.forEach(p => {
-    p.x += Math.max(4, (GS.cellSize||60) * 0.12); // cellSize-adaptive speed
+    p.x += Math.max(7.2, GS.cellSize);          // bullet speed: 8.3× faster // cellSize-adaptive speed
     // Hit detection
     GS.zombies.forEach(z => {
-      if(z.lane === p.targetLane && Math.abs(z.x - p.x) < 20 && Math.abs((laneY(z.lane)) - p.y) < GS.LANE_H/2){
+      if(z.lane === p.targetLane && Math.abs(z.x - p.x) < 35 && Math.abs((laneY(z.lane)) - p.y) < GS.LANE_H/2){
         const WM = 1.0 + (GS.currentWave - 1) * 0.02;
         const dmg = p.damage * WM * getDamageBonus(p.elem, z.type);
         z.hp -= dmg;
@@ -1630,7 +1630,7 @@ function render(){
   // Projectiles
   GS.projs.forEach(p => {
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 5, 0, Math.PI*2);
+    ctx.arc(p.x, p.y, 7, 0, Math.PI*2);  // radius 7: bigger & more visible
     ctx.fillStyle = p.elem.sprite_color;
     ctx.fill();
     ctx.shadowColor = p.elem.sprite_color;

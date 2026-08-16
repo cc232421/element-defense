@@ -1,58 +1,88 @@
 <!DOCTYPE html>
 <html>
-<head><title>Element Defense Diagnostic</title></head>
-<body>
-<pre id="out"></pre>
+<head><title>Element Defense — Live Diagnostics</title>
+<style>
+body{background:#0D1B2A;color:#e0e0e0;font-family:monospace;font-size:13px;padding:10px}
+#log{height:90vh;overflow-y:scroll;white-space:pre}
+.fatal{color:#e74c3c;font-weight:bold}
+.ok{color:#2ecc71}
+.warn{color:#f39c12}
+.info{color:#3498db}
+</style>
+</head>
+<body><div id="log"></div>
 <script src="index.html"></script>
 <script>
-const log = document.getElementById('out');
-function info(msg) { log.textContent += msg + '\n'; }
+// Hijack the diagnostic — monkey-patch key functions
+const DIAG = {
+  attack_mod: null,
+  dmg_calc: [],
+  collision_tested: 0,
+  collision_hit: 0,
+  zombies_killed: 0,
+  game_started: false
+};
 
-(function() {
-  info('=== DIAGNOSTIC RUN ===\n');
+const log = document.getElementById('log');
+function D(msg, cls='info'){ log.textContent += `\n[${new Date().toISOString().substr(11,8)}] ${msg}`; log.scrollTop=log.scrollHeight; }
 
-  // Check 1: attack_speed interpretation
-  const e = window.ELEMENTS_DATA;
-  info('Attack Speed range: ' + Math.min(...e.map(x=>x.attack_speed)) + ' ~ ' + Math.max(...e.map(x=>x.attack_speed)));
-
-  // Simulate: attack_interval at 60fps with 3 different interpretations
-  const speed = 1.0;
-  const rpm_interpretation = 60 / speed;        // how engineers read it
-  const fps_interpretation = 60 / (speed * 60); // how gamers read it
-  info(`\nattack_speed=1.0:`);
-  info(`  RPM interpretation (60/x): interval = ${rpm_interpretation} frames = ${rpm_interpretation/60*1000}ms`);
-  info(`  FPS interpretation (60/(x*60)): interval = ${fps_interpretation} frames = ${fps_interpretation/60*1000}ms`);
-
-  // Check 2: Verify damage values
-  const attackVals = e.map(x=>x.attack).sort((a,b)=>a-b);
-  info(`\nElement attack range: ${attackVals[0]} ~ ${attackVals[attackVals.length-1]}`);
-  info(`DMG_CAP=32, WM(W1)=1.0:`);
-  info(`  min(15,32)*1.0=${Math.min(15,32)*1.0} vs baseHp(W1)=15 → Francium kills in ${Math.ceil(15/(Math.min(15,32)*1.0))} hit(s)`);
-  info(`  min(80,32)*1.0=${Math.min(80,32)*1.0} vs baseHp(W1)=15 → Fluorine kills in ${Math.ceil(15/(Math.min(80,32)*1.0))} hit(s)`);
-
-  // Check 3: Verify spawn interval formula
-  info('\nSpawn interval formula (25s base):');
-  for(let w=1; w<=5; w++){
-    const si = Math.max(5000, 25000 - (w-1)*2000);
-    info(`  W${w}: ${si/1000}s`);
+// Patch gameLoop to inject diagnostics
+const _origGameLoop = window.gameLoop;
+window.gameLoop = function(ts) {
+  if(GS.phase !== 'playing' && !DIAG.game_started) {
+    log.innerHTML += '\n⏳ Waiting for game to start (select world + play)...';
   }
-
-  // Check 4: Verify speed formula
-  info('\nSpeed formula (0.06 base):');
-  for(let w=1; w<=5; w++){
-    const sp = Math.min(0.06 + (w-1)*0.03, 0.50);
-    info(`  W${w}: ${sp.toFixed(2)} px/frame = ${(sp*60).toFixed(1)} px/s`);
+  if(GS.phase === 'playing' && !DIAG.game_started) {
+    DIAG.game_started = true;
+    D('🎮 GAME STARTED', 'fatal');
+    D(`canvas: ${canvas.width}x${canvas.height}`, 'info');
+    D(`LANES=${GS.LANES} COLS=${GS.COLS} cellSize=${GS.cellSize} LANE_H=${GS.LANE_H}`, 'info');
+    D(`FIELD_X=${GS.FIELD_X}  field.length=${GS.field.length}`, 'info');
   }
+  return _origGameLoop.apply(this, arguments);
+};
 
-  // Check 5: Zombie HP formula
-  info('\nZombie HP formula (base 15):');
-  for(let w=1; w<=5; w++){
-    const hp = 15 + (w-1)*4;
-    info(`  W${w}: ${hp} HP`);
+// Patch update to track env
+const _origUpdate = window.update;
+window.update = function(dt, ts) {
+  if(GS.phase === 'playing') {
+    // Log env on first frame
+    if(!DIAG.attack_mod) {
+      DIAG.attack_mod = GS.env.element_attack_mod;
+      D(`GS.env.element_attack_mod = ${DIAG.attack_mod}`, DIAG.attack_mod === undefined ? 'fatal' : 'ok');
+      D(`GS.env.element_global_hp_mod = ${GS.env.element_global_hp_mod}`, GS.env.element_global_hp_mod === undefined ? 'fatal' : 'ok');
+    }
+    // Track zombies
+    if(GS.zombies.length > 0 && !this._loggedZombies) {
+      this._loggedZombies = true;
+      const z = GS.zombies[0];
+      D(`First zombie: x=${Math.round(z.x)} hp=${z.hp} maxHp=${z.maxHp} speed=${z.speed}`, 'warn');
+    }
   }
+  return _origUpdate.apply(this, arguments);
+};
 
-  info('\n=== DIAGNOSTIC COMPLETE ===');
-})();
-</script>
-</body>
+// Patch spawnProjectile to track damage
+const _origSpawn = window.spawnProjectile;
+window.spawnProjectile = function(x, y, dmg, elem, lane) {
+  D(`  FIRE [${elem.symbol}]: dmg=${dmg?.toFixed(1)} x=${Math.round(x)} lane=${lane}`, 'info');
+  return _origSpawn.apply(this, arguments);
+};
+
+// Intercept damage application — can't easily patch z.hp -= so watch GS.zombies
+const _origRender = window.render;
+window.render = function() {
+  if(GS.phase === 'playing' && GS.zombies.length > 0) {
+    const z = GS.zombies[0];
+    if(this._lastZHp !== undefined && this._lastZHp !== z.hp) {
+      D(`💥 ZOMBIE HIT: hp ${this._lastZHp.toFixed(1)} → ${z.hp.toFixed(1)}  (diff=${(this._lastZHp - z.hp).toFixed(1)})`, 'warn');
+      if(z.hp <= 0) D(`💀 ZOMBIE DEAD at x=${Math.round(z.x)}`, 'fatal');
+    }
+    this._lastZHp = z.hp;
+  }
+  return _origRender.apply(this, arguments);
+};
+
+D('Diagnostic loaded — start game to see live data', 'info');
+</script></body>
 </html>
