@@ -1142,8 +1142,7 @@ function selectWorld(worldId){
   const world = WORLDS_DATA.find(w => w.id === worldId);
   if (!world) return;
   GS.worldId = worldId;
-  if (!GS.unlockedElements) GS.unlockedElements = new Set();
-  world.elements.forEach(e => GS.unlockedElements.add(e.atomic_number));
+  // All elements are always unlocked in V7.0 (quiz disabled)
   GS.levelIdx = 1;
   closeOverlay('levelSelect');
   closeOverlay('menuOverlay');
