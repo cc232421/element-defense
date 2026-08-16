@@ -1161,7 +1161,7 @@ function startLevel(){
   GS.currentWave = 0;
   GS.waveTotal = lvl.wave_count;
   GS.waveCount = 0;
-  GS.spawnInterval = Math.max(6000, 9000 - GS.levelIdx * 400); // 前期大幅延长刷新间隔
+  GS.spawnInterval = 8000; // P4: W1=8s, will be overridden by spawnWave()'s wave-based value
   GS.lastSpawn = 0;
   GS.env = Object.assign({
     element_global_hp_mod: 1,
@@ -1270,7 +1270,8 @@ function gameLoop(ts){
 
 function update(dt, ts){
   // B1 fix: init lastSpawn on first frame so wave spawns fire immediately
-  if (GS.lastSpawn === 0) GS.lastSpawn = ts;
+  // P1 fix: wave 1 spawns immediately — no 25s wait
+  if(GS.currentWave === 0){ GS.lastSpawn = ts - GS.spawnInterval; } else { GS.lastSpawn = ts; }
 
   // ── Energy regeneration (every 10 seconds) ─────────────
   GS.energyRegenTimer = (GS.energyRegenTimer||0) + dt;
@@ -1420,7 +1421,8 @@ function spawnWave(){
 
   // Progressive difficulty V7.2: W1=super easy, W10+=challenging
   const w = GS.currentWave;
-  const spawnInterval = Math.max(5000, 25000 - (w - 1) * 2000); // 25s(W1)→5s(W9+)
+  // P4 fix: W1 interval 25s→8s (was too long, player waits forever)
+  const spawnInterval = Math.max(5000, 8000 - (w - 1) * 300); // 8s(W1)→5s(W10+)
   const speed = Math.min(0.06 + (w - 1) * 0.03, 0.50);        // 0.06(W1)→0.50(W10+)
   const zombiesThisWave = w <= 3 ? w : w <= 5 ? 2 : Math.min(w - 3, 4); // 1,1,2,2,2,3,3,3,4,4...
   const baseHp = 15 + (w - 1) * 4;                          // 15(W1)→...→56(W11)
@@ -1590,7 +1592,20 @@ function render(){
     }
   }
 
-  // Field elements
+  // P2: First-time placement hint — disappears after first element is placed
+  if(!GS._placedFirst && GS.phase === 'playing'){
+    ctx.save();
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.font = `bold ${Math.round(GS.cellSize*0.28)}px "Segoe UI", Arial, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+    ctx.shadowBlur = 6;
+    ctx.fillText('👇 点击上方元素，再点击这里放置 👇', GS.FIELD_X + (GS.COLS * GS.cellSize)/2, GS.LANES * GS.LANE_H / 2);
+    ctx.restore();
+  }
+
+  // ── Field elements
   GS.field.forEach(f => {
     const x = f.col * GS.cellSize + GS.FIELD_X + GS.cellSize/2;
     const y = laneY(f.lane);
@@ -1764,6 +1779,7 @@ canvas.addEventListener('click', e => {
   updateEnergy();
   spawnParticles(col * GS.cellSize + GS.FIELD_X + GS.cellSize/2, laneY(lane), elem.sprite_color, 8);
   Sound.place();
+  if(!GS._placedFirst){ GS._placedFirst = true; } // P2: hide hint after first placement
 });
 
 // ═══════════════════════════════════════════════════════════
