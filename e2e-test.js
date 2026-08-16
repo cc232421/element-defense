@@ -66,17 +66,12 @@ const { chromium } = require('playwright');
       }
       pass('Start game button clicked');
     }
-
-    // Dismiss tutorial overlay if present (via JS to avoid pointer-event issues)
+    // Close menuOverlay so canvas is accessible
     await page.evaluate(() => {
-      ['tutorialOverlay'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.add('hidden');
-      });
+      const el = document.getElementById('menuOverlay');
+      if (el) el.classList.add('hidden');
     });
-    await page.waitForTimeout(300);
-    pass('Tutorial overlay dismissed');
-  } catch(e) { fail('Start game + tutorial', e.message); }
+  } catch(e) { fail('Start game', e.message); }
 
   // ── Test 7: Canvas visible after game start ───────
   try {
@@ -95,34 +90,16 @@ const { chromium } = require('playwright');
     else fail('Element cards rendered', '0 cards found');
   } catch(e) { fail('Element cards', e.message); }
 
-  // ── Test 9: Quiz overlay exists ───────────────────
+  // ── Test 9: No quiz popups during gameplay (V7.0: quiz disabled) ─────────────
   try {
-    // Dismiss any overlay via JS (some overlays may not have visible close buttons)
-    await page.evaluate(() => {
-      ['quizOverlay','tutorialOverlay'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.add('hidden');
-      });
-    });
-    await page.waitForTimeout(300);
-    // Try to click a locked element to trigger quiz
-    const lockedCards = await page.$$('.elem-card.locked');
-    if (lockedCards.length > 0) {
-      await lockedCards[0].click({ timeout: 3000 });
-      await page.waitForTimeout(800);
-      const overlay = await page.$('#quizOverlay');
-      if (overlay) {
-        const cls = await overlay.getAttribute('class');
-        if (cls && !cls.includes('hidden')) {
-          pass('Quiz overlay appears on locked element click');
-        } else {
-          pass('Locked element clicked, quiz may have auto-closed or element was unlocked');
-        }
-      } else {
-        pass('Quiz overlay not found after click');
-      }
+    // Quiz system is disabled in V7.0 — verify no quizOverlay auto-triggers
+    await page.waitForTimeout(1000);
+    const quiz = await page.$('#quizOverlay');
+    const cls = quiz ? await quiz.getAttribute('class') : 'no-quiz';
+    if (cls && cls.includes('hidden')) {
+      pass('No quiz popup during gameplay (quiz disabled in V7.0)');
     } else {
-      pass('No locked elements to test quiz (all unlocked)');
+      fail('Quiz popup during gameplay', `quizOverlay class="${cls}"`);
     }
   } catch(e) { fail('Quiz system', e.message); }
 
@@ -162,7 +139,7 @@ const { chromium } = require('playwright');
   try {
     // Close any overlay that might be blocking
     await page.evaluate(() => {
-      ['quizOverlay','tutorialOverlay'].forEach(id => {
+      ['quizOverlay'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.classList.add('hidden');
       });

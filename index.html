@@ -272,19 +272,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   </div>
 </div>
 
-<!-- Tutorial Overlay -->
-<div id="tutorialOverlay" class="overlay hidden" style="background:rgba(0,0,0,0.4);z-index:400;">
-  <div style="background:#1a2a3a;border:2px solid #f39c12;border-radius:16px;padding:24px;max-width:380px;text-align:center;box-shadow:0 8px 40px rgba(243,156,18,0.3)">
-    <div style="font-size:48px;margin-bottom:12px">🎓</div>
-    <div id="tutCounter" style="color:#f39c12;font-size:12px;margin-bottom:8px">1/4</div>
-    <div id="tutText" style="font-size:15px;line-height:1.6;color:#FFF8F0;margin-bottom:20px"></div>
-    <div style="display:flex;gap:10px">
-      <button onclick="skipTut()" style="flex:1;padding:10px;background:#2c3e50;border:2px solid #2c3e50;border-radius:8px;color:#aaa;font-size:13px;cursor:pointer">跳过教程</button>
-      <button onclick="nextTut()" style="flex:1;padding:10px;background:#f39c12;border:2px solid #f39c12;border-radius:8px;color:#000;font-size:13px;font-weight:bold;cursor:pointer">知道了 →</button>
-    </div>
-  </div>
-</div>
-
 <!-- Help Overlay -->
 <div id="helpOverlay" class="overlay hidden">
   <div class="panel" style="max-width:480px">
@@ -316,8 +303,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0D1B2A;font-family:
   <div class="panel" style="text-align:center">
     <h2 id="gameEndTitle">游戏结束</h2>
     <p id="gameEndMsg" style="margin:16px 0;font-size:14px;opacity:0.8"></p>
+    <div id="knowledgeSection" style="display:none;margin:12px 0;max-height:280px;overflow-y:auto;text-align:left"></div>
     <button class="menu-btn" onclick="restartLevel();Sound.click()">🔄 重试</button>
     <button class="menu-btn" onclick="showMenu();Sound.click()">🏠 主菜单</button>
+    <button id="knowledgeBtn" class="menu-btn" style="display:none;background:#27ae60;border-color:#27ae60" onclick="toggleKnowledge()">📖 知识点</button>
   </div>
 </div>
 
@@ -1003,6 +992,27 @@ function showKnowledge(text, duration=4000){
   popup.onclick = () => { popup.classList.add('hidden'); clearTimeout(GS.kTimer); };
 }
 
+// Post-win knowledge (showEndScreen on victory — non-intrusive)
+let _knowVisible = false;
+function showPostWinKnowledge(world) {
+  document.getElementById('knowledgeSection').innerHTML = world.elements.map(e => {
+    const el = ELEM_MAP[e.atomic_number];
+    return `<div style="margin:6px 0;padding:8px;background:rgba(255,255,255,0.05);border-radius:6px">
+      <b style="color:#f39c12">${el.symbol} ${el.name_cn}</b>
+      <p style="margin:3px 0 0 0;font-size:13px;opacity:0.85">${el.knowledge_text}</p>
+    </div>`;
+  }).join('');
+  document.getElementById('knowledgeBtn').style.display = '';
+  _knowVisible = false;
+  document.getElementById('knowledgeSection').style.display = 'none';
+}
+
+function toggleKnowledge() {
+  const sec = document.getElementById('knowledgeSection');
+  _knowVisible = !_knowVisible;
+  sec.style.display = _knowVisible ? '' : 'none';
+}
+
 // ═══════════════════════════════════════════════════════════
 //  HUD MESSAGES
 // ═══════════════════════════════════════════════════════════
@@ -1129,7 +1139,11 @@ function startGame(){
 }
 
 function selectWorld(worldId){
+  const world = WORLDS_DATA.find(w => w.id === worldId);
+  if (!world) return;
   GS.worldId = worldId;
+  if (!GS.unlockedElements) GS.unlockedElements = new Set();
+  world.elements.forEach(e => GS.unlockedElements.add(e.atomic_number));
   GS.levelIdx = 1;
   closeOverlay('levelSelect');
   closeOverlay('menuOverlay');
@@ -1203,7 +1217,10 @@ function endGame(victory){
       });
       if(nextWorld) GS.completedWorlds.add(nextWorld.id);
       saveProgress();
-      showKnowledge(`🎉 BOSS击败！${world.name}通关！`, 4000);
+      showPostWinKnowledge(world);   // populate knowledge card
+      document.getElementById('gameEndTitle').textContent = `🎉 BOSS击败！${world.name}通关！`;
+      document.getElementById('gameEndMsg').textContent = '继续挑战下一关...';
+      document.getElementById('gameEndOverlay').classList.remove('hidden');
     }
     if(lvl && !lvl.boss && GS.levelIdx < world.levels.filter(l=>!l.boss).length){
       GS.levelIdx++;
@@ -1217,7 +1234,10 @@ function endGame(victory){
       // World complete
       GS.completedWorlds.add(world.id);
       saveProgress();
-      showKnowledge(`🎉 ${world.name}全部通关！`, 4000);
+      showPostWinKnowledge(world);
+      document.getElementById('gameEndTitle').textContent = `🎉 ${world.name}全部通关！`;
+      document.getElementById('gameEndMsg').textContent = `得分: ${GS.score}`;
+      document.getElementById('gameEndOverlay').classList.remove('hidden');
     }
   }
   document.getElementById('gameEndTitle').textContent = victory ? '🎉 胜利！' : '💀 失败';
@@ -1306,7 +1326,8 @@ function update(dt, ts){
         : null;
       if(target){
         f.lastAttack = 0;
-        const dmg = f.elem.attack * GS.env.element_attack_mod * 2.0;
+        const base = f.elem.attack * GS.env.element_attack_mod;
+        const dmg = base; // bonus applied at hit time by getDamageBonus()
         spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, laneY(f.lane), dmg, f.elem, f.lane);
         Sound.attack();
       }
@@ -1340,8 +1361,6 @@ function update(dt, ts){
         p.hit = true;
         Sound.hit();
         spawnParticles(p.x, p.y, '#f39c12', 3);
-        // Knowledge popup on hit
-        if(Math.random() < 0.05) showKnowledge(p.elem.knowledge_text);
       }
     });
   });
@@ -1398,7 +1417,7 @@ function spawnWave(){
   const spawnInterval = Math.max(5000, 15000 - w * 1000); // 15s(W1)→5s(W10+)
   const speed = Math.min(0.30 + w * 0.04, 0.65);        // 0.30(W1)→0.65(W10+)
   const zombiesThisWave = w === 1 ? 1 : Math.min(w, 3);   // 1,1,2,2,2,3,3,3...
-  const baseHp = 40;                                      // 统一40HP → 2发必死
+  const baseHp = 24;                                // W1: 弱点1发/普通2发
 
   for(let i=0; i<zombiesThisWave; i++){
     const lane = Math.floor(Math.random() * GS.LANES);
@@ -1701,7 +1720,6 @@ function render(){
 canvas.addEventListener('click', e => {
   if(GS.phase !== 'playing') return;
   if(!GS.selectedElem){
-    showKnowledge('请先在底部选择一个元素！👇', 1500);
     Sound.error();
     return;
   }
@@ -1720,7 +1738,6 @@ canvas.addEventListener('click', e => {
   // Check energy
   if(!elem) return;
   if(GS.energy < elem.cost_energy){
-    showKnowledge('☢ 能量不足！击杀怪物获取更多能量', 1500);
     Sound.error();
     return;
   }
@@ -1734,7 +1751,6 @@ canvas.addEventListener('click', e => {
     lifetime: 0
   });
   updateEnergy();
-  showKnowledge(elem.knowledge_text);
   spawnParticles(col * GS.cellSize + GS.FIELD_X + GS.cellSize/2, laneY(lane), elem.sprite_color, 8);
   Sound.place();
 });
