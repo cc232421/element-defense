@@ -1325,8 +1325,8 @@ function update(dt, ts){
         : null;
       if(target){
         f.lastAttack = 0;
-        const base = f.elem.attack * GS.env.element_attack_mod;
-        const dmg = base; // bonus applied at hit time by getDamageBonus()
+        const base = Math.min(f.elem.attack, 32) * GS.env.element_attack_mod;
+        const dmg = base; // WM applied at hit time
         spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, laneY(f.lane), dmg, f.elem, f.lane);
         Sound.attack();
       }
@@ -1354,7 +1354,8 @@ function update(dt, ts){
     // Hit detection
     GS.zombies.forEach(z => {
       if(z.lane === p.targetLane && Math.abs(z.x - p.x) < 20 && Math.abs((laneY(z.lane)) - p.y) < GS.LANE_H/2){
-        const dmg = p.damage * getDamageBonus(p.elem, z.type);
+        const WM = 1.0 + (GS.currentWave - 1) * 0.02;
+        const dmg = p.damage * WM * getDamageBonus(p.elem, z.type);
         z.hp -= dmg;
         z.flashUntil = performance.now() + 100;
         p.hit = true;
@@ -1411,12 +1412,16 @@ function spawnWave(){
   const lvl = world.levels[GS.levelIdx-1];
   const [minA, maxA] = lvl.allow_atomic_range || [1,20];
 
-  // Progressive difficulty: wave 1 = slowest/fewest/weakest
+  // Progressive difficulty V7.2: W1=super easy, W10+=challenging
   const w = GS.currentWave;
-  const spawnInterval = Math.max(5000, 15000 - w * 1000); // 15s(W1)→5s(W10+)
-  const speed = Math.min(0.30 + w * 0.04, 0.65);        // 0.30(W1)→0.65(W10+)
-  const zombiesThisWave = w === 1 ? 1 : Math.min(w, 3);   // 1,1,2,2,2,3,3,3...
-  const baseHp = 24;                                // W1: 弱点1发/普通2发
+  const spawnInterval = Math.max(5000, 25000 - (w - 1) * 2000); // 25s(W1)→5s(W9+)
+  const speed = Math.min(0.06 + (w - 1) * 0.03, 0.50);        // 0.06(W1)→0.50(W10+)
+  const zombiesThisWave = w <= 3 ? w : w <= 5 ? 2 : Math.min(w - 3, 4); // 1,1,2,2,2,3,3,3,4,4...
+  const baseHp = 15 + (w - 1) * 4;                          // 15(W1)→...→56(W11)
+
+  // Damage: min(attack, 32) normalized, then × wave multiplier × weakness bonus
+  const DMG_CAP = 32;
+  const WM = 1.0 + (w - 1) * 0.02;                          // W1=1.0 → W10=1.18
 
   for(let i=0; i<zombiesThisWave; i++){
     const lane = Math.floor(Math.random() * GS.LANES);
