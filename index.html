@@ -344,6 +344,10 @@ const GS = {
   projs: [], // {x,y,damage,elem,targetLane}
   // particles
   parts: [], // {x,y,vx,vy,life,color,size}
+  // death explosion effects
+  deathEffects: [], // {x,y,type,startTime,particles,emojis}
+  // energy popup text
+  energyPopups: [], // {x,y,text,life,vy}
   // lane config
   LANES: 5,
   LANE_H: 0,
@@ -414,6 +418,27 @@ const Sound = {
   },
   unlock(){
     [523,659,784,1047,1318].forEach((f,i)=>_tone(f,'sine',i*0.1,0.25,0.2));
+  },
+  explode(){
+    // Low-freq "BOOM" — white noise burst + sine thump
+    try {
+      const bufLen = Math.floor(audioCtx.sampleRate * 0.2);
+      const buf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
+      const d = buf.getChannelData(0);
+      for(let i=0; i<bufLen; i++) d[i] = Math.random()*2-1;
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buf;
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(600, audioCtx.currentTime);
+      lp.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.15);
+      const g = audioCtx.createGain();
+      g.gain.setValueAtTime(0.5, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+      noise.connect(lp); lp.connect(g); g.connect(audioCtx.destination);
+      noise.start();
+      _tone(80,'sine',0,0.08,0.12);
+    } catch(e){ _tone(120,'sawtooth',0,0.1,0.15); }
   }
 };
 
@@ -1168,7 +1193,7 @@ function update(dt, ts){
   GS.energyRegenTimer = (GS.energyRegenTimer||0) + dt;
   if(GS.energyRegenTimer >= 10){
     GS.energyRegenTimer = 0;
-    GS.energy = Math.min(GS.energy + 8, 300);
+    GS.energy = Math.min(GS.energy + 10, 300);
     updateEnergy();
   }
 
@@ -1212,11 +1237,14 @@ function update(dt, ts){
     f.lastAttack = (f.lastAttack||0) + dt * 60;
     const attackInterval = 60 / f.elem.attack_speed;
     if(f.lastAttack >= attackInterval){
-      // Find target in same lane
-      const target = GS.zombies.find(z => z.lane === f.lane && z.x > GS.FIELD_X);
+      // Find closest zombie in same lane (leftmost = most dangerous)
+      const laneZombies = GS.zombies.filter(z => z.lane === f.lane && z.x > GS.FIELD_X);
+      const target = laneZombies.length > 0
+        ? laneZombies.reduce((a, b) => a.x < b.x ? a : b)
+        : null;
       if(target){
         f.lastAttack = 0;
-        const dmg = f.elem.attack * GS.env.element_attack_mod;
+        const dmg = f.elem.attack * GS.env.element_attack_mod * 2.0;
         spawnProjectile(f.col * 60 + GS.FIELD_X + 50, f.lane * GS.LANE_H + GS.LANE_H/2, dmg, f.elem, f.lane);
         Sound.attack();
       }
@@ -1254,6 +1282,7 @@ function update(dt, ts){
         if(p.elem.atomic_number >= 9 && p.elem.atomic_number <= 17) dmg *= 1.3; // halogens
         if(p.elem.atomic_number >= 6 && p.elem.atomic_number <= 8) dmg *= 1.2; // carbon group
         z.hp -= dmg;
+        z.flashUntil = performance.now() + 100;
         p.hit = true;
         Sound.hit();
         spawnParticles(p.x, p.y, '#f39c12', 3);
@@ -1267,11 +1296,12 @@ function update(dt, ts){
   // ── Dead zombies ─────────────────────────────────────────
   GS.zombies = GS.zombies.filter(z => {
     if(z.hp <= 0){
+      const zy = z.lane * GS.LANE_H + GS.LANE_H/2;
+      addDeathEffect(z.x, zy, z.type);   // explosion particles + emoji
+      addEnergyPopup(z.x, zy, z.reward); // "+10 ⚡" floating text
+      Sound.explode();
       GS.energy += z.reward;
       GS.score += Math.floor(z.maxHp / 10);
-      Sound.kill();
-      Sound.energy();
-      spawnParticles(z.x, z.lane * GS.LANE_H + GS.LANE_H/2, z.color, 10);
       updateEnergy();
       return false;
     }
@@ -1327,9 +1357,9 @@ function spawnWave(){
   // Progressive difficulty: wave 1 = slowest/fewest/weakest
   const w = GS.currentWave;
   const spawnInterval = Math.max(5000, 15000 - w * 1000); // 15s(W1)→5s(W10+)
-  const speed = Math.min(0.06 + w * 0.02, 0.25);        // 0.06(W1)→0.25(W10+)
-  const zombiesThisWave = w === 1 ? 1 : Math.min(w, 3); // 1,1,2,2,2,3,3,3...
-  const baseHp = 8 + w * 6;                            // 8(W1)→68(W11)
+  const speed = Math.min(0.30 + w * 0.04, 0.65);        // 0.30(W1)→0.65(W10+)
+  const zombiesThisWave = w === 1 ? 1 : Math.min(w, 3);   // 1,1,2,2,2,3,3,3...
+  const baseHp = 40;                                      // 统一40HP → 2发必死
 
   for(let i=0; i<zombiesThisWave; i++){
     const lane = Math.floor(Math.random() * GS.LANES);
@@ -1341,7 +1371,7 @@ function spawnWave(){
       type, lane, x: canvas.width + i * 100,
       hp, maxHp: hp, speed, damage: 5 + GS.currentWave, color,
       emoji: typeEmoji[type], typeName: typeNames[type],
-      reward: 15
+      reward: 10
     });
   }
   GS.lastSpawn = performance.now();
@@ -1365,6 +1395,100 @@ function spawnParticles(x, y, color, count){
       color, size: 2 + Math.random()*4
     });
   }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  DEATH EXPLOSION EFFECTS
+// ═══════════════════════════════════════════════════════════
+const TYPE_COLORS = {
+  oxidizer: '#8b5e3c',
+  hydrated: '#87CEEB',
+  heated: '#ff6320',
+  acid: '#76ff03',
+  halogen: '#bf00ff',
+  inert: '#ffffff'
+};
+const EXPLOSION_EMOJIS = ['⭐','❤','💫','✨'];
+
+function addDeathEffect(x, y, type){
+  const color = TYPE_COLORS[type] || '#ffffff';
+  const particles = [];
+  for(let i=0; i<12; i++){
+    const angle = (Math.PI*2/12)*i + Math.random()*0.5;
+    const speed = 2 + Math.random()*3;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle)*speed,
+      vy: Math.sin(angle)*speed - 1,
+      color,
+      size: 3 + Math.random()*3,
+      life: 30 + Math.random()*20
+    });
+  }
+  const emojis = EXPLOSION_EMOJIS.map(e => ({
+    x: x - 8 + Math.random()*16,
+    y: y,
+    vy: -1.5 - Math.random(),
+    emoji: e,
+    life: 40
+  }));
+  GS.deathEffects.push({ x, y, type, startTime: performance.now(), particles, emojis });
+}
+
+function renderDeathEffects(ctx){
+  const now = performance.now();
+  GS.deathEffects = GS.deathEffects.filter(e => now - e.startTime < 600);
+  GS.deathEffects.forEach(e => {
+    const age = now - e.startTime;
+    const t = age / 600;
+    // Flash (0~150ms)
+    if(t < 0.25){
+      const fa = 1 - t/0.25;
+      const fr = 10 + (t/0.25)*25;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, fr, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${fa})`;
+      ctx.fill();
+    }
+    // Particles
+    e.particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.life -= 2;
+      ctx.globalAlpha = Math.max(0, 1 - t*1.5);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+      ctx.fill();
+    });
+    // Emoji float
+    if(t > 0.15){
+      e.emojis.forEach(em => {
+        em.y += em.vy;
+        ctx.globalAlpha = Math.max(0, 1-(t-0.15)/0.5);
+        ctx.font = '16px serif';
+        ctx.fillText(em.emoji, em.x, em.y);
+      });
+    }
+    ctx.globalAlpha = 1;
+  });
+}
+
+// Energy popup text
+function addEnergyPopup(x, y, amount){
+  GS.energyPopups.push({ x, y, text: `+${amount} ⚡`, life: 40, vy: -1.5 });
+}
+
+function renderEnergyPopups(ctx){
+  GS.energyPopups.forEach(p => {
+    p.y += p.vy; p.life -= 1;
+    ctx.globalAlpha = Math.min(1, p.life/15);
+    ctx.fillStyle = '#f1c40f';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(p.text, p.x, p.y);
+  });
+  ctx.textAlign = 'left';
+  ctx.globalAlpha = 1;
+  GS.energyPopups = GS.energyPopups.filter(p => p.life > 0);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1455,20 +1579,50 @@ function render(){
     ctx.shadowBlur = 0;
   });
 
-  // Zombies — Canvas 2D procedural drawing (drawZombie)
+  // Zombies — Emoji rendering with flash effect
   GS.zombies.forEach(z => {
     const y = z.lane * GS.LANE_H + GS.LANE_H/2;
     const frame = ((GS.frame||0) + z.lane * 7 + Math.floor(z.x/50)) % 60;
     const hpRatio = z.hp / z.maxHp;
-    drawZombie(ctx, z.type, z.x, y, frame, hpRatio);
-    // HP bar (drawZombie doesn't include this)
-    const barW = 30, barH = 5;
-    const barX = z.x - barW/2, barY = y - 28;
+    const bounce = Math.sin(frame * 0.15) * 2;
+    const isFlashing = z.flashUntil && performance.now() < z.flashUntil;
+
+    // Flash overlay
+    if(isFlashing){
+      ctx.globalAlpha = 0.5;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(z.x, y + bounce, 22, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    // Shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.2)';
+    ctx.beginPath();
+    ctx.ellipse(z.x, y+22, 16, 5, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Emoji
+    const emojiMap = { oxidizer:'🟤', hydrated:'💧', heated:'🔥', acid:'🟢', halogen:'💜', inert:'👻' };
+    const emoji = emojiMap[z.type] || '🧟';
+    ctx.font = '36px serif';
+    ctx.fillText(emoji, z.x-18, y+12+bounce);
+
+    // HP bar
+    const barW = 28, barH = 4;
+    const barX = z.x - barW/2, barY = y + 24;
     ctx.fillStyle = '#1a2a3a';
     ctx.fillRect(barX, barY, barW, barH);
     ctx.fillStyle = hpRatio > 0.5 ? '#27ae60' : hpRatio > 0.25 ? '#f39c12' : '#e74c3c';
     ctx.fillRect(barX, barY, barW * hpRatio, barH);
   });
+
+  // Death explosion effects
+  renderDeathEffects(ctx);
+
+  // Energy popup text
+  renderEnergyPopups(ctx);
 
   // Particles
   GS.parts.forEach(p => {
