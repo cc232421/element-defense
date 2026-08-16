@@ -379,7 +379,47 @@ const GS = {
 };
 
 // ═══════════════════════════════════════════════════════════
-//  SOUND SYSTEM — Web Audio API (zero downloads)
+//  ZOMBIE TYPES — Single Source of Truth (DRY / Open-Closed)
+// ═══════════════════════════════════════════════════════════
+const ZOMBIE_TYPES = {
+  oxidizer: { emoji:'🟫', color:'#4a4a4a', name:'氧化怪' },
+  hydrated: { emoji:'💧', color:'#87CEEB', name:'水合怪' },
+  heated:   { emoji:'🔥', color:'#e74c3c', name:'高温怪' },
+  acid:     { emoji:'🟢', color:'#2ecc71', name:'强酸怪' },
+  halogen:  { emoji:'🟣', color:'#9b59b6', name:'卤素怪' },
+  inert:    { emoji:'👻', color:'rgba(200,200,255,0.5)', name:'惰性怪' }
+};
+const ZOMBIE_TYPE_KEYS = Object.keys(ZOMBIE_TYPES);
+const EXPLOSION_EMOJIS = ['⭐','❤','💫','✨'];
+// ──────────────────────────────────────────────────────────────
+//  HELPERS — Single source of truth (DRY)
+// ──────────────────────────────────────────────────────────────
+// Lane center Y coordinate (DRY: replaces 6x duplicate calculations)
+function laneY(lane) { return lane * GS.LANE_H + GS.LANE_H / 2; }
+// Damage bonus lookup table (DRY / Open-Closed: single place for all bonus rules)
+const BONUS_MAP = [
+  { weakness:'oxidize',  target:'oxidizer', mult:1.5 },
+  { weakness:'water',    target:'hydrated', mult:1.5 },
+  { weakness:'acid',     target:'acid',     mult:1.5 },
+  { weakness:'halogen',  target:'halogen',  mult:1.5 },
+  { weakness:'high_temp',target:'heated',   mult:1.5 },
+  { weakness:'inert',    target:'inert',    mult:1.5 }
+];
+const GROUP_BONUSES = [ { min:9,max:17,mult:1.3 }, { min:6,max:8,mult:1.2 } ];
+function getDamageBonus(elem, zombieType) {
+  let mult = 1.0;
+  if (elem.weakness) {
+    for (const e of BONUS_MAP) {
+      if (elem.weakness.includes(e.weakness) && e.target === zombieType) mult = Math.max(mult, e.mult);
+    }
+  }
+  for (const g of GROUP_BONUSES) {
+    if (elem.atomic_number >= g.min && elem.atomic_number <= g.max) mult = Math.max(mult, g.mult);
+  }
+  return mult;
+}
+
+// ═══════════════════════════════════════════════════════════
 // ═══════════════════════════════════════════════════════════
 let _audioCtx = null;
 let _muted = false;
@@ -523,31 +563,34 @@ function resizeCanvas() {
   if (!availH || availH < 100) availH = window.innerHeight - topH - botH;
   const availW = window.innerWidth;
 
-  // Determine cellSize and cols based on available width
-  let cellSize, cols;
-  if (availW >= 1024) {
-    cellSize = 60; cols = 9;
-  } else if (availW >= 768) {
-    cellSize = 50; cols = 9;
-  } else if (availW >= 600) {
-    cellSize = 44; cols = Math.max(7, Math.floor(availW / 44) - 1);
-  } else if (availW >= 480) {
-    cellSize = 38; cols = Math.max(6, Math.floor(availW / 38) - 1);
-  } else {
-    // Portrait phone: compact grid, min 7 cols
-    cellSize = Math.floor(availW / 7.5); cols = 7;
+  // Determine cellSize and cols based on available width (table-driven, KISS)
+  // Format: { minW, cellSize, cols }
+  const BREAKPOINTS = [
+    { minW:1024, cellSize:60, cols:9 },
+    { minW:768,  cellSize:50, cols:9 },
+    { minW:600,  cellSize:44, cols:7 },
+    { minW:480,  cellSize:38, cols:6 }
+  ];
+  let cellSize = 32, cols = 7;
+  for (const bp of BREAKPOINTS) {
+    if (availW >= bp.minW) { cellSize = bp.cellSize; cols = bp.cols; break; }
   }
+  if (availW < 480) { cellSize = Math.max(30, Math.floor(availW / 7.5)); cols = 7; }
+
+  // Safety clamping — prevent divide-by-zero / zero canvas (Fail Fast)
+  cellSize = Math.max(30, Math.min(80, cellSize || 60));
+  cols     = Math.max(5, Math.min(9,  cols || 9));
 
   // Determine lane count based on available height (min 44px per lane for touch)
   const minLaneH = Math.max(cellSize * 0.8, 44);
-  const lanes = Math.max(3, Math.min(5, Math.floor(availH / minLaneH)));
+  const lanes = Math.max(3, Math.min(5, Math.floor(availH / minLaneH) || 5));
 
   // Compute sizes
   const dangerZone = Math.round(cellSize * 1.2);
   const fieldW = cols * cellSize;
   const fieldH = lanes * Math.floor((availH - 4) / lanes);
-  const canvasW = fieldW + dangerZone + 8;
-  const canvasH = fieldH + 4;
+  const canvasW = Math.max(300, fieldW + dangerZone + 8);
+  const canvasH = Math.max(200, fieldH + 4);
 
   // Apply to canvas
   canvas.width = canvasW;
@@ -707,125 +750,6 @@ function injectQuestions(elems){
       { q:`以下关于${sym}的说法，正确的是？`, options:[facts[0], facts[1]||facts[0], facts[2]||facts[0]], answer:facts[0] }
     ];
   });
-}
-
-// ═══════════════════════════════════════════════════════════
-//  CANVAS ZOMBIE DRAWING SYSTEM
-// ═══════════════════════════════════════════════════════════
-function drawZombie(ctx, type, x, y, frame, hpRatio){
-  ctx.save();
-  ctx.globalAlpha = Math.max(0.35, hpRatio||1);
-  const bounce = Math.sin(frame * Math.PI * 0.5) * 2;
-  switch(type){
-    case 'oxidizer': {
-      ctx.fillStyle = '#5a7a5a';
-      ctx.beginPath(); ctx.roundRect(x-14, y-18+bounce, 28, 34, 6); ctx.fill();
-      ctx.fillStyle = '#8b5e3c';
-      ctx.beginPath(); ctx.arc(x-5, y-5+bounce, 5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+8, y+8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.strokeStyle='#2d3d2d'; ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.roundRect(x-14, y-18+bounce, 28, 34, 6); ctx.stroke();
-      ctx.fillStyle='#cc2222';
-      ctx.beginPath(); ctx.arc(x-5, y-8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+5, y-8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle='#5a7a5a';
-      ctx.fillRect(x-6, y-4+bounce, 3, 8);
-      ctx.fillRect(x+4, y-4+bounce, 3, 6);
-      break;
-    }
-    case 'hydrated': {
-      ctx.globalAlpha = Math.max(0.5, (hpRatio||1)*0.85);
-      ctx.fillStyle='rgba(168,216,234,0.8)';
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 15, 20, 0, 0, Math.PI*2); ctx.fill();
-      ctx.strokeStyle='#5ba8c8'; ctx.lineWidth=1.5; ctx.stroke();
-      ctx.fillStyle='rgba(255,255,255,0.9)';
-      ctx.beginPath(); ctx.arc(x-5, y-8+bounce, 5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+5, y-8+bounce, 5, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle='#1a5a8a';
-      ctx.beginPath(); ctx.arc(x-4, y-7+bounce, 2.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+6, y-7+bounce, 2.5, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle='rgba(168,216,234,0.7)';
-      ctx.beginPath(); ctx.arc(x+16, y-5+bounce, 3, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x-16, y+5+bounce, 2, 0, Math.PI*2); ctx.fill();
-      break;
-    }
-    case 'heated': {
-      ctx.shadowColor='#ff4500'; ctx.shadowBlur=12;
-      ctx.fillStyle='#8b2500';
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 15, 19, 0, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-      ctx.fillStyle='#c83200';
-      ctx.beginPath(); ctx.ellipse(x, y-5+bounce, 10, 12, 0, 0, Math.PI*2); ctx.fill();
-      ctx.strokeStyle='#ff6320'; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 15, 19, 0, 0, Math.PI*2); ctx.stroke();
-      ctx.shadowColor='#ffaa00'; ctx.shadowBlur=6;
-      ctx.fillStyle='#ffcc00';
-      ctx.beginPath(); ctx.arc(x-5, y-7+bounce, 4.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+5, y-7+bounce, 4.5, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-      ctx.strokeStyle='rgba(100,100,100,0.5)'; ctx.lineWidth=2;
-      ctx.beginPath(); ctx.moveTo(x-4, y-20+bounce); ctx.quadraticCurveTo(x-8, y-28, x-2, y-30); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x+4, y-20+bounce); ctx.quadraticCurveTo(x+8, y-28, x+2, y-30); ctx.stroke();
-      break;
-    }
-    case 'acid': {
-      ctx.fillStyle='#7cb342';
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 15, 20, 0, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle='#4a7020';
-      ctx.beginPath(); ctx.arc(x-8, y-2+bounce, 5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+6, y+6+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+2, y-12+bounce, 3, 0, Math.PI*2); ctx.fill();
-      ctx.strokeStyle='#2d5016'; ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 15, 20, 0, 0, Math.PI*2); ctx.stroke();
-      ctx.shadowColor='#76ff03'; ctx.shadowBlur=5;
-      ctx.fillStyle='#76ff03';
-      ctx.beginPath(); ctx.arc(x-5, y-8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+5, y-8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-      ctx.fillStyle='rgba(118,255,3,0.6)';
-      ctx.beginPath(); ctx.arc(x-10, y-22+bounce+Math.sin(frame)*3, 2.5, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+7, y-25+bounce+Math.cos(frame)*2, 2, 0, Math.PI*2); ctx.fill();
-      break;
-    }
-    case 'halogen': {
-      ctx.shadowColor='#9b30ff'; ctx.shadowBlur=8;
-      ctx.fillStyle='#4a1080';
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 14, 18, 0, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-      ctx.strokeStyle='#7a20c0'; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(x-8,y-15+bounce); ctx.lineTo(x-3,y-5+bounce); ctx.lineTo(x-10,y+5+bounce); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x+6,y-12+bounce); ctx.lineTo(x+10,y-2+bounce); ctx.lineTo(x+4,y+8+bounce); ctx.stroke();
-      ctx.strokeStyle='#2d0060'; ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.ellipse(x, y+bounce, 14, 18, 0, 0, Math.PI*2); ctx.stroke();
-      ctx.shadowColor='#bf00ff'; ctx.shadowBlur=6;
-      ctx.fillStyle='#bf00ff';
-      ctx.beginPath(); ctx.arc(x-5, y-7+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+5, y-7+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-      break;
-    }
-    case 'inert':
-    default: {
-      const pulse = 0.3 + Math.sin(frame * Math.PI * 0.5) * 0.15;
-      ctx.globalAlpha = Math.max(0.2, pulse);
-      const grad = ctx.createLinearGradient(x, y-20+bounce, x, y+18+bounce);
-      grad.addColorStop(0,'rgba(200,220,255,0.7)'); grad.addColorStop(1,'rgba(180,200,255,0.3)');
-      ctx.fillStyle=grad;
-      ctx.beginPath();
-      ctx.moveTo(x-12,y-18+bounce); ctx.quadraticCurveTo(x-16,y+bounce,x-14,y+16+bounce);
-      ctx.lineTo(x-8,y+12+bounce); ctx.lineTo(x,y+18+bounce);
-      ctx.lineTo(x+8,y+12+bounce); ctx.lineTo(x+14,y+16+bounce);
-      ctx.quadraticCurveTo(x+16,y+bounce,x+12,y-18+bounce); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle='rgba(200,220,255,0.5)'; ctx.lineWidth=1; ctx.stroke();
-      ctx.shadowColor='#ffffff'; ctx.shadowBlur=8;
-      ctx.fillStyle='#ffffff';
-      ctx.beginPath(); ctx.arc(x-5, y-8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(x+5, y-8+bounce, 4, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur=0;
-      break;
-    }
-  }
-  ctx.restore();
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1285,7 +1209,7 @@ function update(dt, ts){
       f.lifetime = (f.lifetime||0) + dt * 60;
       if(f.lifetime >= f.elem.decay_lifetime){
         f.hp = 0;
-        spawnParticles(f.col * GS.cellSize + GS.FIELD_X, f.lane * GS.LANE_H + GS.LANE_H/2, '#ff6600', 12);
+        spawnParticles(f.col * GS.cellSize + GS.FIELD_X, laneY(f.lane), '#ff6600', 12);
         return;
       }
     }
@@ -1301,7 +1225,7 @@ function update(dt, ts){
       if(target){
         f.lastAttack = 0;
         const dmg = f.elem.attack * GS.env.element_attack_mod * 2.0;
-        spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, f.lane * GS.LANE_H + GS.LANE_H/2, dmg, f.elem, f.lane);
+        spawnProjectile(f.col * GS.cellSize + GS.FIELD_X + GS.cellSize * 0.8, laneY(f.lane), dmg, f.elem, f.lane);
         Sound.attack();
       }
     }
@@ -1327,16 +1251,8 @@ function update(dt, ts){
     p.x += 8;
     // Hit detection
     GS.zombies.forEach(z => {
-      if(z.lane === p.targetLane && Math.abs(z.x - p.x) < 20 && Math.abs((z.lane * GS.LANE_H + GS.LANE_H/2) - p.y) < GS.LANE_H/2){
-        let dmg = p.damage;
-        // Bonus damage vs certain zombie types
-        if(p.elem.weakness && p.elem.weakness.includes('oxidize') && z.type==='oxidizer') dmg *= 1.5;
-        if(p.elem.weakness && p.elem.weakness.includes('water') && z.type==='hydrated') dmg *= 1.5;
-        if(p.elem.weakness && p.elem.weakness.includes('acid') && z.type==='acid') dmg *= 1.5;
-        if(p.elem.weakness && p.elem.weakness.includes('halogen') && z.type==='halogen') dmg *= 1.5;
-        // Compound damage bonus
-        if(p.elem.atomic_number >= 9 && p.elem.atomic_number <= 17) dmg *= 1.3; // halogens
-        if(p.elem.atomic_number >= 6 && p.elem.atomic_number <= 8) dmg *= 1.2; // carbon group
+      if(z.lane === p.targetLane && Math.abs(z.x - p.x) < 20 && Math.abs((laneY(z.lane)) - p.y) < GS.LANE_H/2){
+        const dmg = p.damage * getDamageBonus(p.elem, z.type);
         z.hp -= dmg;
         z.flashUntil = performance.now() + 100;
         p.hit = true;
@@ -1352,7 +1268,7 @@ function update(dt, ts){
   // ── Dead zombies ─────────────────────────────────────────
   GS.zombies = GS.zombies.filter(z => {
     if(z.hp <= 0){
-      const zy = z.lane * GS.LANE_H + GS.LANE_H/2;
+      const zy = laneY(z.lane);
       addDeathEffect(z.x, zy, z.type);   // explosion particles + emoji
       addEnergyPopup(z.x, zy, z.reward); // "+10 ⚡" floating text
       Sound.explode();
@@ -1394,21 +1310,6 @@ function spawnWave(){
   const world = WORLDS_DATA.find(w=>w.id === GS.worldId);
   const lvl = world.levels[GS.levelIdx-1];
   const [minA, maxA] = lvl.allow_atomic_range || [1,20];
-  const types = ['oxidizer','hydrated','heated','acid','halogen','inert'];
-  const typeColors = {
-    oxidizer:'#4a4a4a',
-    hydrated:'#87CEEB',
-    heated:'#e74c3c',
-    acid:'#2ecc71',
-    halogen:'#9b59b6',
-    inert:'rgba(200,200,255,0.5)'
-  };
-  const typeEmoji = {
-    oxidizer:'🟫', hydrated:'💧', heated:'🔥', acid:'🟢', halogen:'🟣', inert:'👻'
-  };
-  const typeNames = {
-    oxidizer:'氧化怪', hydrated:'水合怪', heated:'高温怪', acid:'强酸怪', halogen:'卤素怪', inert:'惰性怪'
-  };
 
   // Progressive difficulty: wave 1 = slowest/fewest/weakest
   const w = GS.currentWave;
@@ -1419,14 +1320,14 @@ function spawnWave(){
 
   for(let i=0; i<zombiesThisWave; i++){
     const lane = Math.floor(Math.random() * GS.LANES);
-    const type = types[Math.floor(Math.random() * types.length)];
+    const type = ZOMBIE_TYPE_KEYS[Math.floor(Math.random() * ZOMBIE_TYPE_KEYS.length)];
     const hp = baseHp;
-    const color = typeColors[type];
+    const cfg = ZOMBIE_TYPES[type];
 
     GS.zombies.push({
       type, lane, x: canvas.width + i * 100,
-      hp, maxHp: hp, speed, damage: 5 + GS.currentWave, color,
-      emoji: typeEmoji[type], typeName: typeNames[type],
+      hp, maxHp: hp, speed, damage: 5 + GS.currentWave, color: cfg.color,
+      emoji: cfg.emoji, typeName: cfg.name,
       reward: 10
     });
   }
@@ -1456,18 +1357,9 @@ function spawnParticles(x, y, color, count){
 // ═══════════════════════════════════════════════════════════
 //  DEATH EXPLOSION EFFECTS
 // ═══════════════════════════════════════════════════════════
-const TYPE_COLORS = {
-  oxidizer: '#8b5e3c',
-  hydrated: '#87CEEB',
-  heated: '#ff6320',
-  acid: '#76ff03',
-  halogen: '#bf00ff',
-  inert: '#ffffff'
-};
-const EXPLOSION_EMOJIS = ['⭐','❤','💫','✨'];
-
 function addDeathEffect(x, y, type){
-  const color = TYPE_COLORS[type] || '#ffffff';
+  const cfg = ZOMBIE_TYPES[type];
+  const color = cfg ? cfg.color : '#ffffff';
   const particles = [];
   for(let i=0; i<12; i++){
     const angle = (Math.PI*2/12)*i + Math.random()*0.5;
@@ -1589,7 +1481,7 @@ function render(){
   // Field elements
   GS.field.forEach(f => {
     const x = f.col * GS.cellSize + GS.FIELD_X + GS.cellSize/2;
-    const y = f.lane * GS.LANE_H + GS.LANE_H/2;
+    const y = laneY(f.lane);
     const e = f.elem;
 
     // Glow
@@ -1637,7 +1529,7 @@ function render(){
 
   // Zombies — Emoji rendering with flash effect
   GS.zombies.forEach(z => {
-    const y = z.lane * GS.LANE_H + GS.LANE_H/2;
+    const y = laneY(z.lane);
     const frame = ((GS.frame||0) + z.lane * 7 + Math.floor(z.x/50)) % 60;
     const hpRatio = z.hp / z.maxHp;
     const bounce = Math.sin(frame * 0.15) * 2;
@@ -1660,8 +1552,7 @@ function render(){
     ctx.fill();
 
     // Emoji
-    const emojiMap = { oxidizer:'🟤', hydrated:'💧', heated:'🔥', acid:'🟢', halogen:'💜', inert:'👻' };
-    const emoji = emojiMap[z.type] || '🧟';
+    const emoji = (ZOMBIE_TYPES[z.type] || {}).emoji || '🧟';
     ctx.font = '36px serif';
     ctx.fillText(emoji, z.x-18, y+12+bounce);
 
